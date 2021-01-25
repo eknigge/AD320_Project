@@ -1,65 +1,51 @@
-# AD320_Project
+# AD320 Project Team Charter
 
-Github Repo
-Please send me your GitHub username and I will add you
+**Description:** Our team will be creating a system of applications for the owner of several hot dog carts!
 
-https://github.com/eknigge/AD320_Project
+**Scope:** Develop a system of web applications to manage online ordering from their hot dog carts
 
-Contact Info
-Slack Channel: https://nscad.slack.com/archives/G01L79JLETA
+---
+
+## Team members
 
 Name: Eric Knigge
-E-mail: ericknigge@gmail.com or eric.knigge@seattlecolleges.edu
-Phone: 360-907-5384
+E-mail: eric.knigge@seattlecolleges.edu
+GitHub: @eknigge
 
 Name: Steven Wang
-Email: stevenwangbe@gmail.com or steven.wang@seattlecolleges.edu
-Phone: 626-818-8029
-GitHub: shipitsteven
+Email: steven.wang@seattlecolleges.edu
+GitHub: @shipitsteven
 
 Name: Hanna Negash
 Email: hanna.negash@seattlecentral.edu
-Phone: 206-465-6723
-GitHub: Hanna-N9
+GitHub: @Hanna-N9
 
 Name: Rhonda Pearson
 Email: rhonda.pearson@seattlecolleges.edu
-GitHub: heyimrhonda
+GitHub: @heyimrhonda
 
 Name Daniel Gebreselassie
-Email:daniel.gebreselassie@seattlecolleges.edu
-Phone 206 556 8535
-GitHub : eyerusalemdani
+Email: daniel.gebreselassie@seattlecolleges.edu
+GitHub : @eyerusalemdani
 
 Name Tizeta Fantaye
-Email:tizeta.fantaye@seattlecentral.edu or tesfutiz21@gmail.com
+Email: tizeta.fantaye@seattlecentral.edu
 GitHub:Tizeta2018
-Phone: 206-457-6289
-Meeting Time/Availability 
-Eric Knigge
-	Evenings and weekend
-	Would prefer to meet Wednesday night and Saturdays
 
-Steven Wang
-	Evenings and weekends
-	Prefer Monday/Friday nights and weekends
+## Meeting Time
 
-Hanna Negash
-Can do Mondays regardless of time and weekends
+Monday @ 7PM
 
-Rhonda Pearson
-	MWF Evenings @ or after 7pm, Weekends negotiable
+---
 
-Daniel Gebreselassie 
-            TWS Sn Evenings @ or after 5Pm.
-Tizeta Fantaye
-MW evenings and weekends 
-	
+## UI Wireframes
 
-UI Wireframes
-Tools: 
-Desktop app with free tier: https://www.figma.com/downloads/
-No BS, simple wireframe tool https://wireframe.cc/
+Tools:
 
-User Stories
-https://www.altexsoft.com/blog/business/acceptance-criteria-purposes-formats-and-best-practices/
+- Desktop app with free tier: https://www.figma.com/downloads/
+- Simple online wireframe tool https://wireframe.cc/
+- Another online drawing tool https://app.diagrams.net/
+
+## User Stories
+
+[Link to Google Doc](https://docs.google.com/document/d/1ZGYg-S9JF52MNV1osi4Z2nr04yzhmEzZfHGVv7KX6kA/edit?usp=sharing)
