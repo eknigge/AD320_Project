@@ -4,39 +4,35 @@
 
 **Scope:** Develop a system of web applications to manage online ordering from their hot dog carts
 
----
-
 ## Team members
 
-Name: Eric Knigge
-E-mail: eric.knigge@seattlecolleges.edu
+Name: Eric Knigge  
+E-mail: eric.knigge@seattlecolleges.edu  
 GitHub: @eknigge
 
-Name: Steven Wang
-Email: steven.wang@seattlecolleges.edu
+Name: Steven Wang  
+Email: steven.wang@seattlecolleges.edu  
 GitHub: @shipitsteven
 
-Name: Hanna Negash
-Email: hanna.negash@seattlecentral.edu
+Name: Hanna Negash  
+Email: hanna.negash@seattlecentral.edu  
 GitHub: @Hanna-N9
 
-Name: Rhonda Pearson
-Email: rhonda.pearson@seattlecolleges.edu
+Name: Rhonda Pearson  
+Email: rhonda.pearson@seattlecolleges.edu  
 GitHub: @heyimrhonda
 
-Name Daniel Gebreselassie
-Email: daniel.gebreselassie@seattlecolleges.edu
+Name Daniel Gebreselassie  
+Email: daniel.gebreselassie@seattlecolleges.edu  
 GitHub : @eyerusalemdani
 
-Name Tizeta Fantaye
-Email: tizeta.fantaye@seattlecentral.edu
+Name Tizeta Fantaye  
+Email: tizeta.fantaye@seattlecentral.edu  
 GitHub:Tizeta2018
 
 ## Meeting Time
 
 Monday @ 7PM
-
----
 
 ## UI Wireframes
 
