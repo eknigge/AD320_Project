@@ -1,5 +1,7 @@
 # AD320 Project Team Charter
 
+**Detailed Team Charter:** [Google Doc](https://docs.google.com/document/d/1iCR_MuiLv1O3_-gQJBNhowhfHmRuy_9hmVbJ5UsYkj8/edit?usp=sharing)
+
 **Description:** Our team will be creating a system of applications for the owner of several hot dog carts!
 
 **Scope:** Develop a system of web applications to manage online ordering from their hot dog carts
@@ -28,7 +30,7 @@ GitHub : @eyerusalemdani
 
 Name Tizeta Fantaye  
 Email: tizeta.fantaye@seattlecentral.edu  
-GitHub:Tizeta2018
+GitHub: @Tizeta2018
 
 ## Meeting Time
 
