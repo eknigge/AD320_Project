@@ -76,7 +76,7 @@ When all the acceptance criteria has been met.
 - test with Postman
 - linter with GitHub Actions
 
-*Who should test stories?*
+*Who should test stories?*  
 First, test our own code, then request a teammate to test our code.  
 
 *Do stories need approval before merging?*  
@@ -95,7 +95,7 @@ It should have the relevant user story, libraries or API needed to implement the
 *When is a story development complete and ready to be marked as done?*  
 When testing is finished, teammates approve the pull request, and merge the final result from the feature branch to the master/main branch.
 
-### \*** Stories to work on for Week 5 Sprint \*\*\*
+## \*** Stories to work on for Week 5 Sprint \*\*\*
 
 **Issue #7:** customer menu view  
 Backup: Login page
