@@ -38,11 +38,7 @@ Monday @ 7PM
 
 ## UI Wireframes
 
-Tools:
-
-- Desktop app with free tier: https://www.figma.com/downloads/
-- Simple online wireframe tool https://wireframe.cc/
-- Another online drawing tool https://app.diagrams.net/
+See `./Docs/Wireframes`
 
 ## User Stories
 
@@ -50,7 +46,8 @@ Tools:
 
 ## API Doc
 
-[Link to Google Doc](https://docs.google.com/document/d/1CaN3-iOnp0L78z6sgPUqt3vSqgkHQCK83G1e_anO4oQ/edit?usp=sharing)
+See `./Docs/APIDesign.md`  
+or [Link to Google Doc](https://docs.google.com/document/d/1CaN3-iOnp0L78z6sgPUqt3vSqgkHQCK83G1e_anO4oQ/edit?usp=sharing)
 
 ## Git/Branch strategy  
 
