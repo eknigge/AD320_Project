@@ -95,7 +95,7 @@ When testing is finished, teammates approve the pull request, and merge the fina
 
 ## \*** Stories to work on for Week 5 Sprint \*\*\*
 
-Issue #7: customer menu view  
-Templates: Login page, Admin View 
-Templates: Site Wireframes 
-Database: Finalize database and import test data 
+- Issue #7: customer menu view
+- Templates: Login page, Admin View
+- Templates: Site Wireframes
+- Database: Finalize database and import test data
