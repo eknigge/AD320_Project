@@ -51,15 +51,15 @@ or [Link to Google Doc](https://docs.google.com/document/d/1CaN3-iOnp0L78z6sgPUq
 
 ## Git/Branch strategy  
 
+- Every feature has it's own branch, usually 2 team members would work on one feature  
 - We each have our own personal branch  
-  - Naming convention: FirstnameLastname  
-- A feature would have its own branch as well, usually 2 team members would work on one feature  
+  - Naming convention: BranchName_FirstnameLastname  
 - Team communication states that only designated members should work on specific issues.  
-- Team members should push and pull request the feature branch once a day when they’re developing  
+- Team members should push and pull request the feature branch once a day when they are developing  
 
 ## Code Quality Guide
 
-We’re using University of Washington CSE 154’s code quality and style guide as a reference.  
+We're using University of Washington CSE 154’s code quality and style guide as a reference.  
 Link: [https://courses.cs.washington.edu/courses/cse154/codequalityguide/](https://courses.cs.washington.edu/courses/cse154/codequalityguide/)
 
 ## Story lifecycle
@@ -72,6 +72,7 @@ When all the acceptance criteria has been met.
 - Manual test
 - test with Postman
 - linter with GitHub Actions
+- Try testing with Jasmine 
 
 *Who should test stories?*  
 First, test our own code, then request a teammate to test our code.  
@@ -95,4 +96,6 @@ When testing is finished, teammates approve the pull request, and merge the fina
 ## \*** Stories to work on for Week 5 Sprint \*\*\*
 
 **Issue #7:** customer menu view  
-Backup: Login page
+**Templates:** Login page, Admin View
+**Templates:** Site Wireframes
+**Database:** Finalize database and import test data
