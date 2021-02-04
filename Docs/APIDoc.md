@@ -2,6 +2,12 @@
 
 This is the detailed API documentation for our Hot Dog Tycoon web app
 
+Quick Navigation:
+
+- [Customer](#customer-view)
+- [Vendor](#vendor-view)
+- [System Admin](#system-admin)
+
 ## Customer view
 
 ### Shows the map of all available carts
@@ -140,7 +146,9 @@ or
 
 -------------
 
-## Vendor view
+## Vendor view 
+
+[Back to Top](#hot-dog-tycoon-api-documentation)
 
 ### Shows my cart’s location and availability
 
@@ -482,6 +490,8 @@ Error handling:
 
 ## System Admin
 
+[Back to Top](#hot-dog-tycoon-api-documentation)
+
 ### Shows a page where we can see a list of all carts
 
 Request: `GET    /admin/cart`  
@@ -638,6 +648,7 @@ Example response:
 ```text
 "Successfully deleted cart ID 13"
 ```
+
 Error handling:
 
 - Status 400: Invalid cart ID
@@ -648,12 +659,119 @@ Error handling:
 "Cannot delete cart ID 1000"
 ```
 
-### User/Vendors
+### Show a page where we can see a list of vendors
 
-`GET    /admin/vendor` - shows a page where we can see a list of vendors
-`POST   /admin/vendor` - submits request to create new user/vendor
+Request: `GET    /admin/vendor`  
+Return data format: `JSON`
+Description:
 
-`GET    /admin/vendor/edit` - shows a page where we can edit information about a vendor
+- Direct to a page where a list of vendor is shown
+- API should respond with all vendor data
+- Vendor data should include vendor ID, vendor name, associated cart, availability
+
+Example request: `/admin/vendor`
+
+Example response:
+
+```json
+{
+    "adminID": 1,
+    "vendors": [
+        {
+            "vendorID": 12,
+            "vendorName": "John Carter",
+            "vendorAvailable": "Yes",
+            "associatedCartID": 4
+        },
+        {
+            "vendorID": 15,
+            "vendorName": "Webber Spyder",
+            "..."
+        },
+        "..."
+    ]
+}
+```
+
+Error handling:
+
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "You do not have permission to view this page" }
+```
+
+### Create new user/vendor
+
+Request: `POST   /admin/vendor`  
+Return data format: `text`
+Description:
+
+- Grabs new vendor data and send as body of request
+- API should respond with creation successful or failure
+
+Default response: `Status 201 Created`
+
+Example request: `/admin/vendor`
+
+Example Response:  
+
+```text
+Status: 201 Created
+
+"Successfully created vendor ID 15"
+```
+
+### Shows a page where we can edit information about a vendor
+
+Request `GET    /admin/vendor/edit`  
+Return data format: `JSON`  
+Query parameter: vendorID or "all" as `id`
+Description:
+
+- Direct user to a page where a form is present to edit vendor information
+- API should respond with all/specified vendor data
+- Vendor data should include vendor ID, vendor name, associated cart, availability
+
+Example request: `/admin/vendor/edit?id=all`
+
+Example response:
+
+```json
+{
+    "adminID": 1,
+    "vendors": [
+        {
+            "vendorID": 12,
+            "vendorName": "John Carter",
+            "vendorAvailable": "Yes",
+            "associatedCartID": 4
+        },
+        {
+            "vendorID": 15,
+            "vendorName": "Webber Spyder",
+            "..."
+        },
+        "..."
+    ]
+}
+```
+
+Error handling:
+
+- Status 400: Invalid vendor ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "Cannot find vendor ID 66" }
+```
+
+-----------
+
+### TODO: finish the rest & add in default response
+
 `PUT    /admin/vendor/edit` - update information of an existing user/vendor
 `DELETE /admin/vendor/edit` - delete a specific vendor
 
