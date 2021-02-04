@@ -1,4 +1,4 @@
-# Hot Dog Empire API Design Doc
+# Hot Dog Tycoon API Design Doc
 
 This is the routing and API design document for our hot dog empire web app.
 
@@ -15,11 +15,13 @@ For more detailed API documentation, see `APIDoc.md`
 ## Vendor view
 
 `GET    /vendor` - shows my cart’s location and availability
-`GET    /vendor/edit` - shows the page where I can edit my location and availability
-`POST   /vendor/edit` - update the cart’s location and availability
+`GET    /vendor/edit` - shows the page where I can edit my location and availability  
+`POST   /vendor/edit` - update the cart’s location and availability  
 
-`GET    /vendor/orders` - shows all my orders
-`POST   /vendor/orders` - update a order's completion status
+`GET    /vendor/orders` - shows all my orders  
+`POST   /vendor/orders` - update an order's completion status  
+
+`GET    /vendor/orders/edit` - show a page where vendor can edit an order's details  
 `POST   /vendor/orders/edit` - update an order's details
 
 `GET    /vendor/menu` - shows the screen where I can see my menu
