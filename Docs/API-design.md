@@ -19,7 +19,7 @@ For more detailed API documentation, see `APIDoc.md`
 `POST   /vendor/edit` - update the cart’s location and availability  
 
 `GET    /vendor/orders` - shows all my orders  
-`POST   /vendor/orders` - update an order's completion status  
+`PUT   /vendor/orders` - update an order's completion status  
 
 `GET    /vendor/orders/edit` - show a page where vendor can edit an order's details  
 `POST   /vendor/orders/edit` - update an order's details

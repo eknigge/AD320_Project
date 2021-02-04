@@ -13,23 +13,49 @@ Quick Navigation:
 ### Shows the map of all available carts
 
 Request: `GET /customer`  
-Return data format: render / text  
+Return data format: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Shows 2-D map that with pins for locations
 - Users can zoom in and out and are able to see local streets and landmarks
 - API request should retrieve all carts’ location data
 - Location data should be in a format digestible by the Maps API
-- If no cart available, API should respond with empty
+- If no cart available, API should respond with empty object
 
 Example request: `/customer`
 
-Example response: `index.html` & `"rendering customer main page"`
+Example response:
+
+`Status 200`  
+
+```json
+{
+    "carts":
+    [
+        {
+            "cartID": 1,
+            "cartLocation": "45.3423, 123.3456",
+            "cartAvailable": "Yes"
+        },
+        {
+            "cartID": 2,
+            "..."
+        },
+        "..."
+    ]
+}
+```
+
+Error handling:
+
+- Status 500: Server error or database error
 
 ### Shows a specific cart’s information
 
 Request: `GET /customer/:cartId`  
 Return data format: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Shows a summary of that location when clicked or selected
@@ -38,6 +64,8 @@ Description:
 Example request: `/customer/12`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -56,7 +84,9 @@ Example response:
 
 Error handling:
 
-- Invalid ID respond with status 400 and JSON containing error message
+- Status 400: Invalid cart ID
+
+`Status 400 Bad request`
 
 ```json
 { "error": "Invalid cart ID" }
@@ -66,6 +96,7 @@ Error handling:
 
 Request: `GET /customer/:cartId/menu`  
 Return data format: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Shows all items on the menu
@@ -76,6 +107,8 @@ Description:
 Example request: `/customer/12/menu`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -101,20 +134,19 @@ Example response:
 
 Error handling:
 
-- Invalid cart ID respond with status 400 and JSON containing error message
+- Status 400: Invalid cart ID
+
+`Status 400 Bad request`
 
 ```json
 { "error": "Invalid cart ID" }
-
-or
-
-{ "error": "No menu associated with cart 12" }
 ```
 
 ### Submit the order
 
 Request: `POST /customer/:cartId/menu`  
-Return data format: `JSON`  
+Return data format: `text`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Grabs the items user has selected on the page
@@ -127,8 +159,8 @@ Example request: `/customer/12/menu`
 
 Example response:
 
-```json
-{ "status": "order successful placed!" }
+```text
+"Successfully submitted order ID 234"
 ```
 
 Error handling:
@@ -136,12 +168,12 @@ Error handling:
 - Status 400: Order with unavailable items, invalid menu ID, vendor ID or item ID
 - Status 500: Server error
 
-```json
-{ "error": "Item ID 2: Coke is not available at this location" }
+```text
+"Order failed: item ID 2 is not available"
 
 or
 
-{ "error": "Invalid item ID" }
+"Order failed: invalid item ID 4343"
 ```
 
 ---
@@ -153,8 +185,9 @@ or
 ### Shows my cart’s location and availability
 
 Request: `GET /vendor`  
-Return data format: render `JSON`  
+Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - Receives the vendor’s ID as request
@@ -194,6 +227,7 @@ Error handling:
 Request: `GET /vendor/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - API should direct user to page with form
@@ -221,8 +255,9 @@ Example response:
 ### Update the cart’s location and availability
 
 Request: `POST /vendor/edit`  
-Return data format: `JSON`  
+Return data format: `text`  
 Query parameter: vendorID as `id`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Grabs updated location and availability and send as request
@@ -233,8 +268,8 @@ Example request: `/vendor/edit?id=13`
 
 Example response:
 
-```json
-{ "status": "update successful" }
+```text
+"Successfully updated vendor information"
 ```
 
 Error handling:
@@ -242,8 +277,8 @@ Error handling:
 - Status 400: invalid location
 - Status 401: unauthorized request
 
-```json
-{ "error": "Invalid location coordinates" }
+```text
+"Update failed: invalid location"
 ```
 
 ### Shows all my orders
@@ -251,6 +286,7 @@ Error handling:
 Request: `GET /vendor/orders`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - Receives vendor ID as query parameter
@@ -300,9 +336,10 @@ Error handling:
 
 ### Update an order's completion status
 
-Request: `POST /vendor/orders`  
-Return data format: `JSON`  
+Request: `PUT /vendor/orders`  
+Return data format: `text`  
 Query parameter: vendorID as `id`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Receives the order ID in the body of the request
@@ -312,16 +349,16 @@ Example request: `/vendor/orders?id=12`
 
 Example response:
 
-```json
-{ "status": "order status updated" }
+```text
+"Successfully updated status for order ID 23"
 ```
 
 Error handling:
 
 - Status 400: invalid order ID or vendor ID
 
-```json
-{ "error": "Invalid order ID" }
+```text
+"Error: invalid order ID 999"
 ```
 
 ### Show a page where vendor can edit an order's details
@@ -329,6 +366,7 @@ Error handling:
 Request: `GET /vendor/orders/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - API should direct user to the appropriate page
@@ -378,8 +416,9 @@ Error handling:
 ### Update an order's details
 
 Request: `POST /vendor/orders/edit`  
-Return data type: `JSON`  
+Return data type: `text`  
 Query parameter: vendorID as `id`  
+Default response: `Status 201 Created`  
 Description:
 
 - Grabs updated item's information and send as body of the request
@@ -389,16 +428,16 @@ Example request: `vendor/orders/edit?id=12`
 
 Example response:
 
-```json
-{ "status": "order updated" }
+```text
+"Successfully updated order ID 23"
 ```
 
 Error handling:
 
 - Status 400 for invalid vendor ID
 
-```json
-{ "error": "Invalid vendor ID" }
+```text
+"Error: invalid vendor ID 549"
 ```
 
 ### Shows the screen where I can see my menu
@@ -406,6 +445,7 @@ Error handling:
 Request: `GET /vendor/menu`
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - Receives vendor ID as request
@@ -449,6 +489,7 @@ Error handling:
 Request: `GET /vendor/menu/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - Receives vendor ID as request
@@ -496,6 +537,7 @@ Error handling:
 
 Request: `GET /admin/cart`  
 Return data type: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Receives the admin ID as request
@@ -538,7 +580,8 @@ Error handling:
 ### Submits request to create new cart
 
 Request: `POST /admin/cart`  
-Return data format: `JSON`  
+Return data format: `text`  
+Default response: `Status 201 Created`  
 Description:
 
 - Sends form data containing new cart info as request
@@ -549,8 +592,8 @@ Example request: `/admin/cart`
 
 Example response:
 
-```json
-{ "status": "Successfully added new cart ID 23" }
+```text
+"Successfully created new cart ID 20"
 ```
 
 Error handling:
@@ -559,14 +602,15 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
-```json
-{ "error": "Invalid new cart information" }
+```text
+"Failed to create new cart, invalid cart info"
 ```
 
 ### Shows a page where we can edit an existing cart
 
 Request: `GET /admin/cart/edit`  
 Return data type: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Direct to a page where admin can edit existing cart
@@ -608,6 +652,7 @@ Error handling:
 
 Request: `PUT /admin/cart/edit`  
 Return data format: `text`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Sends updated cart info in the request
@@ -636,6 +681,7 @@ Error handling:
 
 Request: `DELETE /admin/cart/edit`  
 Return data form: `text`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Include Cart ID and admin ID as part of the request
@@ -662,7 +708,8 @@ Error handling:
 ### Show a page where we can see a list of vendors
 
 Request: `GET /admin/vendor`  
-Return data format: `JSON`
+Return data format: `JSON`  
+Default response: `Status 200 OK`  
 Description:
 
 - Direct to a page where a list of vendor is shown
@@ -705,7 +752,8 @@ Error handling:
 ### Create new user/vendor
 
 Request: `POST /admin/vendor`  
-Return data format: `text`
+Return data format: `text`  
+Default response: `Status 201 Created`  
 Description:
 
 - Grabs new vendor data and send as body of request
@@ -727,7 +775,8 @@ Status: 201 Created
 
 Request `GET /admin/vendor/edit`  
 Return data format: `JSON`  
-Query parameter: vendorID or "all" as `id`
+Query parameter: vendorID or "all" as `id`  
+Default response: `Status 200 OK`  
 Description:
 
 - Direct user to a page where a form is present to edit vendor information
@@ -954,7 +1003,7 @@ Error handling:
 
 Request: `PUT /admin/menu/edit`  
 Response data format: `text`  
-Default response: `204 No Content`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Grabs updated information on menu item and send as body of request
@@ -982,7 +1031,7 @@ Error handling:
 
 Request: `DELETE /admin/menu/edit`  
 Response data format: `text`  
-Default response: `204 No Content`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Sends the menu item ID and menu ID as body of request
