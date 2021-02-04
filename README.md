@@ -9,7 +9,7 @@
 ## Team members
 
 Name: Eric Knigge  
-E-mail: eric.knigge@seattlecolleges.edu  
+Email: eric.knigge@seattlecolleges.edu  
 GitHub: @eknigge
 
 Name: Steven Wang  
@@ -42,8 +42,9 @@ See `./Docs/Wireframes`
 
 ## API Doc
 
-See `./Docs/APIDesign.md`  
-or [Link to Google Doc](https://docs.google.com/document/d/1CaN3-iOnp0L78z6sgPUqt3vSqgkHQCK83G1e_anO4oQ/edit?usp=sharing)
+See `./Docs/APIDesign.md` and `./Docs/APIDoc.md`  
+
+or [Link to Google Doc](https://docs.google.com/document/d/1CaN3-iOnp0L78z6sgPUqt3vSqgkHQCK83G1e_anO4oQ/edit?usp=sharing) (draft document, not up to date)
 
 ## Git/Branch strategy  
 
@@ -68,7 +69,7 @@ When all the acceptance criteria has been met.
 - Manual test
 - test with Postman
 - linter with GitHub Actions
-- Try testing with Jasmine 
+- Try testing with Jasmine
 
 *Who should test stories?*  
 First, test our own code, then request a teammate to test our code.  
