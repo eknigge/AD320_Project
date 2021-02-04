@@ -482,12 +482,171 @@ Error handling:
 
 ## System Admin
 
-`GET    /admin/cart` - shows a page where we can see a list of all carts
-`POST   /admin/cart` - submits request to create new cart
+### Shows a page where we can see a list of all carts
 
-`GET    /admin/cart/edit` - shows a page where we can edit an existing cart
-`PUT    /admin/cart/edit` - update information of an existing cart
-`DELETE /admin/cart/edit` - delete a specific cart
+Request: `GET    /admin/cart`  
+Return data type: `JSON`  
+Description:
+
+- Receives the admin ID as request  
+- Returns a page with all carts information  
+- API should respond with all cart data that's currently in our system  
+- Page should contain a form where we can enter new carts
+
+Example request: `/admin/cart`
+
+Example return:
+
+```json
+{
+    "adminID": 1,
+    "cart": [
+        {
+            "cartID": 21,
+            "associatedVendorID": null,
+            "location": "45.2342, 123.5434",
+            "available": "No"
+        },
+        {
+            "cartID": 22,
+            "..."
+        },
+        "..."
+    ]
+}
+```
+
+Error handling:
+
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "You do not have permission to access this page" }
+```
+
+### Submits request to create new cart
+
+Request: `POST   /admin/cart`  
+Return data format: `JSON`  
+Description:
+
+- Sends form data containing new cart info as request
+- Attach admin ID as part of the request
+- API should respond with creation success or failure
+
+Example request: `/admin/cart`
+
+Example response:
+
+```json
+{ "status": "Successfully added new cart ID 23" }
+```
+
+Error handling:
+
+- Status 400: Invalid cart info
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "Invalid new cart information" }
+```
+
+### Shows a page where we can edit an existing cart
+
+Request: `GET    /admin/cart/edit`  
+Return data type: `JSON`  
+Description:
+
+- Direct to a page where admin can edit existing cart
+- API should respond with all/specified cart's data
+
+Example request: `/admin/cart/edit`  
+
+Example response:
+
+```json
+{
+    "adminID": 1,
+    "cart": [
+        {
+            "cartID": 21,
+            "associatedVendorID": 20,
+            "location": "45.2342, 123.5434",
+            "available": "No"
+        },
+        {
+            "cartID": 22,
+            "..."
+        },
+        "..."
+    ]
+}
+```
+
+Error handling:
+
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "You do not have permission to access this page" }
+```
+
+### Update information of an existing cart
+
+Request: `PUT    /admin/cart/edit`  
+Return data format: `text`  
+Description:
+
+- Sends updated cart info in the request
+- Include admin ID as part of the request
+- API should respond whether update is successful
+
+Example request: `/admin/cart/edit`
+
+Example response:
+
+```text
+"Cart ID 12 successfully updated"
+```
+
+Error handling:
+
+- Status 400: Invalid cart infomation
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Invalid cart information"
+```
+
+### Delete a specific cart
+
+Request: `DELETE /admin/cart/edit`  
+Return data form: `text`  
+Description:
+
+- Include Cart ID and admin ID as part of the request
+- API should respond whether deletion is successful or not
+
+Example request: `/admin/cart/edit`
+
+Example response:
+
+```text
+"Successfully deleted cart ID 13"
+```
+Error handling:
+
+- Status 400: Invalid cart ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot delete cart ID 1000"
+```
 
 ### User/Vendors
 

@@ -20,10 +20,6 @@ Name: Hanna Negash
 Email: hanna.negash@seattlecentral.edu  
 GitHub: @Hanna-N9
 
-Name: Rhonda Pearson  
-Email: rhonda.pearson@seattlecolleges.edu  
-GitHub: @heyimrhonda
-
 Name Daniel Gebreselassie  
 Email: daniel.gebreselassie@seattlecolleges.edu  
 GitHub : @eyerusalemdani
