@@ -1,6 +1,6 @@
 # Hot Dog Tycoon API Design Doc
 
-This is the routing and API design document for our hot dog empire web app.
+This is the routing and API design document for our hot dog tycoon web app.
 
 For more detailed API documentation, see `APIDoc.md`
 
