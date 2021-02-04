@@ -19,7 +19,7 @@
 `POST   /vendor/orders/edit` - update an order's details  
 
 `GET    /vendor/menu` - shows the screen where I can see my menu  
-`GET    /vendor/menu/edit` - shows the screen where I can edit my menu
+`GET    /vendor/menu/edit` - shows the screen where I can edit my menu  
 `POST   /vendor/menu/edit` - update the menu
 
 ## System Admin
