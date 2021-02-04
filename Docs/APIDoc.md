@@ -41,16 +41,16 @@ Example response:
 
 ```json
 {
-    "cartID": 12,
-    "cartAvailable": "Yes",
-    "cartLocation": "42.3456, 123,3456",
-    "vendor": {
-        "vendorID": 3,
-        "vendorName": "Joe Smith"
-    },
-    "menu": {
-        "menuID": 1
-    }
+  "cartID": 12,
+  "cartAvailable": "Yes",
+  "cartLocation": "42.3456, 123,3456",
+  "vendor": {
+    "vendorID": 3,
+    "vendorName": "Joe Smith"
+  },
+  "menu": {
+    "menuID": 1
+  }
 }
 ```
 
@@ -113,7 +113,7 @@ or
 
 ### Submit the order
 
-Request: `POST   /customer/:cartId/menu`  
+Request: `POST /customer/:cartId/menu`  
 Return data format: `JSON`  
 Description:
 
@@ -128,7 +128,7 @@ Example request: `/customer/12/menu`
 Example response:
 
 ```json
-{ "status": "order successful placed!"}
+{ "status": "order successful placed!" }
 ```
 
 Error handling:
@@ -144,15 +144,15 @@ or
 { "error": "Invalid item ID" }
 ```
 
--------------
+---
 
-## Vendor view 
+## Vendor view
 
 [Back to Top](#hot-dog-tycoon-api-documentation)
 
 ### Shows my cart’s location and availability
 
-Request: `GET    /vendor`  
+Request: `GET /vendor`  
 Return data format: render `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -167,16 +167,16 @@ Example response:
 
 ```json
 {
-    "vendorID": 13,
-    "vendorName": "Joe Smith",
-    "cart": {
-        "cartID": 1,
-        "cartLocation": "45.3245, 123.4544",
-        "cartAvailable": "Yes"
-    },
-    "menu": {
-        "menuID": 2
-    }
+  "vendorID": 13,
+  "vendorName": "Joe Smith",
+  "cart": {
+    "cartID": 1,
+    "cartLocation": "45.3245, 123.4544",
+    "cartAvailable": "Yes"
+  },
+  "menu": {
+    "menuID": 2
+  }
 }
 ```
 
@@ -191,7 +191,7 @@ Error handling:
 
 ### Shows the page where I can edit my location and availability
 
-Request: `GET    /vendor/edit`  
+Request: `GET /vendor/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -205,22 +205,22 @@ Example response:
 
 ```json
 {
-    "vendorID": 13,
-    "vendorName": "Joe Smith",
-    "cart": {
-        "cartID": 1,
-        "cartLocation": "45.3245, 123.4544",
-        "cartAvailable": "Yes"
-    },
-    "menu": {
-        "menuID": 2
-    }
+  "vendorID": 13,
+  "vendorName": "Joe Smith",
+  "cart": {
+    "cartID": 1,
+    "cartLocation": "45.3245, 123.4544",
+    "cartAvailable": "Yes"
+  },
+  "menu": {
+    "menuID": 2
+  }
 }
 ```
 
 ### Update the cart’s location and availability
 
-Request: `POST   /vendor/edit`  
+Request: `POST /vendor/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -248,7 +248,7 @@ Error handling:
 
 ### Shows all my orders
 
-Request: `GET    /vendor/orders`  
+Request: `GET /vendor/orders`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -300,7 +300,7 @@ Error handling:
 
 ### Update an order's completion status
 
-Request: `POST   /vendor/orders`  
+Request: `POST /vendor/orders`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -326,14 +326,14 @@ Error handling:
 
 ### Show a page where vendor can edit an order's details
 
-Request: `GET    /vendor/orders/edit`  
+Request: `GET /vendor/orders/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
 
 - API should direct user to the appropriate page
 - API should respond with the same response as `GET /vendor/orders`
-  
+
 Example request: `/vendor/orders/edit?id=12`
 
 Example response:
@@ -377,7 +377,7 @@ Error handling:
 
 ### Update an order's details
 
-Request: `POST   /vendor/orders/edit`  
+Request: `POST /vendor/orders/edit`  
 Return data type: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -403,7 +403,7 @@ Error handling:
 
 ### Shows the screen where I can see my menu
 
-Request: `GET    /vendor/menu`
+Request: `GET /vendor/menu`
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -446,7 +446,7 @@ Error handling:
 
 ### Shows the screen where I can edit my menu
 
-Request: `GET    /vendor/menu/edit`  
+Request: `GET /vendor/menu/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID as `id`  
 Description:
@@ -486,7 +486,7 @@ Error handling:
 { "error": "Invalid vendor ID" }
 ```
 
--------------
+---
 
 ## System Admin
 
@@ -494,13 +494,13 @@ Error handling:
 
 ### Shows a page where we can see a list of all carts
 
-Request: `GET    /admin/cart`  
+Request: `GET /admin/cart`  
 Return data type: `JSON`  
 Description:
 
-- Receives the admin ID as request  
-- Returns a page with all carts information  
-- API should respond with all cart data that's currently in our system  
+- Receives the admin ID as request
+- Returns a page with all carts information
+- API should respond with all cart data that's currently in our system
 - Page should contain a form where we can enter new carts
 
 Example request: `/admin/cart`
@@ -537,7 +537,7 @@ Error handling:
 
 ### Submits request to create new cart
 
-Request: `POST   /admin/cart`  
+Request: `POST /admin/cart`  
 Return data format: `JSON`  
 Description:
 
@@ -565,14 +565,14 @@ Error handling:
 
 ### Shows a page where we can edit an existing cart
 
-Request: `GET    /admin/cart/edit`  
+Request: `GET /admin/cart/edit`  
 Return data type: `JSON`  
 Description:
 
 - Direct to a page where admin can edit existing cart
 - API should respond with all/specified cart's data
 
-Example request: `/admin/cart/edit`  
+Example request: `/admin/cart/edit`
 
 Example response:
 
@@ -606,7 +606,7 @@ Error handling:
 
 ### Update information of an existing cart
 
-Request: `PUT    /admin/cart/edit`  
+Request: `PUT /admin/cart/edit`  
 Return data format: `text`  
 Description:
 
@@ -661,7 +661,7 @@ Error handling:
 
 ### Show a page where we can see a list of vendors
 
-Request: `GET    /admin/vendor`  
+Request: `GET /admin/vendor`  
 Return data format: `JSON`
 Description:
 
@@ -704,7 +704,7 @@ Error handling:
 
 ### Create new user/vendor
 
-Request: `POST   /admin/vendor`  
+Request: `POST /admin/vendor`  
 Return data format: `text`
 Description:
 
@@ -715,7 +715,7 @@ Default response: `Status 201 Created`
 
 Example request: `/admin/vendor`
 
-Example Response:  
+Example Response:
 
 ```text
 Status: 201 Created
@@ -725,7 +725,7 @@ Status: 201 Created
 
 ### Shows a page where we can edit information about a vendor
 
-Request `GET    /admin/vendor/edit`  
+Request `GET /admin/vendor/edit`  
 Return data format: `JSON`  
 Query parameter: vendorID or "all" as `id`
 Description:
@@ -768,17 +768,246 @@ Error handling:
 { "error": "Cannot find vendor ID 66" }
 ```
 
------------
+### Update information of an existing user/vendor
 
-### TODO: finish the rest & add in default response
+Request `PUT /admin/vendor/edit`  
+Return data format: `text`  
+Default response: `Status 204 No Content`  
+Description:
 
-`PUT    /admin/vendor/edit` - update information of an existing user/vendor
-`DELETE /admin/vendor/edit` - delete a specific vendor
+- Sends updated vendor information in body of request
+- API should respond whether the update is successful
 
-### Menu
+Example request: `/admin/vendor/edit`
 
-`GET    /admin/menu` - shows information about a specific menu
-`GET    /admin/menu/edit` - shows a page where admin can edit a menu
-`POST   /admin/menu/edit` - submit request to edit menu items
-`PUT    /admin/menu/edit` - update information on menu items
-`DELETE /admin/menu/edit` - delete a specific menu item
+Example response:
+
+```text
+"Successfully updated Vendor ID 14"
+```
+
+Error handling:
+
+- Status 400: Invalid vendor ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot find vendor ID 50"
+```
+
+### Delete a specific vendor
+
+Request: `DELETE /admin/vendor/edit`  
+Response data format: `text`  
+Default response: `Status 204 No Content`  
+Description:
+
+- Sends vendor ID in body of request
+- API should respond whether deletion is successful
+
+Example request: `/admin/vendor/edit`
+
+Example response:
+
+```text
+"Successfully deleted vendor ID 11"
+```
+
+Error handling:
+
+- Status 400: Invalid vendor ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot find vendor ID 50"
+```
+
+### Shows information about a specific menu
+
+Request: `GET /admin/menu`  
+Response data format: `JSON`  
+Query parameter: menuID or "all" as `id`  
+Default Response: `Status 200 OK`  
+Description:
+
+- Direct to a page where admin can see all data on a specific menu
+- API should respond with a list of menus and its data
+- Menu data should contain menu ID, item name, item quantity, item availability
+
+Example request: `/admin/menu?id=2`
+
+Example response:
+
+```json
+{
+    "adminID": 1,
+    "menu": {
+        "menuID": 2,
+        "items": [
+        {
+            "itemID": 1,
+            "itemName": "Hot dog",
+            "itemPrice": 2.00,
+            "itemAvailable": "Yes"
+        },
+        {
+            "itemID": 2,
+            "itemName": "Coke",
+            "..."
+        },
+        "..."
+    ]
+    }
+}
+```
+
+Error handling:
+
+- Status 400: Invalid menu ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "Cannot find menu ID 40" }
+```
+
+### Shows a page where admin can edit a menu
+
+Request: `GET /admin/menu/edit`  
+Response data format: `JSON`  
+Query parameter: menuID as `id`  
+Default response: `Status 200 OK`  
+Description:
+
+- Direct to a page where admin can edit a specified menu
+- API should respond with all data within the specified menu
+- Menu data should contain menu ID, item name, item quantity, item availability
+
+Example request: `/admin/menu/edit?id=5`
+
+Example response:
+
+```json
+{
+    "adminID": 1,
+    "menu": {
+        "menuID": 2,
+        "items": [
+        {
+            "itemID": 1,
+            "itemName": "Hot dog",
+            "itemPrice": 2.00,
+            "itemAvailable": "Yes"
+        },
+        {
+            "itemID": 2,
+            "itemName": "Coke",
+            "..."
+        },
+        "..."
+    ]
+    }
+}
+```
+
+Error handling:
+
+- Status 400: Invalid menu ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```json
+{ "error": "Cannot find menu ID 50" }
+```
+
+### Add new menu items
+
+Request: `POST /admin/menu/edit`  
+Response data format: `text`  
+Default response: `Status 201 Created`  
+Description:
+
+- Grabs information on new menu item and send as body of request
+- API should respond whether creation is successful
+
+Example request: `/admin/menu/edit`
+
+Example response:
+
+```text
+"Successfully created menu item ID 9"
+```
+
+Error handling:
+
+- Status 400: Invalid menu ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot find menu ID 50"
+```
+
+### Update information on menu items
+
+Request: `PUT /admin/menu/edit`  
+Response data format: `text`  
+Default response: `204 No Content`  
+Description:
+
+- Grabs updated information on menu item and send as body of request
+- API should respond whether update on menu item is successful
+
+Example request: `/admin/menu/edit`
+
+Example response:
+
+```text
+"Successfully updated menu item ID 4"
+```
+
+Error handling:
+
+- Status 400: Invalid menu ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot find menu ID 50"
+```
+
+### Delete a specific menu item
+
+Request: `DELETE /admin/menu/edit`  
+Response data format: `text`  
+Default response: `204 No Content`  
+Description:
+
+- Sends the menu item ID and menu ID as body of request
+- API should respond whether deletion is successful
+
+Example request: `/admin/menu/edit`
+
+Example response:
+
+```text
+"Successfully deleted menu item ID 5
+```
+
+Error handling:
+
+- Status 400: Invalid menu ID
+- Status 401: unauthorized, unrecognized user
+- Status 403: users without admin permission
+
+```text
+"Cannot find menu ID 50"
+```
+
+---
+
+#### End of document
+
+[Back to Top](#hot-dog-tycoon-api-documentation)
