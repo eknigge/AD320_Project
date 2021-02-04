@@ -85,9 +85,9 @@ Example response:
             },
             {
                 "itemID": 2,
-                ...
+                "..."
             },
-            ...
+            "..."
         ]
     }
 }
@@ -268,16 +268,16 @@ Example response:
                     "itemID": 1,
                     "itemName": "Hot dog",
                     "itemPrice": 2.00,
-                    ...
+                    "..."
                 },
-                ...
+                "..."
             ]
         },
         {
             "orderID": 2,
-            ...
+            "..."
         },
-        ...
+        "..."
     ]
 }
 ```
@@ -303,6 +303,7 @@ Description:
 Example request: `/vendor/orders?id=12`
 
 Example response:
+
 ```json
 { "status": "order status updated" }
 ```
@@ -344,16 +345,16 @@ Example response:
                     "itemID": 1,
                     "itemName": "Hot dog",
                     "itemPrice": 2.00,
-                    ...
+                    "..."
                 },
-                ...
+                "..."
             ]
         },
         {
             "orderID": 2,
-            ...
+            "..."
         },
-        ...
+        "..."
     ]
 }
 ```
@@ -389,7 +390,7 @@ Error handling:
 - Status 400 for invalid vendor ID
 
 ```json
-{ error: "Invalid vendor ID" }
+{ "error": "Invalid vendor ID" }
 ```
 
 ### Shows the screen where I can see my menu
@@ -420,9 +421,9 @@ Example response:
         {
             "itemID": 2,
             "itemName": "Coke",
-            ...
+            "..."
         },
-        ...
+        "..."
     ]
 }
 ```
@@ -462,9 +463,9 @@ Example response:
         {
             "itemID": 2,
             "itemName": "Coke",
-            ...
+            "..."
         },
-        ...
+        "..."
     ]
 }
 ```
