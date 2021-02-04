@@ -96,11 +96,11 @@ Error handling:
 - Invalid cart ID respond with status 400 and JSON containing error message
 
 ```json
-{ error: "Invalid cart ID" } 
+{ "error": "Invalid cart ID" } 
 
 or
 
-{ error: "No menu associated with cart 12" }
+{ "error": "No menu associated with cart 12" }
 ```
 
 ### Submit the order
@@ -119,7 +119,7 @@ Example request: `/customer/12/menu`
 Example response:
 
 ```json
-{ status: "order successful placed!"}
+{ "status": "order successful placed!"}
 ```
 
 Error handling:
@@ -128,11 +128,11 @@ Error handling:
 - Status 500: Server error
 
 ```json
-{ error: "Item ID 2: Coke is not available at this location" } 
+{ "error": "Item ID 2: Coke is not available at this location" } 
 
 or
 
-{ error: "Invalid item ID" }
+{ "error": "Invalid item ID" }
 ```
 
 ## Vendor view
@@ -153,15 +153,15 @@ Example response:
 
 ```json
 { 
-    vendorID: 13,
-    vendorName: "Joe Smith",
-    cart: {
-        cartID: 1,
-        cartLocation: "45.3245, 123.4544",
-        cartAvailable: "Yes"
+    "vendorID": 13,
+    "vendorName": "Joe Smith",
+    "cart": {
+        "cartID": 1,
+        "cartLocation": "45.3245, 123.4544",
+        "cartAvailable": "Yes"
     },
-    menu: {
-        menuID: 2
+    "menu": {
+        "menuID": 2
     }
 }
 ```
@@ -192,26 +192,26 @@ Example response:
 
 ```json
 {
-    vendorID: 13,
-    orders: [
+    "vendorID": 13,
+    "orders": [
         {
-            orderID: 1,
-            customerFirstName: "Sean",
-            customerLastName: "McGuire",
-            totalPrice: 10.05,
-            completed: "No",
-            items: [
+            "orderID": 1,
+            "customerFirstName": "Sean",
+            "customerLastName": "McGuire",
+            "totalPrice": 10.05,
+            "completed": "No",
+            "items": [
                 {
-                    itemID: 1,
-                    itemName: "Hot dog",
-                    itemPrice: 2.00,
+                    "itemID": 1,
+                    "itemName": "Hot dog",
+                    "itemPrice": 2.00,
                     ...
                 },
                 ...
             ]
         },
         {
-            orderID: 2,
+            "orderID": 2,
             ...
         },
         ...
@@ -229,10 +229,24 @@ Error handling:
 
 ### Shows the screen where I can edit my menu
 
-Request: `GET    /vendor/menu`  
-Return data format: `JSON`
-Query parameter: `id = vendorID`
-Description: 
+Request: `GET    /vendor/menu/edit`  
+Return data format: `JSON`  
+Query parameter: `id = vendorID`  
+Description:
+
+- Receives vendor ID as request
+- API should respond with all menu data
+- Menu data should contain menu ID, item name, item quantity, item availability
+
+Example request: `/vendor/menu/edit?id=12`
+
+Example response:
+
+## \*\*\* **TODO: to be filled out, check design doc first** \*\*\*
+
+-------------------------
+
+
 
 `POST   /vendor/:id` - update the cart’s location and availability  
 `POST   /vendor/:id/menu` - update the menu  

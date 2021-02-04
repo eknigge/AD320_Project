@@ -11,11 +11,16 @@
 ## Vendor view
 
 `GET    /vendor` - shows my cart’s location and availability  
-`GET    /vendor/orders` - shows all my orders  
-`GET    /vendor/menu` - shows the screen where I can edit my menu  
+`GET    /vendor/edit` - shows the page where I can edit my location and availability  
+`POST   /vendor/edit` - update the cart’s location and availability
 
-`POST   /vendor/cart` - update the cart’s location and availability  
-`POST   /vendor/menu` - update the menu  
+`GET    /vendor/orders` - shows all my orders  
+`POST   /vendor/orders` - update a order's completion status  
+`POST   /vendor/orders/edit` - update an order's details  
+
+`GET    /vendor/menu` - shows the screen where I can see my menu  
+`GET    /vendor/menu/edit` - shows the screen where I can edit my menu
+`POST   /vendor/menu/edit` - update the menu
 
 ## System Admin
 
@@ -23,17 +28,21 @@
 
 ### Carts
 
-`GET    /admin/cart` - shows popup where we can enter/edit information about the cart  
+`GET    /admin/cart` - shows a page where we can see a list of all carts  
 `POST   /admin/cart` - submits request to create new cart  
-`PUT    /admin/cart` - update information of an existing cart  
-`DELETE /admin/cart` - delete a specific cart  
+
+`GET    /admin/cart/edit` - shows a page where we can edit an existing cart  
+`PUT    /admin/cart/edit` - update information of an existing cart  
+`DELETE /admin/cart/edit` - delete a specific cart  
 
 ### User/Vendors
 
-`GET    /admin/vendor` - shows popup where we can enter/edit information about the vendor  
+`GET    /admin/vendor` - shows a page where we can see a list of vendors  
 `POST   /admin/vendor` - submits request to create new user/vendor  
-`PUT    /admin/vendor` - update information of an existing user/vendor  
-`DELETE /admin/vendor` - delete a specific vendor  
+
+`GET    /admin/vendor/edit` - shows a page where we can edit information about a vendor  
+`PUT    /admin/vendor/edit` - update information of an existing user/vendor  
+`DELETE /admin/vendor/edit` - delete a specific vendor  
 
 ### Menu
 
