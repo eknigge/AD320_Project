@@ -440,6 +440,8 @@ Error handling:
 
 - Status 400 for invalid vendor ID
 
+`Status 400 Invalid Request`
+
 ```text
 "Error: invalid vendor ID 549"
 ```
@@ -460,6 +462,8 @@ Example request: `/vendor/menu?id=12`
 
 Example response:
 
+`Status 200 OK`
+
 ```json
 {
     "vendorID": 12,
@@ -483,6 +487,8 @@ Example response:
 Error handling:
 
 - Status 400 for invalid vendor ID
+
+`Status 400 Invalid Request`
 
 ```json
 { "error": "Invalid vendor ID" }
@@ -503,6 +509,8 @@ Example request: `/vendor/menu/edit?id=12`
 
 Example response:
 
+`Status 200 OK`
+
 ```json
 {
     "vendorID": 12,
@@ -527,8 +535,36 @@ Error handling:
 
 - Status 400 for invalid vendor ID
 
+`Status 400 Invalid Request`
+
 ```json
 { "error": "Invalid vendor ID" }
+```
+
+### Update the menu
+
+Request: `PUT   /vendor/menu/edit`  
+Return data format: `text`  
+Default response: `Status 204 No Content`  
+Description:
+
+- Grabs updated menu information and send as body of request
+- API should respond whether the update is successful
+
+Example request: `/vendor/menu/edit`
+
+Example response:
+
+`Status 204 No Content`
+
+Error handling:
+
+- Status 400: Invalid menu information
+
+`Status 400 Invalid Request`
+
+```text
+"Updated failed: invalid menu information"
 ```
 
 ---
@@ -552,6 +588,8 @@ Description:
 Example request: `/admin/cart`
 
 Example return:
+
+`Status 200 OK`
 
 ```json
 {
@@ -577,6 +615,8 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
+`Status 401 Unauthorized`
+
 ```json
 { "error": "You do not have permission to access this page" }
 ```
@@ -596,6 +636,8 @@ Example request: `/admin/cart`
 
 Example response:
 
+`Status 201 Created`
+
 ```text
 "Successfully created new cart ID 20"
 ```
@@ -605,6 +647,8 @@ Error handling:
 - Status 400: Invalid cart info
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Failed to create new cart, invalid cart info"
@@ -623,6 +667,8 @@ Description:
 Example request: `/admin/cart/edit`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -648,6 +694,8 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
+`Status 403 Forbidden`
+
 ```json
 { "error": "You do not have permission to access this page" }
 ```
@@ -667,15 +715,15 @@ Example request: `/admin/cart/edit`
 
 Example response:
 
-```text
-"Cart ID 12 successfully updated"
-```
+`Status 204 No Content`
 
 Error handling:
 
-- Status 400: Invalid cart infomation
+- Status 400: Invalid cart information
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Invalid cart information"
@@ -695,15 +743,15 @@ Example request: `/admin/cart/edit`
 
 Example response:
 
-```text
-"Successfully deleted cart ID 13"
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: Invalid cart ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot delete cart ID 1000"
@@ -723,6 +771,8 @@ Description:
 Example request: `/admin/vendor`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -749,6 +799,8 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
+`Status 403 Forbidden`
+
 ```json
 { "error": "You do not have permission to view this page" }
 ```
@@ -769,9 +821,9 @@ Example request: `/admin/vendor`
 
 Example Response:
 
-```text
-Status: 201 Created
+`Status: 201 Created`
 
+```text
 "Successfully created vendor ID 15"
 ```
 
@@ -817,6 +869,8 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
+`Status 400 Invalid Request`
+
 ```json
 { "error": "Cannot find vendor ID 66" }
 ```
@@ -835,15 +889,15 @@ Example request: `/admin/vendor/edit`
 
 Example response:
 
-```text
-"Successfully updated Vendor ID 14"
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: Invalid vendor ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot find vendor ID 50"
@@ -863,15 +917,15 @@ Example request: `/admin/vendor/edit`
 
 Example response:
 
-```text
-"Successfully deleted vendor ID 11"
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: Invalid vendor ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot find vendor ID 50"
@@ -893,6 +947,8 @@ Example request: `/admin/menu?id=2`
 
 Example response:
 
+`Status 200 OK`
+
 ```json
 {
     "adminID": 1,
@@ -921,6 +977,8 @@ Error handling:
 - Status 400: Invalid menu ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```json
 { "error": "Cannot find menu ID 40" }
@@ -942,6 +1000,8 @@ Example request: `/admin/menu/edit?id=5`
 
 Example response:
 
+`Status 200 OK`
+
 ```json
 {
     "adminID": 1,
@@ -971,6 +1031,8 @@ Error handling:
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
 
+`Status 400 Invalid Request`
+
 ```json
 { "error": "Cannot find menu ID 50" }
 ```
@@ -989,6 +1051,8 @@ Example request: `/admin/menu/edit`
 
 Example response:
 
+`Status 201 Created`
+
 ```text
 "Successfully created menu item ID 9"
 ```
@@ -998,6 +1062,8 @@ Error handling:
 - Status 400: Invalid menu ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot find menu ID 50"
@@ -1017,15 +1083,15 @@ Example request: `/admin/menu/edit`
 
 Example response:
 
-```text
-"Successfully updated menu item ID 4"
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: Invalid menu ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot find menu ID 50"
@@ -1045,15 +1111,15 @@ Example request: `/admin/menu/edit`
 
 Example response:
 
-```text
-"Successfully deleted menu item ID 5
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: Invalid menu ID
 - Status 401: unauthorized, unrecognized user
 - Status 403: users without admin permission
+
+`Status 400 Invalid Request`
 
 ```text
 "Cannot find menu ID 50"
