@@ -16,17 +16,17 @@ For more detailed API documentation, see `APIDoc.md`
 
 `GET    /vendor` - shows my cart’s location and availability  
 `GET    /vendor/edit` - shows the page where I can edit my location and availability  
-`POST   /vendor/edit` - update the cart’s location and availability  
+`PUT   /vendor/edit` - update the cart’s location and availability  
 
 `GET    /vendor/orders` - shows all my orders  
 `PUT   /vendor/orders` - update an order's completion status  
 
 `GET    /vendor/orders/edit` - show a page where vendor can edit an order's details  
-`POST   /vendor/orders/edit` - update an order's details
+`PUT   /vendor/orders/edit` - update an order's details
 
 `GET    /vendor/menu` - shows the screen where I can see my menu  
 `GET    /vendor/menu/edit` - shows the screen where I can edit my menu  
-`POST   /vendor/menu/edit` - update the menu
+`PUT   /vendor/menu/edit` - update the menu
 
 ## System Admin
 

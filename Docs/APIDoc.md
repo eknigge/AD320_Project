@@ -146,7 +146,7 @@ Error handling:
 
 Request: `POST /customer/:cartId/menu`  
 Return data format: `text`  
-Default response: `Status 204 No Content`  
+Default response: `Status 201 Created`  
 Description:
 
 - Grabs the items user has selected on the page
@@ -159,6 +159,8 @@ Example request: `/customer/12/menu`
 
 Example response:
 
+`Status 201 Created`
+
 ```text
 "Successfully submitted order ID 234"
 ```
@@ -168,12 +170,10 @@ Error handling:
 - Status 400: Order with unavailable items, invalid menu ID, vendor ID or item ID
 - Status 500: Server error
 
+`Status 400 Invalid Request`
+
 ```text
 "Order failed: item ID 2 is not available"
-
-or
-
-"Order failed: invalid item ID 4343"
 ```
 
 ---
@@ -198,6 +198,8 @@ Example request: `/vendor?id=13`
 
 Example response:
 
+`Status 200 OK`
+
 ```json
 {
   "vendorID": 13,
@@ -218,6 +220,8 @@ Error handling:
 - If vendor has no cart associated with them, respond with status 400
 - Unauthorized user receives status 401
 
+`Status 400 Invalid Request`
+
 ```json
 { "error": "No cart associated with vendor ID 13" }
 ```
@@ -233,9 +237,11 @@ Description:
 - API should direct user to page with form
 - API should respond with the same response as `/vendor`
 
-Example request: `/vendor/edit?id=12`
+Example request: `/vendor/edit?id=13`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -254,7 +260,7 @@ Example response:
 
 ### Update the cart’s location and availability
 
-Request: `POST /vendor/edit`  
+Request: `PUT /vendor/edit`  
 Return data format: `text`  
 Query parameter: vendorID as `id`  
 Default response: `Status 204 No Content`  
@@ -268,9 +274,7 @@ Example request: `/vendor/edit?id=13`
 
 Example response:
 
-```text
-"Successfully updated vendor information"
-```
+`Status 204 No Content`
 
 Error handling:
 
@@ -296,6 +300,8 @@ Description:
 Example request: `/vendor/orders?id=13`
 
 Example response:
+
+`Status 200 OK`
 
 ```json
 {
@@ -349,13 +355,13 @@ Example request: `/vendor/orders?id=12`
 
 Example response:
 
-```text
-"Successfully updated status for order ID 23"
-```
+`Status 204 No Content`
 
 Error handling:
 
 - Status 400: invalid order ID or vendor ID
+
+`Status 400 Invalid Request`
 
 ```text
 "Error: invalid order ID 999"
@@ -415,10 +421,10 @@ Error handling:
 
 ### Update an order's details
 
-Request: `POST /vendor/orders/edit`  
+Request: `PUT /vendor/orders/edit`  
 Return data type: `text`  
 Query parameter: vendorID as `id`  
-Default response: `Status 201 Created`  
+Default response: `Status 204 No Content`  
 Description:
 
 - Grabs updated item's information and send as body of the request
@@ -428,9 +434,7 @@ Example request: `vendor/orders/edit?id=12`
 
 Example response:
 
-```text
-"Successfully updated order ID 23"
-```
+`Status 204 No Content`
 
 Error handling:
 
