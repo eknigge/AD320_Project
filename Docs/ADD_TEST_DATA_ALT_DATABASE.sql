@@ -1,6 +1,5 @@
 USE mydb;
 
-
 INSERT INTO ITEMS (ITEM_NAME, ITEM_CATEGORY, PRICE)
 VALUES 	("Seattle Dog", "Food", 499),
 		("Plain Hot Dog", "Food", 349),
@@ -25,7 +24,7 @@ VALUES 	("user1@website.com", "pass1", "user1", "user1_last", "CUSTOMER"),
         ("admin@website.com", "apass1", "admin1", "admin_last", "ADMIN")
 ;
 
-INSERT INTO ITEMS_MENU(MENU_ITEM_ID, ITEM_ID, AVAILABLE)
+INSERT INTO ITEMS_MENU(MENU_ID, ITEM_ID, AVAILABLE)
 VALUES 	(1, 1, "Y"),
 		(1, 2, "Y"),
         (1, 3, "N"),
@@ -55,24 +54,45 @@ VALUES 	(1, 1),
         (4, 3)
 ;
 
-INSERT INTO mydb.ORDER(ITEM_ID, QUANTITY)
-VALUES 	(1,1),
-		(1,1),
-        (1,4),
-        (1,2)
+INSERT INTO ORDERS(DATE)
+VALUES 	("2021-01-02 20:00:10"),
+		("2021-01-02 19:13:11"),
+        ("2021-01-02 12:41:18")
 ;
 
 INSERT INTO ORDER_USERS(USER_ID, ORDER_ID)
-VALUES 	(1,4),
+VALUES 	(1,2),
 		(2,1),
         (2,3)
 ;
 
 INSERT INTO CART(LOCATION, MENU_ID)
-VALUES 	("47.6828977,-122.3917439", 1)
+VALUES 	("47.6828977,-122.3917439", 1),
 		("47.6150395,-122.347419", 2),
         ("47.6124525,-122.3190042", 3)
 ;
 
-select * from cart;
-select * from menu;
+
+INSERT INTO CART_ORDERS(CART_ID, ORDER_ID, COMPLETE)
+VALUES 	(1, 1, "N"),
+		(2, 2, "N"),
+        (3, 3, "N")
+;
+
+INSERT INTO ORDERS_ITEMS(ORDER_ID, ITEM_ID, QUANTITY)
+VALUES 	(1, 1, 1),
+		(1, 4, 1),
+		(2, 2, 2),
+        (3, 3, 1)
+;
+
+SELECT * FROM MENU
+JOIN ITEMS_MENU USING (MENU_ID)
+JOIN ITEMS USING (ITEM_ID)
+ORDER BY MENU_ID;
+
+SELECT * FROM USERS
+JOIN USER_LOGS USING (USER_ID)
+JOIN LOG USING (LOG_ITEM_ID);
+
+select * from orders_items;
