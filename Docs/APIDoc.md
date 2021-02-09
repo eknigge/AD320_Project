@@ -35,8 +35,9 @@ Example response:
     [
         {
             "cartID": 1,
-            "cartLocation": "45.3423, 123.3456",
-            "cartAvailable": "Yes"
+            "location": "45.3423, 123.3456",
+            "menuID": 2,
+            "available": true
         },
         {
             "cartID": 2,
@@ -70,15 +71,9 @@ Example response:
 ```json
 {
   "cartID": 12,
-  "cartAvailable": "Yes",
-  "cartLocation": "42.3456, 123,3456",
-  "vendor": {
-    "vendorID": 3,
-    "vendorName": "Joe Smith"
-  },
-  "menu": {
-    "menuID": 1
-  }
+  "location": "42.3456, 123,3456",
+  "menuID": 3,
+  "available": true
 }
 ```
 
@@ -118,9 +113,11 @@ Example response:
         "items": [
             {
                 "itemID": 1,
-                "itemName": "Hot Dog",
-                "itemAvailable": "Yes",
-                "itemPrice": 3.00
+                "name": "Hot Dog",
+                "category": "Food",
+                "available": true,
+                "price": 3.00,
+                "description": null
             },
             {
                 "itemID": 2,
@@ -203,14 +200,13 @@ Example response:
 ```json
 {
   "vendorID": 13,
-  "vendorName": "Joe Smith",
+  "vendorFirstName": "Joe",
+  "vendorLastName": "Smith",
   "cart": {
-    "cartID": 1,
-    "cartLocation": "45.3245, 123.4544",
-    "cartAvailable": "Yes"
-  },
-  "menu": {
-    "menuID": 2
+    "id": 1,
+    "location": "45.3245, 123.4544",
+    "menuID": 3,
+    "available": true
   }
 }
 ```
@@ -246,14 +242,13 @@ Example response:
 ```json
 {
   "vendorID": 13,
-  "vendorName": "Joe Smith",
+  "vendorFirstName": "Joe",
+  "vendorLastName": "Smith",
   "cart": {
-    "cartID": 1,
-    "cartLocation": "45.3245, 123.4544",
-    "cartAvailable": "Yes"
-  },
-  "menu": {
-    "menuID": 2
+    "id": 1,
+    "location": "45.3245, 123.4544",
+    "menuID": 3,
+    "available": true
   }
 }
 ```
@@ -309,16 +304,18 @@ Example response:
     "orders": [
         {
             "orderID": 1,
+            "date": "2021-01-03 10:30:12",
             "customerFirstName": "Sean",
             "customerLastName": "McGuire",
             "totalPrice": 10.05,
-            "completed": "No",
+            "complete": false,
             "items": [
                 {
-                    "itemID": 1,
-                    "itemName": "Hot dog",
-                    "itemPrice": 2.00,
-                    "..."
+                    "id": 1,
+                    "name": "Hot dog",
+                    "category": "Food",
+                    "price": 2.00,
+                    "description": "Seattle's best!"
                 },
                 "..."
             ]
@@ -388,16 +385,18 @@ Example response:
     "orders": [
         {
             "orderID": 1,
+            "date": "2021-01-03 10:30:12",
             "customerFirstName": "Sean",
             "customerLastName": "McGuire",
             "totalPrice": 10.05,
-            "completed": "No",
+            "complete": false,
             "items": [
                 {
-                    "itemID": 1,
-                    "itemName": "Hot dog",
-                    "itemPrice": 2.00,
-                    "..."
+                    "id": 1,
+                    "name": "Hot dog",
+                    "category": "Food",
+                    "price": 2.00,
+                    "description": "Seattle's best!"
                 },
                 "..."
             ]
@@ -467,20 +466,25 @@ Example response:
 ```json
 {
     "vendorID": 12,
-    "menu": [
+    "cartID": 3,
+    "menu": {
+        "menuID": 3,
+        "items": [
         {
-            "itemID": 1,
-            "itemName": "Hot dog",
-            "itemPrice": 2.00,
-            "itemAvailable": "Yes"
+            "id": 1,
+            "name": "Hot dog",
+            "category": "Food",
+            "price": 2.00,
+            "available": true
         },
         {
-            "itemID": 2,
-            "itemName": "Coke",
+            "id": 2,
+            "name": "Coke",
             "..."
         },
         "..."
-    ]
+        ]
+    } 
 }
 ```
 
@@ -514,20 +518,25 @@ Example response:
 ```json
 {
     "vendorID": 12,
-    "menu": [
+    "cartID": 3,
+    "menu": {
+        "menuID": 3,
+        "items": [
         {
-            "itemID": 1,
-            "itemName": "Hot dog",
-            "itemPrice": 2.00,
-            "itemAvailable": "Yes"
+            "id": 1,
+            "name": "Hot dog",
+            "category": "Food",
+            "price": 2.00,
+            "available": true
         },
         {
-            "itemID": 2,
-            "itemName": "Coke",
+            "id": 2,
+            "name": "Coke",
             "..."
         },
         "..."
-    ]
+        ]
+    } 
 }
 ```
 
@@ -597,9 +606,10 @@ Example return:
     "cart": [
         {
             "cartID": 21,
-            "associatedVendorID": null,
             "location": "45.2342, 123.5434",
-            "available": "No"
+            "menuID": 3,
+            "available": false,
+            "userID": 5
         },
         {
             "cartID": 22,
@@ -676,9 +686,10 @@ Example response:
     "cart": [
         {
             "cartID": 21,
-            "associatedVendorID": 20,
             "location": "45.2342, 123.5434",
-            "available": "No"
+            "menuID": 3,
+            "available": false,
+            "userID": 5
         },
         {
             "cartID": 22,
@@ -779,14 +790,17 @@ Example response:
     "adminID": 1,
     "vendors": [
         {
-            "vendorID": 12,
-            "vendorName": "John Carter",
-            "vendorAvailable": "Yes",
-            "associatedCartID": 4
+            "id": 12,
+            "firstName": "John",
+            "lastName": "Carter",
+            "email": "johncarter@hotdog.com",
+            "cartID": 4,
+            "available": true
         },
         {
-            "vendorID": 15,
-            "vendorName": "Webber Spyder",
+            "id": 15,
+            "firstName": "Webber",
+            "lastName": "Spyder",
             "..."
         },
         "..."
@@ -848,14 +862,17 @@ Example response:
     "adminID": 1,
     "vendors": [
         {
-            "vendorID": 12,
-            "vendorName": "John Carter",
-            "vendorAvailable": "Yes",
-            "associatedCartID": 4
+            "id": 12,
+            "firstName": "John",
+            "lastName": "Carter",
+            "email": "johncarter@hotdog.com",
+            "cartID": 4,
+            "available": true
         },
         {
-            "vendorID": 15,
-            "vendorName": "Webber Spyder",
+            "id": 15,
+            "firstName": "Webber",
+            "lastName": "Spyder",
             "..."
         },
         "..."
@@ -956,18 +973,20 @@ Example response:
         "menuID": 2,
         "items": [
         {
-            "itemID": 1,
-            "itemName": "Hot dog",
-            "itemPrice": 2.00,
-            "itemAvailable": "Yes"
+            "id": 1,
+            "name": "Hot dog",
+            "category": "Food",
+            "price": 2.00,
+            "available": true,
+            "description": null
         },
         {
-            "itemID": 2,
-            "itemName": "Coke",
+            "id": 2,
+            "name": "Coke",
             "..."
         },
         "..."
-    ]
+        ]
     }
 }
 ```
@@ -1005,22 +1024,24 @@ Example response:
 ```json
 {
     "adminID": 1,
-    "menu": {
+        "menu": {
         "menuID": 2,
         "items": [
         {
-            "itemID": 1,
-            "itemName": "Hot dog",
-            "itemPrice": 2.00,
-            "itemAvailable": "Yes"
+            "id": 1,
+            "name": "Hot dog",
+            "category": "Food",
+            "price": 2.00,
+            "available": true,
+            "description": null
         },
         {
-            "itemID": 2,
-            "itemName": "Coke",
+            "id": 2,
+            "name": "Coke",
             "..."
         },
         "..."
-    ]
+        ]
     }
 }
 ```
