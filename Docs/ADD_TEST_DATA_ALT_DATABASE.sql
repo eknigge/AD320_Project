@@ -86,13 +86,31 @@ VALUES 	(1, 1, 1),
         (3, 3, 1)
 ;
 
+INSERT INTO USERS_CART(USER_ID, CART_ID)
+VALUES 	(3, 1),
+		(3, 2),
+		(4, 3)
+;
+
+-- show menu's and available items
 SELECT * FROM MENU
 JOIN ITEMS_MENU USING (MENU_ID)
 JOIN ITEMS USING (ITEM_ID)
 ORDER BY MENU_ID;
 
+-- show history of user actions
 SELECT * FROM USERS
 JOIN USER_LOGS USING (USER_ID)
 JOIN LOG USING (LOG_ITEM_ID);
 
-select * from orders_items;
+-- show items odrdered by users
+select * FROM USERS
+JOIN ORDER_USERS USING (USER_ID)
+JOIN ORDERS USING (ORDER_ID)
+JOIN ORDERS_ITEMS USING (ORDER_ID)
+JOIN ITEMS USING (ITEM_ID)
+ORDER BY USER_ID
+;
+
+select * from users;
+select * from cart;
