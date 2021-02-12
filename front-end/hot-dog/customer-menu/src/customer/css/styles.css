@@ -1,0 +1,110 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body{
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  h1, h2, h3{
+      margin: 0.5rem 0;
+  }
+
+  h1{
+    margin-top: 2rem;
+    }
+  
+  h2{
+    font-size: 1.2rem;  
+  }
+
+  h3{
+    font-size: 1rem;
+  }
+
+  .block{
+    background-color:rgb(127, 148, 127);
+    padding:1rem;
+    margin: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.row{
+   display: flex;  /*Arrow and row next to each other in row*/
+   justify-content: space-between; /*Split arrow and cart instead of sticking together*/
+}
+
+.center{
+    text-align: center;
+}
+
+.col-1{
+    flex: 1;
+}
+
+.col-2{
+    flex: 2;
+}
+
+img.small{
+    max-height:8rem;
+}
+
+img.chili{
+  margin-top: 2rem;
+  width:1005%;
+
+}
+
+.products{
+  display: grid;
+  margin-left: 10rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.products img {
+  width: 100%;
+}
+
+.product{
+  padding: 40px;
+}
+
+button{
+  font-size: 15px;
+  padding: 8px;
+}
+
+
+/* Tablets  (portrait and landscape) ----------- */
+@media all and (min-width:768px) and (max-width:1279px) {
+  /* CSS rules */
+    
+    .products {
+        width: 100%;
+        text-align: center;
+        margin-left:9px;
+        margin-bottom:15px;   
+    }
+
+    img.chili{
+      margin-top: 2rem;
+      
+    }
+  }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (max-width: 767px) {
+  .products {
+      width: 50%;
+      margin-left: 5rem; 
+      grid-template-columns: none;
+    }
+}
