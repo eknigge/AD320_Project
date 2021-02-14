@@ -6,7 +6,9 @@ class Banner extends React.Component {
     return (
       <Container>
         <div className="ui message" style={{ marginTop: '1em' }}>
-          <h1 className="ui Huge header centered">Hello, Vendor Name</h1>
+          <h1 className="ui Huge header centered">
+            Hello, {this.props.vendorName}
+          </h1>
         </div>
       </Container>
     );

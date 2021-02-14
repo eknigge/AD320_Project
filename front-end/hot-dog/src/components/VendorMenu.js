@@ -1,9 +1,15 @@
 import React from 'react';
 import Banner from './Banner';
+import Menu from './Menu';
 
 class VendorMenu extends React.Component {
   render() {
-    return <Banner></Banner>;
+    return (
+      <div>
+        <Banner vendorName="Steven" />
+        <Menu />
+      </div>
+    );
   }
 }
 
