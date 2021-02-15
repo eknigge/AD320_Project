@@ -2,6 +2,25 @@ import React from 'react';
 import TableRow from './TableRow';
 
 class Table extends React.Component {
+  renderContent() {
+    if (this.props.apiResponse['menu'] !== undefined) {
+      return (
+        <TableRow
+          itemName={this.props.apiResponse['menu']['items'][0]['name']}
+          category={this.props.apiResponse.menu.items[0].category}
+          price={this.props.apiResponse.menu.items[0].price}
+          status={
+            this.props.apiResponse.menu.items[0].available
+              ? 'Available'
+              : 'Unavailable'
+          }
+        ></TableRow>
+      );
+    } else {
+      return null;
+    }
+  }
+
   render() {
     return (
       <form className="ui form">
@@ -16,12 +35,7 @@ class Table extends React.Component {
             </tr>
           </thead>
           <tbody>
-            <TableRow
-              itemName="Hot dog"
-              category="Food"
-              price="2.99"
-              status="Available"
-            ></TableRow>
+            {this.renderContent()}
             <TableRow
               itemName="Coke"
               category="Beverage"
@@ -35,11 +49,11 @@ class Table extends React.Component {
               status="Unavailable"
             ></TableRow>
           </tbody>
-          <tfoot class="full-width">
+          <tfoot className="full-width">
             <tr>
               <th></th>
-              <th colspan="4">
-                <button class="ui right floated medium primary button">
+              <th colSpan="4">
+                <button className="ui right floated medium primary button">
                   Update Menu
                 </button>
               </th>
