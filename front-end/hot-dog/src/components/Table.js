@@ -2,20 +2,21 @@ import React from 'react';
 import TableRow from './TableRow';
 
 class Table extends React.Component {
-  renderContent() {
+  renderItems() {
     if (this.props.apiResponse['menu'] !== undefined) {
-      return (
-        <TableRow
-          itemName={this.props.apiResponse['menu']['items'][0]['name']}
-          category={this.props.apiResponse.menu.items[0].category}
-          price={this.props.apiResponse.menu.items[0].price}
-          status={
-            this.props.apiResponse.menu.items[0].available
-              ? 'Available'
-              : 'Unavailable'
-          }
-        ></TableRow>
-      );
+      const menuItems = this.props.apiResponse.menu.items.map((item) => {
+        return (
+          <TableRow
+            key={item.id}
+            itemName={item.name}
+            category={item.category}
+            price={item.price}
+            status={item.available ? 'Available' : 'Unavailable'}
+          ></TableRow>
+        );
+      });
+
+      return <tbody>{menuItems}</tbody>;
     } else {
       return null;
     }
@@ -34,21 +35,7 @@ class Table extends React.Component {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            {this.renderContent()}
-            <TableRow
-              itemName="Coke"
-              category="Beverage"
-              price="1.99"
-              status="Available"
-            ></TableRow>
-            <TableRow
-              itemName="Water"
-              category="Beverage"
-              price="0.99"
-              status="Unavailable"
-            ></TableRow>
-          </tbody>
+          {this.renderItems()}
           <tfoot className="full-width">
             <tr>
               <th></th>
