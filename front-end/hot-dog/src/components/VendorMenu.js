@@ -9,7 +9,7 @@ class VendorMenu extends React.Component {
   }
 
   callAPI() {
-    fetch('http://localhost:8000/vendor/menu?id=4')
+    fetch('http://localhost:8000/vendor/menu?id=6')
       .then((res) => res.json())
       .then((res) => {
         this.setState({ apiResponse: res });
@@ -23,9 +23,10 @@ class VendorMenu extends React.Component {
   }
 
   render() {
+    const { vendorFirstName, vendorLastName } = this.state.apiResponse;
     return (
       <div>
-        <Banner vendorName="Steven" />
+        <Banner vendorName={vendorFirstName + ' ' + vendorLastName} />
         <Menu apiResponse={this.state.apiResponse} />
       </div>
     );

@@ -25,14 +25,14 @@ class Table extends React.Component {
   render() {
     return (
       <form className="ui form">
-        <table className="ui definition table">
+        <table className="ui table">
           <thead>
             <tr>
-              <th></th>
               <th>Item Name</th>
               <th>Category</th>
               <th>Price ($)</th>
               <th>Status</th>
+              <th>Toggle</th>
             </tr>
           </thead>
           {this.renderItems()}

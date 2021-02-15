@@ -8,6 +8,9 @@ class Menu extends React.Component {
     return (
       <Container>
         <Box>
+          <h2 className="ui header">
+            <i className="clipboard outline icon"></i>Menu
+          </h2>
           <Table apiResponse={this.props.apiResponse}></Table>
         </Box>
       </Container>

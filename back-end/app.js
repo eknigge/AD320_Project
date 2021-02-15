@@ -8,6 +8,8 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
+console.log('Server is running...');
+
 app.use('/vendor/menu', vendorMenu);
 
 const PORT = process.env.PORT || LOCAL_PORT;

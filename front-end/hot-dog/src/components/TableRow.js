@@ -1,21 +1,39 @@
 import React from 'react';
 
 class TableRow extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { apiResponse: {} };
+  // }
+
   render() {
+    const { itemName, category, price, status } = this.props;
+
     return (
       <tr>
+        <td>{itemName}</td>
+        <td>{category}</td>
+        <td>{price}</td>
+        <td className={status === 'Available' ? 'positive' : 'negative'}>
+          {status}
+        </td>
         <td className="collapsing">
           <div className="ui fitted toggle checkbox">
-            <input type="checkbox"></input> <label></label>
+            <input
+              type="checkbox"
+              // checked={this.props.status === 'Available'}
+              onChange={this.handleChange}
+            ></input>
+            <label></label>
           </div>
         </td>
-        <td>{this.props.itemName}</td>
-        <td>{this.props.category}</td>
-        <td>{this.props.price}</td>
-        <td>{this.props.status}</td>
       </tr>
     );
   }
+
+  handleChange = (event) => {
+    console.log('button has been clicked');
+  };
 }
 
 export default TableRow;
