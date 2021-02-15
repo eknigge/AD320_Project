@@ -8,7 +8,7 @@ class Menu extends React.Component {
     return (
       <Container>
         <Box>
-          <Table></Table>
+          <Table apiResponse={this.props.apiResponse}></Table>
         </Box>
       </Container>
     );
