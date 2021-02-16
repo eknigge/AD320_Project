@@ -1,6 +1,7 @@
 import React from 'react';
 import Banner from './Banner';
 import Menu from './Menu';
+import Container from './Container';
 
 class VendorMenu extends React.Component {
   constructor(props) {
@@ -22,11 +23,25 @@ class VendorMenu extends React.Component {
     this.callAPI();
   }
 
+  errorHandling() {
+    if (this.state.apiResponse.error) {
+      return (
+        <Container>
+          <div className="ui message">
+            <h1 className="ui centered header">Error</h1>
+          </div>
+        </Container>
+      );
+    } else {
+      const { vendorFirstName, vendorLastName } = this.state.apiResponse;
+      return <Banner vendorName={vendorFirstName + ' ' + vendorLastName} />;
+    }
+  }
+
   render() {
-    const { vendorFirstName, vendorLastName } = this.state.apiResponse;
     return (
       <div>
-        <Banner vendorName={vendorFirstName + ' ' + vendorLastName} />
+        {this.errorHandling()}
         <Menu apiResponse={this.state.apiResponse} />
       </div>
     );
