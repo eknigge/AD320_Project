@@ -3,16 +3,48 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
 
+const queries = {
+  getMenu:
+    'SELECT User_ID, First_Name, Last_Name, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available, Items.Description FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?',
+  userPermission: 'SELECT Permission FROM Users WHERE User_ID = ?',
+  updateMenuItem:
+    'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?;'
+};
+
 router.get('/', async (req, res) => {
   let id = parseInt(req.query.id);
+<<<<<<< HEAD
   console.log('Getting menu for vendor ' + id);
   let queryString =
     'SELECT User_ID, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available, Items.Description FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?';
+=======
+  let validPermission;
+  try {
+    validPermission =
+      (await db.promise().execute(queries.userPermission, [id]))[0][0][
+        'Permission'
+      ] === 'VENDOR';
+>>>>>>> d4060eb... added error handing for showing vendor menu
 
-  const data = (await db.promise().execute(queryString, [id]))[0];
+    if (validPermission) {
+      try {
+        const data = (await db.promise().execute(queries.getMenu, [id]))[0];
 
-  let finalJSON = makeJSON(data);
-  res.json(finalJSON);
+        let finalJSON = makeJSON(data);
+        res.json(finalJSON);
+      } catch {
+        res.status(400).send({
+          error: 'You currently do not have an active menu'
+        });
+      }
+    } else {
+      res
+        .status(401)
+        .send({ error: 'You do not have permission to view this page' });
+    }
+  } catch {
+    res.status(400).send({ error: `No user found with id ${id}` });
+  }
 });
 
 function makeJSON(dbResult) {
