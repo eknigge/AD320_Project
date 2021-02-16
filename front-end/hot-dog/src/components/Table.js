@@ -8,6 +8,7 @@ class Table extends React.Component {
         return (
           <TableRow
             key={item.id}
+            id={item.id}
             itemName={item.name}
             category={item.category}
             price={item.price}
@@ -28,7 +29,7 @@ class Table extends React.Component {
         <table className="ui definition table">
           <thead>
             <tr>
-              <th></th>
+              <th>Item ID</th>
               <th>Item Name</th>
               <th>Category</th>
               <th>Price ($)</th>

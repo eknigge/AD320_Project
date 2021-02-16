@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
 
+// SQL queries
 const queries = {
   getMenu:
     'SELECT User_ID, First_Name, Last_Name, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available, Items.Description FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?',
@@ -11,20 +12,17 @@ const queries = {
     'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?;'
 };
 
+/**
+ * Shows the menu for a specific vendor
+ */
 router.get('/', async (req, res) => {
   let id = parseInt(req.query.id);
-<<<<<<< HEAD
-  console.log('Getting menu for vendor ' + id);
-  let queryString =
-    'SELECT User_ID, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available, Items.Description FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?';
-=======
   let validPermission;
   try {
     validPermission =
       (await db.promise().execute(queries.userPermission, [id]))[0][0][
         'Permission'
       ] === 'VENDOR';
->>>>>>> d4060eb... added error handing for showing vendor menu
 
     if (validPermission) {
       try {
@@ -47,6 +45,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+/**
+ * Turns query result into JSON responded by API
+ * @param {Array} dbResult array containing query result
+ */
 function makeJSON(dbResult) {
   if (dbResult) {
     let obj = {
@@ -61,6 +63,18 @@ function makeJSON(dbResult) {
   }
 }
 
+/**
+ * Format all items into JSON
+ * @param {Array} dbResult array containing query result
+ */
+function getItems(dbResult) {
+  return dbResult.map(getItem);
+}
+
+/**
+ * Used by map to format each item's information
+ * @param {Object} row json containing item information
+ */
 function getItem(row) {
   let item = {
     id: row.Item_ID,
@@ -70,10 +84,6 @@ function getItem(row) {
     available: row.Available === 'Y'
   };
   return item;
-}
-
-function getItems(dbResult) {
-  return dbResult.map(getItem);
 }
 
 module.exports = router;
