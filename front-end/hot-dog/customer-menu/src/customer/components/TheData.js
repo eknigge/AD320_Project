@@ -26,10 +26,6 @@ function TheData() {
 </div> 
 </header> 
 
-  <div>
-    <img className="logo" src={logo} alt="image" />
-  </div>
-
   <div className="block center">
        <h2>Address: 9600 College Way N, Seattle, WA 98103</h2>
        <h2>TUESDAY-FRIDAY | 10am to 2am | CLOSED MONDAY</h2>
