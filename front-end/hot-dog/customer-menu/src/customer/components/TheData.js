@@ -1,65 +1,75 @@
 import React, {useState } from 'react';
 import data from '../data/data';
-import regular from '../images/regular.jpeg';
-import example from '../images/example.jpeg';
+import logo from './images/logo.jpg';
 import css from '../css/styles.css';
+import back from './images/back.jpg';
+import x from './images/x.jpg';
 
 function TheData() {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState([]);
 
   const addToCart = (product) =>{
     setCart([...cart, product])
 
   }
+
     return(
 
 
-<div>
+<div className="wrapper">
 
 <header className="row block center">
-<button>Go Back</button>
+  <h3><a href='home'> <img src={back} alt="back-arrow" /> </a></h3>
 
-    <button>
-    <i className="fas fa-cart-plus"></i>
-      Cart ({cart.length})
-      </button>
-    
-  </header>      
+<div className="cart">
+  <button className="cart-button">Cart ({cart.length})</button>
+</div> 
+</header> 
 
-  <img class="image" src={example} className="theImages" alt="image" />
+  <div>
+    <img className="logo" src={logo} alt="image" />
+  </div>
 
   <div className="block center">
        <h2>Address: 9600 College Way N, Seattle, WA 98103</h2>
-       <h3>TUESDAY-FRIDAY | 10am to 2am | CLOSED MONDAY</h3>
+       <h2>TUESDAY-FRIDAY | 10am to 2am | CLOSED MONDAY</h2>
        <hr></hr>
         <h1>Menu</h1>
-
   </div>
 
-
     <div className="products"> 
-        {data.map(product => (
-        
-        <div className="product" key={product.id}> 
+
+    {data.map((product) => (
+
+        <div className="product" key = {product.id}> 
+
+{/*Ternary operator to disable button --- if equal to 5 then it is true (Sold out) since disable occurs otherwise false (+/add) thus, disable is not used*/}
+         <div className="productsSup"> <button  className="plus" onClick={() => addToCart(product)} disabled = {(cart.length == 10 ? true : false)}>
+         {cart.length== 10 ? <img src={x} alt="image" /> : <b>+</b>}</button>
+
+
+{/*img*/}
           <img className="small" src={product.img}></img>
-           {product.name} 
-           ${product.price}
-           <div>
-             <button onClick={() => addToCart(product)}>
-               Add to Cart
-               </button>
-            </div>
-           
-          </div>
+{/*name*/}
+          <div className="left">
+             {product.name} 
+{/*price*/}
+             <div>${product.price}</div></div>
 
-))};
+             
+             </div> {/*end productsSup*/}
+            
+             </div> //end product
+))}
 
-</div>
+</div> {/*end products*/}
+</div> //end wrapper
 
-
-    </div>
 
     )
   };
+
+
+
   
 export default TheData;
