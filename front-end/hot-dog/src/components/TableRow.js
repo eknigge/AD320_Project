@@ -1,16 +1,17 @@
 import React from 'react';
 
 class TableRow extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { apiResponse: {} };
-  // }
+  constructor(props) {
+    super(props);
+    this.itemRef = React.createRef();
+  }
 
   render() {
-    const { itemName, category, price, status } = this.props;
+    const { id, itemName, category, price, status } = this.props;
 
     return (
       <tr>
+        <td>{id}</td>
         <td>{itemName}</td>
         <td>{category}</td>
         <td>{price}</td>
