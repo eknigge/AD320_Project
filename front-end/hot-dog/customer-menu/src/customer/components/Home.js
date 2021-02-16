@@ -16,7 +16,7 @@ function Home() {
 </header>
 
 <div className="welcome">
-<h4>WELCOME to FLYING HOTDOG</h4>
+<h4>WELCOME to HOT DOGGIST</h4>
 </div>
 
 <div class="chiliSup">
