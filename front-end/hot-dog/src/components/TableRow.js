@@ -3,7 +3,17 @@ import React from 'react';
 class TableRow extends React.Component {
   constructor(props) {
     super(props);
-    this.itemRef = React.createRef();
+    this.state = {
+      id: 0,
+      status: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.id,
+      status: this.props.status
+    });
   }
 
   render() {
@@ -15,15 +25,17 @@ class TableRow extends React.Component {
         <td>{itemName}</td>
         <td>{category}</td>
         <td>{price}</td>
-        <td className={status === 'Available' ? 'positive' : 'negative'}>
-          {status}
+        <td className={status ? 'positive' : 'negative'}>
+          {status ? 'Available' : 'Unavailable'}
         </td>
         <td className="collapsing">
           <div className="ui fitted toggle checkbox">
             <input
+              ref={this.itemRef}
               type="checkbox"
               // checked={this.props.status === 'Available'}
               onChange={this.handleChange}
+              checked={this.state.status}
             ></input>
             <label></label>
           </div>
@@ -33,7 +45,10 @@ class TableRow extends React.Component {
   }
 
   handleChange = (event) => {
-    console.log('button has been clicked');
+    this.setState({ status: event.target.checked });
+    setTimeout(() => {
+      console.log(this.state);
+    }, 50);
   };
 }
 

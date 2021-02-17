@@ -14,7 +14,7 @@ class VendorMenu extends React.Component {
       .then((res) => res.json())
       .then((res) => {
         this.setState({ apiResponse: res });
-        console.log(this.state.apiResponse);
+        // console.log(this.state.apiResponse);
       })
       .catch((err) => console.error(err));
   }
