@@ -2,37 +2,39 @@ import React from 'react';
 import TableRow from './TableRow';
 
 class Table extends React.Component {
-  state = { items: this.props.apiResponse };
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-  // getItemStatus(itemID, status) {
-  //   this.setState({
-  //     itemID: itemID,
-  //     status: status
-  //   });
-  //   // console.log(this.state);
-  // }
+  getItemStatus(itemID, status) {
+    // console.log(this.state);
+  }
 
   updateItems = (event) => {
     event.preventDefault();
-    // if (this.props.apiResponse['menu'] !== undefined) {
-    //   let n = this.props.apiResponse.menu.items;
-    //   let stateObj = {};
-    //   for (let i = 0; i < n.length; i++) {
-    //     stateObj[n[i].id] = n[i].available;
-    //   }
-    //   this.setState({ itemCount: n.length, ...stateObj });
-    // }
+
     setTimeout(() => {
       console.log(this.state);
     }, 50);
   };
 
+  // I copied the state from props, but now what?
+  // How do I manipulate it with child component listeners?
+
+  // On another thought, it's much easier to make separate fetch request for every item update
+  // But to reduce unnecessary fetch calls, I should find a way to gather changes in the children
+  static getDerivedStateFromProps(nextProps) {
+    return {
+      api: nextProps.apiResponse
+    };
+  }
+
   renderItems() {
-    if (this.props.apiResponse['menu'] !== undefined) {
-      const menuItems = this.props.apiResponse.menu.items.map((item) => {
+    if (this.state.api.menu !== undefined) {
+      const menuItems = this.state.api.menu.items.map((item) => {
         return (
           <TableRow
-            ref={this.name}
             key={item.id}
             id={item.id}
             itemName={item.name}
