@@ -125,7 +125,10 @@ img.small{
   }
 
   .left{
-    margin-right: 20%;
+    margin-left: 2%;
+    background-color: rgb(207, 200, 200);
+    width: 70%;
+    padding:1rem;
   }
 
 
@@ -234,6 +237,8 @@ img.chili{
        margin-left: 35%;
        width:30%;
        font-size: 0.90rem;
+       padding:0;
+       background-color: #f1f2f5;
     }
   
   .logo{

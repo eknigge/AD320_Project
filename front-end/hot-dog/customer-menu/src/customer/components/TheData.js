@@ -50,7 +50,10 @@ function TheData() {
           <div className="left">
              {product.name} 
 {/*price*/}
-             <div>${product.price}</div></div>
+             <div>${product.price}</div>
+
+{/*price*/}
+             <div>{product.description}</div></div>
 
              
              </div> {/*end productsSup*/}
