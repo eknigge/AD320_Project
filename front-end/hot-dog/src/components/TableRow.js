@@ -4,6 +4,7 @@ class TableRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      menuID: null,
       id: 0,
       status: false
     };
@@ -11,13 +12,15 @@ class TableRow extends React.Component {
 
   componentDidMount() {
     this.setState({
+      menuID: this.props.menuID,
       id: this.props.id,
       status: this.props.status
     });
   }
 
   render() {
-    const { id, itemName, category, price, status } = this.props;
+    const { id, itemName, category, price } = this.props;
+    const { status } = this.state;
 
     return (
       <tr>
@@ -31,11 +34,9 @@ class TableRow extends React.Component {
         <td className="collapsing">
           <div className="ui fitted toggle checkbox">
             <input
-              ref={this.itemRef}
               type="checkbox"
-              // checked={this.props.status === 'Available'}
               onChange={this.handleChange}
-              checked={this.state.status}
+              checked={status}
             ></input>
             <label></label>
           </div>
@@ -46,9 +47,15 @@ class TableRow extends React.Component {
 
   handleChange = (event) => {
     this.setState({ status: event.target.checked });
-    setTimeout(() => {
-      console.log(this.state);
-    }, 50);
+
+    fetch('http://localhost:8000/vendor/menu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res))
+      .catch((err) => console.err(err));
   };
 }
 

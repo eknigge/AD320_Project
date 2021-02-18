@@ -2,15 +2,6 @@ import React from 'react';
 import TableRow from './TableRow';
 
 class Table extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  getItemStatus(itemID, status) {
-    // console.log(this.state);
-  }
-
   updateItems = (event) => {
     event.preventDefault();
 
@@ -19,22 +10,12 @@ class Table extends React.Component {
     }, 50);
   };
 
-  // I copied the state from props, but now what?
-  // How do I manipulate it with child component listeners?
-
-  // On another thought, it's much easier to make separate fetch request for every item update
-  // But to reduce unnecessary fetch calls, I should find a way to gather changes in the children
-  static getDerivedStateFromProps(nextProps) {
-    return {
-      api: nextProps.apiResponse
-    };
-  }
-
   renderItems() {
-    if (this.state.api.menu !== undefined) {
-      const menuItems = this.state.api.menu.items.map((item) => {
+    if (this.props.apiResponse.menu !== undefined) {
+      const menuItems = this.props.apiResponse.menu.items.map((item) => {
         return (
           <TableRow
+            menuID={this.props.apiResponse.menu.menuID}
             key={item.id}
             id={item.id}
             itemName={item.name}
@@ -44,7 +25,6 @@ class Table extends React.Component {
           ></TableRow>
         );
       });
-
       return <tbody>{menuItems}</tbody>;
     } else {
       return null;
@@ -69,9 +49,9 @@ class Table extends React.Component {
           <tfoot className="full-width">
             <tr>
               <th></th>
-              <th colSpan="4">
-                <button className="ui right floated medium primary button">
-                  Update Menu
+              <th colSpan="5">
+                <button className="ui right floated medium green button">
+                  Make All Available (currently doesn't do jack)
                 </button>
               </th>
             </tr>
