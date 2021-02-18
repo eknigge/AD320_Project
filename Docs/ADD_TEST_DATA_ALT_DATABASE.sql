@@ -18,13 +18,13 @@ VALUES 	("This is the cart located in Ballard"),
 ;
 
 INSERT INTO USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, PERMISSION)
-VALUES 	("user1@website.com", "pass1", "user1", "user1_last", "CUSTOMER"),
-		("user2@website.com", "pass1", "user2", "user2_last", "CUSTOMER"),
-        ("vendor1@website.com", "vpass1", "vendor1", "vendor1_last", "VENDOR"),
-        ("vendor2@website.com", "vpass2", "vendor2", "vendor2_last", "VENDOR"),
-        ("admin@website.com", "apass1", "admin1", "admin_last", "ADMIN"),
+VALUES 	("user1@website.com", "pass1", "Homer", "Simpson", "CUSTOMER"),
+		("user2@website.com", "pass1", "Baby", "Huey", "CUSTOMER"),
+        ("vendor1@website.com", "vpass1", "Bobby", "Flay", "VENDOR"),
+        ("vendor2@website.com", "vpass2", "Wolfgang", "Puck", "VENDOR"),
+        ("admin@website.com", "apass1", "Best", "Boss", "ADMIN"),
         ("angrychef@gmail.com", "itsraw", "Gordan", "Ramsey", "VENDOR"),
-        ("ilikedonuts@simpson.com", "yumyum", "Homer", "Simpson", "VENDOR")
+        ("ilikedonuts@simpson.com", "yumyum", "Rick", "Sanchez", "VENDOR")
 ;
 
 INSERT INTO ITEMS_MENU(MENU_ID, ITEM_ID, AVAILABLE)
