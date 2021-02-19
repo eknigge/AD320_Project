@@ -9,23 +9,18 @@
 ## Team members
 
 Name: Eric Knigge  
-Email: eric.knigge@seattlecolleges.edu  
 GitHub: @eknigge
 
 Name: Steven Wang  
-Email: steven.wang@seattlecolleges.edu  
 GitHub: @shipitsteven
 
 Name: Hanna Negash  
-Email: hanna.negash@seattlecentral.edu  
 GitHub: @Hanna-N9
 
 Name Daniel Gebreselassie  
-Email: daniel.gebreselassie@seattlecolleges.edu  
 GitHub : @eyerusalemdani
 
 Name Tizeta Fantaye  
-Email: tizeta.fantaye@seattlecentral.edu  
 GitHub: @Tizeta2018
 
 ## Meeting Time
