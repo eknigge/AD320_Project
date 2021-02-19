@@ -10,7 +10,16 @@ class VendorMenu extends React.Component {
   }
 
   callAPI() {
-    fetch('http://localhost:8000/vendor/menu?id=6')
+    // User id and permission
+    // 1 - customer
+    // 2 - customer
+    // 3 - vendor
+    // 4 - vendor
+    // 5 - admin
+    // 6 - vendor
+    // 7 - vendor
+
+    fetch('http://localhost:8000/vendor/menu?id=7')
       .then((res) => res.json())
       .then((res) => {
         this.setState({ apiResponse: res });
