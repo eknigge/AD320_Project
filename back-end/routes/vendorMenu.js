@@ -9,7 +9,7 @@ const queries = {
     'SELECT User_ID, First_Name, Last_Name, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available, Items.Description FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?',
   userPermission: 'SELECT Permission FROM Users WHERE User_ID = ?',
   updateMenuItem:
-    'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?;'
+    'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?'
 };
 
 /**
@@ -46,6 +46,28 @@ router.get('/', async (req, res) => {
 });
 
 /**
+ * Updates an item's availability in the database
+ */
+router.post('/', async (req, res) => {
+  try {
+    const { menuID, id, status } = req.body;
+
+    // BUG: why is the status opposite of what it is in the db?
+    let available = status ? 'N' : 'Y';
+
+    let result = (
+      await db
+        .promise()
+        .execute(queries.updateMenuItem, [available, menuID, id])
+    )[0];
+
+    res.send('Update successful');
+  } catch {
+    res.status(500).send('Server error');
+  }
+});
+
+/**
  * Turns query result into JSON responded by API
  * @param {Array} dbResult array containing query result
  */
@@ -53,6 +75,8 @@ function makeJSON(dbResult) {
   if (dbResult) {
     let obj = {
       vendorID: dbResult[0].User_ID,
+      vendorFirstName: dbResult[0].First_Name,
+      vendorLastName: dbResult[0].Last_Name,
       cartID: dbResult[0].Cart_ID,
       menu: {
         menuID: dbResult[0].Menu_ID,

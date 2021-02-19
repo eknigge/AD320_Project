@@ -3,11 +3,24 @@ import React from 'react';
 class TableRow extends React.Component {
   constructor(props) {
     super(props);
-    this.itemRef = React.createRef();
+    this.state = {
+      menuID: null,
+      id: 0,
+      status: false
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      menuID: this.props.menuID,
+      id: this.props.id,
+      status: this.props.status
+    });
   }
 
   render() {
-    const { id, itemName, category, price, status } = this.props;
+    const { id, itemName, category, price } = this.props;
+    const { status } = this.state;
 
     return (
       <tr>
@@ -15,21 +28,35 @@ class TableRow extends React.Component {
         <td>{itemName}</td>
         <td>{category}</td>
         <td>{price}</td>
-        <td className={status === 'Available' ? 'positive' : 'negative'}>
-          {status}
+        <td className={status ? 'positive' : 'negative'}>
+          {status ? 'Available' : 'Unavailable'}
         </td>
         <td className="collapsing">
           <div className="ui fitted toggle checkbox">
-            <input type="checkbox"></input> <label></label>
+            <input
+              type="checkbox"
+              onChange={this.handleChange}
+              checked={status}
+            ></input>
+            <label></label>
           </div>
         </td>
-        <td>{this.props.itemName}</td>
-        <td>{this.props.category}</td>
-        <td>{this.props.price}</td>
-        <td>{this.props.status}</td>
       </tr>
     );
   }
+
+  handleChange = (event) => {
+    this.setState({ status: event.target.checked });
+
+    fetch('http://localhost:8000/vendor/menu', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state)
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res))
+      .catch((err) => console.err(err));
+  };
 }
 
 export default TableRow;
