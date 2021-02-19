@@ -10,9 +10,6 @@ class VendorMenu extends React.Component {
   }
 
   callAPI() {
-<<<<<<< HEAD
-    fetch('http://localhost:8000/vendor/menu?id=4')
-=======
     // User id and permission
     // 1 - customer
     // 2 - customer
@@ -23,7 +20,6 @@ class VendorMenu extends React.Component {
     // 7 - vendor
 
     fetch('http://localhost:8000/vendor/menu?id=7')
->>>>>>> 2a5a459... added comments for semantic ui and back end
       .then((res) => res.json())
       .then((res) => {
         this.setState({ apiResponse: res });
@@ -54,11 +50,7 @@ class VendorMenu extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <Banner vendorName="Steven" />
-=======
         {this.errorHandling()}
->>>>>>> d4060eb... added error handing for showing vendor menu
         <Menu apiResponse={this.state.apiResponse} />
       </div>
     );
