@@ -46,16 +46,16 @@ class TableRow extends React.Component {
   }
 
   handleChange = (event) => {
-    this.setState({ status: event.target.checked });
-
-    fetch('http://localhost:8000/vendor/menu', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state)
-    })
-      .then((res) => res.text())
-      .then((res) => console.log(res))
-      .catch((err) => console.err(err));
+    this.setState({ status: event.target.checked }, () => {
+      fetch('http://localhost:8000/vendor/menu', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.state)
+      })
+        .then((res) => res.text())
+        .then((res) => console.log(res))
+        .catch((err) => console.err(err));
+    });
   };
 }
 

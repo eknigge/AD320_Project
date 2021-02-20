@@ -48,22 +48,16 @@ router.get('/', async (req, res) => {
 /**
  * Updates an item's availability in the database
  */
-router.post('/', async (req, res) => {
+router.put('/', async (req, res) => {
   try {
     const { menuID, id, status } = req.body;
+    let available = status ? 'Y' : 'N';
 
-    // BUG: why is the status opposite of what it is in the db?
-    let available = status ? 'N' : 'Y';
+    await db.promise().execute(queries.updateMenuItem, [available, menuID, id]);
 
-    let result = (
-      await db
-        .promise()
-        .execute(queries.updateMenuItem, [available, menuID, id])
-    )[0];
-
-    res.send('Update successful');
+    res.status(204).send('Update successful');
   } catch {
-    res.status(500).send('Server error');
+    res.status(400).send('Server error');
   }
 });
 
