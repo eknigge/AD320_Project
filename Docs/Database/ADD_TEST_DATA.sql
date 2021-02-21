@@ -23,7 +23,9 @@ VALUES 	("Seattle Dog", "Food", 499, "Our most popular item the Seattle Dog. Cre
 INSERT INTO MENU(DESCRIPTION_MENU, MENU_TITLE)
 VALUES 	("This is the cart located in Ballard", "Ballard"),
 		("This is the cart located in Belltown", "Belltown"),
-        ("This is the cart located in Capitol Hill", "Cap Hill")
+        ("This is the cart located in Capitol Hill", "Cap Hill"),
+		("This is the cart located in North Gate", "North Gate"),
+        ("This is the cart located in Queen Anne", "Queen Anne")
 ;
 
 INSERT INTO USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, PERMISSION)
@@ -91,7 +93,39 @@ VALUES
 	(3,14,"Y"),
 	(3,15,"Y"),
 	(3,16,"Y"),
-	(3,17,"Y")
+	(3,17,"Y"),
+    (4,1,"Y"),
+    (4,2,"Y"),
+    (4,3,"Y"),
+    (4,4,"Y"),
+    (4,5,"Y"),
+    (4,6,"Y"),
+    (4,7,"N"),
+    (4,8,"Y"),
+    (4,9,"Y"),
+    (4,10,"N"),
+    (4,12,"Y"),
+    (4,13,"N"),
+    (4,14,"Y"),
+    (4,15,"N"),
+    (4,16,"Y"),
+    (4,17,"Y"),
+	(5,1,"Y"),
+    (5,2,"Y"),
+    (5,3,"Y"),
+    (5,4,"N"),
+    (5,5,"Y"),
+    (5,6,"Y"),
+    (5,7,"N"),
+    (5,8,"Y"),
+    (5,9,"Y"),
+    (5,10,"N"),
+    (5,12,"Y"),
+    (5,13,"N"),
+    (5,14,"Y"),
+    (5,15,"N"),
+    (5,16,"Y"),
+    (5,17,"Y")
 ; 
 
 INSERT INTO LOG(DATETIME, EVENT)
@@ -140,10 +174,12 @@ VALUES
 	(1,2)
 ;
 
-INSERT INTO CART(LOCATION, MENU_ID)
-VALUES 	("47.6828977,-122.3917439", 1),
-		("47.6150395,-122.347419", 2),
-        ("47.6124525,-122.3190042", 3)
+INSERT INTO CART(LOCATION, MENU_ID, AVAILABLE)
+VALUES 	("47.6828977,-122.3917439", 1, 'Y'),
+		("47.6150395,-122.347419", 2, 'Y'),
+        ("47.6124525,-122.3190042", 3, 'Y'),
+        ("47.5651632,-122.6865123", 4, 'N'),
+        ("47.6545623,-122.4321235", 5, 'N')
 ;
 
 
@@ -185,8 +221,10 @@ VALUES
 ;
 
 INSERT INTO USERS_CART(USER_ID, CART_ID)
-VALUES 	(3, 1),
-		(3, 2),
-		(4, 3)
+VALUES 	(5, 1),
+		(6, 2),
+		(8, 3),
+        (9, 4),
+        (10, 5)
 ;
 
