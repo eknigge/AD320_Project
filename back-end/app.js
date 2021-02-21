@@ -1,17 +1,18 @@
-// get the client
-const mysql = require('mysql2');
+'use strict';
 
-// create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'user',
-  password: 'password',
-  database: 'mydb',
-});
+const express = require('express');
+const LOCAL_PORT = 8000;
+const vendorMenu = require('./routes/vendorMenu');
+const cors = require('cors');
 
-connection.query(
-  'SELECT * FROM MENU JOIN ITEMS_MENU USING (MENU_ID) JOIN ITEMS USING (ITEM_ID) ORDER BY MENU_ID;',
-  function (err, results, fields) {
-    console.log(results); // results contains rows returned by server
-  }
-);
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+console.log('Server is running...');
+
+app.use('/vendor/menu', vendorMenu);
+
+const PORT = process.env.PORT || LOCAL_PORT;
+app.listen(PORT);
