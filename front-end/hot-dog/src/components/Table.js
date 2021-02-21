@@ -2,12 +2,34 @@ import React from 'react';
 import TableRow from './TableRow';
 
 class Table extends React.Component {
-  updateItems = (event) => {
-    event.preventDefault();
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    setTimeout(() => {
-      console.log(this.state);
-    }, 50);
+  updateItems = (event) => {
+    let itemArray = this.props.apiResponse.menu.items;
+    let idList = [];
+    itemArray.map((item) => (idList = [...idList, item.id]));
+
+    this.setState(
+      {
+        menuID: this.props.apiResponse.menu.menuID,
+        id: idList,
+        status: true
+      },
+      () => {
+        fetch('http://localhost:8000/vendor/menu', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.state)
+        })
+          .then((res) => res.text())
+          // Extra feature: add a pop up stating whether update was successful
+          // .then((res) => console.log(res))
+          .catch((err) => console.err(err));
+      }
+    );
   };
 
   renderItems() {
@@ -50,8 +72,11 @@ class Table extends React.Component {
             <tr>
               <th></th>
               <th colSpan="5">
-                <button className="ui right floated medium green button">
-                  Make All Available (currently doesn't do jack)
+                <button
+                  className="ui right floated medium green button"
+                  onClick={this.updateItems}
+                >
+                  Make All Available
                 </button>
               </th>
             </tr>

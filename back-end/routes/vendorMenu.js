@@ -53,11 +53,17 @@ router.put('/', async (req, res) => {
     const { menuID, id, status } = req.body;
     let available = status ? 'Y' : 'N';
 
-    await db.promise().execute(queries.updateMenuItem, [available, menuID, id]);
-
+    if (Array.isArray(id)) {
+      let queryStr = `UPDATE Items_Menu SET Available = '${available}' WHERE Menu_ID = ${menuID} AND Item_ID IN (${id.toString()})`;
+      await db.promise().execute(queryStr);
+    } else {
+      await db
+        .promise()
+        .execute(queries.updateMenuItem, [available, menuID, id]);
+    }
     res.status(204).send('Update successful');
   } catch {
-    res.status(400).send('Server error');
+    res.status(400).send('Bad request');
   }
 });
 
