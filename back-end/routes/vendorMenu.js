@@ -15,8 +15,8 @@ const queries = {
 /**
  * Shows the menu for a specific vendor
  */
-router.get('/', async (req, res) => {
-  let id = parseInt(req.query.id);
+router.get('/:id', async (req, res) => {
+  let id = parseInt(req.params.id);
   let validPermission;
   try {
     validPermission =

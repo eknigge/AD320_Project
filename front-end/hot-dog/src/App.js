@@ -6,7 +6,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/vendor/menu" component={VendorMenu} />
+        <Route path="/vendor/menu/:id" component={VendorMenu} />
       </Switch>
     </BrowserRouter>
   );

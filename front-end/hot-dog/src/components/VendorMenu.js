@@ -10,7 +10,8 @@ class VendorMenu extends React.Component {
   }
 
   callAPI() {
-    fetch('http://localhost:8000/vendor/menu?id=6')
+    let id = this.props.match.params.id;
+    fetch('http://localhost:8000/vendor/menu/' + id)
       .then((res) => res.json())
       .then((res) => {
         this.setState({ apiResponse: res });
