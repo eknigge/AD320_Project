@@ -4,6 +4,7 @@ import logo from './images/logo.jpg';
 import css from '../css/styles.css';
 import back from './images/back.jpg';
 import x from './images/x.jpg';
+import { Link } from 'react-router-dom';
 
 function TheData() {
   const [cart, setCart] = useState([]);
@@ -16,10 +17,10 @@ function TheData() {
     <div className="wrapper">
       <header className="row block center">
         <h3>
-          <a href="home">
+          <Link to="/">
             {' '}
             <img src={back} alt="back-arrow" />{' '}
-          </a>
+          </Link>
         </h3>
 
         <div className="cart">
