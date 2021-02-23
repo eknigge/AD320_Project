@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const cors = require('cors')
+let cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var customerRouter = require('./routes/customer');
@@ -11,7 +11,11 @@ var customerRouter = require('./routes/customer');
 var app = express();
 
 //CORS
-app.use(cors());
+//app.use(cors());
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
