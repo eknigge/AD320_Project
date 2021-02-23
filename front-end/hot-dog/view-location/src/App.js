@@ -1,5 +1,7 @@
 import React from 'react';
 import GMap from './GMap'
+import GMaps from './GMaps'
+
 
 
 //Allows us to change browser, navigate between different components
@@ -11,6 +13,7 @@ function App() {
     <Router>
       <Switch>
       <Route path="/map" component ={GMap} />
+      <Route path="/maps" component ={GMaps} />
       </Switch>
    </Router>
 
