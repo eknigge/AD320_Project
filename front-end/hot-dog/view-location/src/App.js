@@ -3,7 +3,6 @@ import GMap from './GMap'
 import GMaps from './GMaps'
 
 
-
 //Allows us to change browser, navigate between different components
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 

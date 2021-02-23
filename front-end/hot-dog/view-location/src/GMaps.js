@@ -1,5 +1,5 @@
 import React from 'react';
-
+import css from './css/styles.css'
 
  const GMaps = () => {
     return (
