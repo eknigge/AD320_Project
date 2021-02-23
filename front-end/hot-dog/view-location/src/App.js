@@ -1,5 +1,5 @@
 import React from 'react';
-import Basket from './customer/components/Basket';
+import GMap from './GMap'
 
 
 //Allows us to change browser, navigate between different components
@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Switch>
-      <Route path="//" component ={Basket} />
+      <Route path="/map" component ={GMap} />
       </Switch>
    </Router>
 
