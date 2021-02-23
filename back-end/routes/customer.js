@@ -22,9 +22,12 @@ router.get('/:cartID', (req, res, next) => {
     // querry database
   connection.query(custCartQuery, (err, results, fields)=>{
     if (err) throw err;
-    res.json(results);
+    let output = {"data": results}
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/customer/*');
+    res.json(output);
   })
 });
+
 
 // customers/ route
 router.get('/', (req, res, next) => {
