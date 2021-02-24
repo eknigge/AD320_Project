@@ -2,6 +2,7 @@ import React from 'react';
 import Banner from './Banner';
 import Container from './Container';
 import Map from './Map';
+import Box from './Box';
 
 class VendorMain extends React.Component {
   constructor(props) {
@@ -31,6 +32,26 @@ class VendorMain extends React.Component {
     return (
       <Container>
         <Banner vendorName={`${vendorFirstName} ${vendorLastName}`}></Banner>
+        <Box>
+          <div className="ui equal width center stackable grid">
+            <div className="column">
+              <button className="large ui primary button">
+                Change availability
+              </button>
+            </div>
+            <div className="column">
+              <button
+                className="large ui primary button"
+                data-tooltip="Click anywhere on the map to place a pin, then click this button (no functionality yet)"
+              >
+                Change Location
+              </button>
+            </div>
+            <div className="column">
+              <button className="large ui primary button">Change Menu</button>
+            </div>
+          </div>
+        </Box>
         <Map apiResponse={this.state.apiResponse} />
       </Container>
     );
