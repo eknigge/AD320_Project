@@ -8,6 +8,7 @@ import {
 import Box from './Box';
 import Container from './Container';
 
+// Configs
 const mapContainerStyle = {
   width: '100%',
   height: '80vh'
@@ -23,6 +24,7 @@ const options = {
   zoomControl: true
 };
 
+// Functional component
 export default function Map() {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY
