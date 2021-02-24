@@ -27,9 +27,10 @@ class VendorMain extends React.Component {
   }
 
   render() {
+    const { vendorFirstName, vendorLastName } = this.state.apiResponse;
     return (
       <Container>
-        <Banner vendorName="Greatest Hot Dog Seller on Earth!"></Banner>
+        <Banner vendorName={`${vendorFirstName} ${vendorLastName}`}></Banner>
         <Map apiResponse={this.state.apiResponse} />
       </Container>
     );

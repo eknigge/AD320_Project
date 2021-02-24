@@ -26,6 +26,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// TODO: need to change the cart location to separate out lat and long
 /**
  * Transforms database result array into JSON in desired format
  * @param {Array} dbResult results from database query
@@ -38,6 +39,7 @@ function makeJSON(dbResult) {
       vendorLastName: dbResult[0].Last_Name,
       cart: {
         id: dbResult[0].Cart_ID,
+        // FIXME: right here
         location: dbResult[0].Location,
         menuID: dbResult[0].Menu_ID,
         available: dbResult[0].available == 'Y' ? true : false

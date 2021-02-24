@@ -30,10 +30,33 @@ export default function Map() {
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY
   });
 
+  // Need to set the rendered marker in state first, then refer back to the corresponding marker in state
+  // const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading maps';
+
+  const icon = {
+    icon: {
+      url: '/images/hot-dog-stand.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    }
+  };
+
+  // mock data to test things out
+  const markers = [
+    {
+      lat: 47.6124525,
+      lng: -122.3190042
+    },
+    {
+      lat: 47.6828977,
+      lng: -122.3917439
+    }
+  ];
 
   return (
     <div>
@@ -45,58 +68,37 @@ export default function Map() {
             center={center}
             options={options}
           >
-            <Marker
-              key={'1'}
-              position={{ lat: 47.6828977, lng: -122.3917439 }}
-              icon={{
-                url: '/images/hot-dog-stand.svg',
-                scaledSize: new window.google.maps.Size(40, 40),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(20, 20)
-              }}
-              onClick={(anything) => {
-                setSelected(this);
-              }}
-            >
-              {selected ? (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setSelected(null);
+            {markers.map((marker) => {
+              return (
+                <Marker
+                  key={`${marker.lat}-${marker.lng}`}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  onClick={() => {
+                    setSelected(marker);
                   }}
-                >
-                  <div>
-                    <h3>Hot dog Sold Here!</h3>
-                    <p>What a time to be alive</p>
-                  </div>
-                </InfoWindow>
-              ) : null}
-            </Marker>
-            <Marker
-              key={'2'}
-              position={{ lat: 47.6124525, lng: -122.3190042 }}
-              icon={{
-                url: '/images/hot-dog-stand.svg',
-                scaledSize: new window.google.maps.Size(40, 40),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(20, 20)
-              }}
-              onClick={(target) => {
-                setSelected(target);
-              }}
-            >
-              {selected ? (
-                <InfoWindow
-                  onCloseClick={() => {
-                    setSelected(null);
-                  }}
-                >
-                  <div>
-                    <h3>Hot dog Sold Here!</h3>
-                    <p>What a time to be alive</p>
-                  </div>
-                </InfoWindow>
-              ) : null}
-            </Marker>
+                  icon={icon.icon}
+                ></Marker>
+              );
+            })}
+
+            {selected ? (
+              <InfoWindow
+                position={{ lat: selected.lat, lng: selected.lng }}
+                onCloseClick={() => {
+                  setSelected(null);
+                }}
+              >
+                <div>
+                  <h3>
+                    <span role="img" aria-label="cart">
+                      🌭🌭🌭
+                    </span>{' '}
+                    Hot dogs sold here!
+                  </h3>
+                  <p>Get your wieners while they're hot</p>
+                </div>
+              </InfoWindow>
+            ) : null}
           </GoogleMap>
         </Box>
       </Container>
