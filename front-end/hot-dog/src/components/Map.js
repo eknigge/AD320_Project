@@ -11,7 +11,7 @@ import Container from './Container';
 // Configs
 const mapContainerStyle = {
   width: '100%',
-  height: '80vh'
+  height: '75vh'
 };
 
 const options = {
