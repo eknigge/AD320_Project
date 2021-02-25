@@ -14,49 +14,39 @@ const mapContainerStyle = {
   height: '80vh'
 };
 
-const center = {
-  lat: 47.606209,
-  lng: -122.332069
-};
-
 const options = {
   disableDefaultUI: true,
   zoomControl: true
 };
 
 // Functional component
-export default function Map() {
+export default function Map(props) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY
   });
 
-  // Need to set the rendered marker in state first, then refer back to the corresponding marker in state
-  // const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading maps';
 
   const icon = {
-    icon: {
+    open: {
       url: '/images/hot-dog-stand.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    },
+    closed: {
+      url: '/images/closed.svg',
       scaledSize: new window.google.maps.Size(40, 40),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(20, 20)
     }
   };
 
-  // mock data to test things out
-  const markers = [
-    {
-      lat: 47.6124525,
-      lng: -122.3190042
-    },
-    {
-      lat: 47.6828977,
-      lng: -122.3917439
-    }
-  ];
+  const { cart, vendorFirstName, vendorLastName } = props.apiResponse;
+  const centerPos = { lat: cart?.[0]?.lat, lng: cart?.[0]?.lng };
 
   return (
     <div>
@@ -64,19 +54,22 @@ export default function Map() {
         <Box>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={12}
-            center={center}
+            zoom={11}
+            center={centerPos}
             options={options}
           >
-            {markers.map((marker) => {
+            {cart?.map((marker) => {
               return (
                 <Marker
                   key={`${marker.lat}-${marker.lng}`}
-                  position={{ lat: marker.lat, lng: marker.lng }}
+                  position={{
+                    lat: marker.lat,
+                    lng: marker.lng
+                  }}
                   onClick={() => {
                     setSelected(marker);
                   }}
-                  icon={icon.icon}
+                  icon={marker.available ? icon.open : icon.closed}
                 ></Marker>
               );
             })}
@@ -91,11 +84,20 @@ export default function Map() {
                 <div>
                   <h3>
                     <span role="img" aria-label="cart">
-                      🌭🌭🌭
+                      🌭
                     </span>{' '}
-                    Hot dogs sold here!
+                    {`${vendorFirstName} ${vendorLastName}`}'s Hot Dog Cart
                   </h3>
-                  <p>Get your wieners while they're hot</p>
+                  <p>Cart ID: {selected.id}</p>
+                  <p>Menu ID: {selected.menuID}</p>
+                  <p>
+                    Status:{' '}
+                    <span
+                      style={{ color: selected.available ? 'green' : 'red' }}
+                    >
+                      {selected.available ? 'Available' : 'Unavailable'}
+                    </span>
+                  </p>
                 </div>
               </InfoWindow>
             ) : null}

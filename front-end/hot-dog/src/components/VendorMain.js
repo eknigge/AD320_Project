@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Container from './Container';
 import Map from './Map';
 import Box from './Box';
+import { Link } from 'react-router-dom';
 
 class VendorMain extends React.Component {
   constructor(props) {
@@ -48,7 +49,11 @@ class VendorMain extends React.Component {
               </button>
             </div>
             <div className="column">
-              <button className="large ui primary button">Change Menu</button>
+              <Link to={`/vendor/menu/${this.props.match.params.id}`}>
+                <button className="large ui primary button">
+                  Edit Menu Items
+                </button>
+              </Link>
             </div>
           </div>
         </Box>

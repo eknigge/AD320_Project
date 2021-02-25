@@ -26,24 +26,26 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// TODO: need to change the cart location to separate out lat and long
 /**
  * Transforms database result array into JSON in desired format
  * @param {Array} dbResult results from database query
  */
 function makeJSON(dbResult) {
   if (dbResult) {
+    let locArr = dbResult[0].Location.split(',');
     let obj = {
-      vendorID: dbResult[0].User_ID,
+      vendorID: dbResult[0].USER_ID,
       vendorFirstName: dbResult[0].First_Name,
       vendorLastName: dbResult[0].Last_Name,
-      cart: {
-        id: dbResult[0].Cart_ID,
-        // FIXME: right here
-        location: dbResult[0].Location,
-        menuID: dbResult[0].Menu_ID,
-        available: dbResult[0].available == 'Y' ? true : false
-      }
+      cart: [
+        {
+          id: dbResult[0].Cart_ID,
+          lat: parseFloat(locArr[0]),
+          lng: parseFloat(locArr[1]),
+          menuID: dbResult[0].Menu_ID,
+          available: dbResult[0].Available === 'Y' ? true : false
+        }
+      ]
     };
     return obj;
   }
