@@ -4,10 +4,12 @@ import './index.css';
 // import App from './App';
 import AppCustomerMenu from './AppCustomerMenu';
 import reportWebVitals from './reportWebVitals';
+import AppVendorOrders from './AppVendorOrders';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppCustomerMenu />
+    <AppVendorOrders />
+    {/*<AppCustomerMenu />*/}
   </React.StrictMode>,
   document.getElementById('root')
 );

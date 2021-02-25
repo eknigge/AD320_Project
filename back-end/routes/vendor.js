@@ -8,16 +8,22 @@ let credentials = require('../credentials.json')
 //create database connection
 const connection = mysql.createConnection(credentials);
 
-// customers/cartID route
+// vendor/orders/cartID
 router.get('/:cartID', (req, res, next) => {
   let cartID = req.params.cartID;
   let custCartQuery = 
-    `SELECT ITEM_NAME, DESCRIPTION_ITEM, PRICE
-    FROM MENU 
-    JOIN ITEMS_MENU USING (MENU_ID) 
-    JOIN ITEMS USING (ITEM_ID) 
-    JOIN CART USING (MENU_ID) 
-    WHERE CART_ID = ${cartID};`
+    `
+    SELECT DATE, ORDER_ID, FIRST_NAME, LAST_NAME, ITEM_NAME, PRICE, QUANTITY
+    FROM ORDERS
+    JOIN CART_ORDERS USING (ORDER_ID)
+    JOIN CART USING (CART_ID)
+    JOIN ORDERS_ITEMS USING (ORDER_ID)
+    JOIN ITEMS USING (ITEM_ID)
+    JOIN ORDER_USERS USING (ORDER_ID)
+    JOIN USERS USING (USER_ID)
+    WHERE COMPLETE = "N" AND CART_ID = ${cartID}
+    ORDER BY DATE
+    ;`
 
     // querry database
   connection.query(custCartQuery, (err, results, fields)=>{
@@ -28,11 +34,5 @@ router.get('/:cartID', (req, res, next) => {
   })
 });
 
-
-// customers/ route
-router.get('/', (req, res, next) => {
-  let text = 'select * from MENU;'
-  res.send('this will be a map of all carts');
-});
 
 module.exports = router;
