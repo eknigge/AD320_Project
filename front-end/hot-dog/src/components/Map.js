@@ -46,7 +46,6 @@ export default function Map(props) {
   };
 
   const { cart, vendorFirstName, vendorLastName } = props.apiResponse;
-  const centerPos = { lat: cart?.[0]?.lat, lng: cart?.[0]?.lng };
 
   return (
     <div>
@@ -55,7 +54,7 @@ export default function Map(props) {
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             zoom={11}
-            center={centerPos}
+            center={props.center}
             options={options}
           >
             {cart?.map((marker) => {
@@ -69,7 +68,7 @@ export default function Map(props) {
                   onClick={() => {
                     setSelected(marker);
                   }}
-                  icon={marker.available ? icon.open : icon.closed}
+                  icon={props.status ? icon.open : icon.closed}
                 ></Marker>
               );
             })}
@@ -92,10 +91,8 @@ export default function Map(props) {
                   <p>Menu ID: {selected.menuID}</p>
                   <p>
                     Status:{' '}
-                    <span
-                      style={{ color: selected.available ? 'green' : 'red' }}
-                    >
-                      {selected.available ? 'Available' : 'Unavailable'}
+                    <span style={{ color: props.status ? 'green' : 'red' }}>
+                      {props.status ? 'Available' : 'Unavailable'}
                     </span>
                   </p>
                 </div>

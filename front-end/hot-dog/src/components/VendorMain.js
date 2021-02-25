@@ -13,13 +13,19 @@ class VendorMain extends React.Component {
 
   callAPI() {
     let id = this.props.match.params.id;
-    console.log(id);
     fetch(`http://localhost:8000/vendor/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        this.setState({ apiResponse: res }, () => {
-          console.log(this.state);
-        });
+        this.setState(
+          {
+            apiResponse: res,
+            available: res.cart[0].available,
+            center: { lat: res.cart[0].lat, lng: res.cart[0].lng }
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
       })
       .catch((err) => console.error(err));
   }
@@ -27,6 +33,10 @@ class VendorMain extends React.Component {
   componentDidMount() {
     this.callAPI();
   }
+
+  updateStatus = () => {
+    this.setState({ available: !this.state.available });
+  };
 
   render() {
     const { vendorFirstName, vendorLastName } = this.state.apiResponse;
@@ -36,13 +46,19 @@ class VendorMain extends React.Component {
         <Box>
           <div className="ui equal width center stackable grid">
             <div className="column">
-              <button className="large ui primary button">
-                Change availability
+              <button
+                className={`large ui button ${
+                  this.state.available ? 'teal' : 'green'
+                }`}
+                onClick={this.updateStatus}
+              >
+                Currently {this.state.available ? 'Working' : 'Offline'}, Go
+                {` ${this.state.available ? 'home' : 'to work'}`}
               </button>
             </div>
             <div className="column">
               <button
-                className="large ui primary button"
+                className="large ui blue button"
                 data-tooltip="Click anywhere on the map to place a pin, then click this button (no functionality yet)"
               >
                 Change Location
@@ -50,14 +66,18 @@ class VendorMain extends React.Component {
             </div>
             <div className="column">
               <Link to={`/vendor/menu/${this.props.match.params.id}`}>
-                <button className="large ui primary button">
+                <button className="large ui blue button">
                   Edit Menu Items
                 </button>
               </Link>
             </div>
           </div>
         </Box>
-        <Map apiResponse={this.state.apiResponse} />
+        <Map
+          apiResponse={this.state.apiResponse}
+          status={this.state.available}
+          center={this.state.center}
+        />
       </Container>
     );
   }
