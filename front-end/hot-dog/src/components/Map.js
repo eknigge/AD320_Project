@@ -26,6 +26,8 @@ export default function Map(props) {
   });
 
   const [selected, setSelected] = React.useState(null);
+  const [newLoc, setNewLoc] = React.useState(null);
+  const [selectNew, setSelectNew] = React.useState(null);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading maps';
@@ -39,6 +41,12 @@ export default function Map(props) {
     },
     closed: {
       url: '/images/closed.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    },
+    new: {
+      url: '/images/new.svg',
       scaledSize: new window.google.maps.Size(40, 40),
       origin: new window.google.maps.Point(0, 0),
       anchor: new window.google.maps.Point(20, 20)
@@ -56,6 +64,13 @@ export default function Map(props) {
             zoom={11}
             center={props.center}
             options={options}
+            onClick={(event) => {
+              setNewLoc({
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng(),
+                time: new Date()
+              });
+            }}
           >
             {cart?.map((marker) => {
               return (
@@ -73,6 +88,16 @@ export default function Map(props) {
               );
             })}
 
+            {newLoc ? (
+              <Marker
+                key={`${newLoc.lat}-${newLoc.lng}`}
+                position={{ lat: newLoc.lat, lng: newLoc.lng }}
+                onClick={() => {
+                  setSelectNew(newLoc);
+                }}
+                icon={icon.new}
+              />
+            ) : null}
             {selected ? (
               <InfoWindow
                 position={{ lat: selected.lat, lng: selected.lng }}
@@ -94,6 +119,29 @@ export default function Map(props) {
                     <span style={{ color: props.status ? 'green' : 'red' }}>
                       {props.status ? 'Available' : 'Unavailable'}
                     </span>
+                  </p>
+                </div>
+              </InfoWindow>
+            ) : null}
+            {selectNew ? (
+              <InfoWindow
+                position={{ lat: newLoc.lat, lng: newLoc.lng }}
+                onCloseClick={() => {
+                  setSelectNew(null);
+                }}
+              >
+                <div>
+                  <h3>New Cart Location</h3>
+
+                  <p>
+                    <strong>Latitude:</strong> {newLoc.lat.toFixed(5)}
+                  </p>
+                  <p>
+                    <strong>Longitude:</strong> {newLoc.lng.toFixed(5)}
+                  </p>
+                  <p>
+                    <strong>Time Selected:</strong>{' '}
+                    {newLoc.time.toLocaleString()}
                   </p>
                 </div>
               </InfoWindow>
