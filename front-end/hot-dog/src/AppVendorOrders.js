@@ -1,6 +1,5 @@
 import './App.css';
 import './VendorOrders/Order';
-import Orders from './VendorOrders/Order';
 import AllOrders from './VendorOrders/AllOrders'
 
 function AppCustomerMenu() {

@@ -12,7 +12,7 @@ const connection = mysql.createConnection(credentials);
 router.get('/:cartID', (req, res, next) => {
   let cartID = req.params.cartID;
   let custCartQuery = 
-    `SELECT ITEM_NAME, DESCRIPTION_ITEM, PRICE
+    `SELECT ITEM_ID, ITEM_NAME, DESCRIPTION_ITEM, PRICE
     FROM MENU 
     JOIN ITEMS_MENU USING (MENU_ID) 
     JOIN ITEMS USING (ITEM_ID) 

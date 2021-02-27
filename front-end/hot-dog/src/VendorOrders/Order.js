@@ -1,11 +1,25 @@
 import React from 'react';
+import ReactModal from 'react-modal';
+import '../App.css'
 
 class Order extends React.Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            showModal:false
+        }
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
+    handleOpenModal () {
+        this.setState({ showModal: true });
+      }
+      
+    handleCloseModal () {
+        this.setState({ showModal: false });
+    }
+    
     render(){
         return(
             <div>
@@ -24,6 +38,14 @@ class Order extends React.Component{
                             <th>{this.props.item}</th>
                             <th>{this.props.price}</th>
                             <th>{this.props.quantity}</th>
+                        <button onClick={this.handleOpenModal}>Order Complete</button>
+                        <ReactModal 
+                            isOpen={this.state.showModal}
+                            contentLabel="Minimal Modal Example"
+                            >
+                            <button onClick={this.handleCloseModal}>Close Modal</button>
+                            <button>Confirm</button>
+                        </ReactModal>
                         </tr>
                     </tbody>
                 </table>

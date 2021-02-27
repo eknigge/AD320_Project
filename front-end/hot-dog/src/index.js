@@ -9,7 +9,7 @@ import AppVendorOrders from './AppVendorOrders';
 ReactDOM.render(
   <React.StrictMode>
     <AppVendorOrders />
-    {/*<AppCustomerMenu />*/}
+    <AppCustomerMenu />
   </React.StrictMode>,
   document.getElementById('root')
 );

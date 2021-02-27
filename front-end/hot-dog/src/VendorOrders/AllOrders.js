@@ -5,7 +5,9 @@ import SubTotal from './SubTotal';
 class AllOrders extends React.Component{
     constructor(props){
         super(props);
-        this.state = {tableDataisFetched:false}
+        this.state = {tableDataisFetched:false,
+            orderTotalisFetched:false
+        }
     }
 
     componentDidMount(){
@@ -13,7 +15,7 @@ class AllOrders extends React.Component{
     }
 
     getData = () => {
-        fetch("http://localhost:5000/vendor/orders/3")
+        fetch("http://localhost:5000/vendor/orders/2")
         .then(response => {
             if (response.ok) {
                     return response;
@@ -25,6 +27,19 @@ class AllOrders extends React.Component{
         });
     }
 
+    getSubTotalData = () => {
+        fetch("http://localhost:5000/vendor/orders/2/subtotal")
+        .then(response => {
+            if (response.ok) {
+                    return response;
+            } 
+        })
+        .then(response => response.json())
+        .then(json =>{
+           this.setState({ apiDataSubTotal: json.data, orderTotalisFetched:true })
+        });
+    }
+
     renderOrders(){
         let output = 'Loading...'
         if(this.state.tableDataisFetched){
@@ -33,7 +48,7 @@ class AllOrders extends React.Component{
                     <Order
                         key = {item.ORDER_ID}
                         orderID = {item.ORDER_ID}
-                        name = {item.FIRST_NAME + " " +item.LAST_NAME}
+                        name = {item.FIRST_NAME + " " + item.LAST_NAME[0]}
                         item = {item.ITEM_NAME}
                         price = {item.PRICE}
                         quantity = {item.QUANTITY}
@@ -48,16 +63,41 @@ class AllOrders extends React.Component{
         return (
             <div>
                 {this.renderOrders()}
+                {this.renderSubtotal()}
             </div>
         )
     }
 
-    /*
-    Add subtotal function
-    */
-   getSubtotal(){
-       return <SubTotal dollarValue='3.00'/>
-   }
+    renderSubtotal(){
+        return (
+            <table>
+                <thead>
+                    <th>ORDER ID</th>
+                    <th>TOTAL ($)</th>
+                </thead>
+                <tbody>
+                    {this.getSubtotals}
+                </tbody>
+            </table>
+        )
+    }
+
+    getSubtotals(){
+        let output = 'Loading...'
+        if(this.state.orderTotalisFetched){
+            console.log(this.state.apiDataSubTotal)
+            output = this.state.apiDataSubTotal.map((item) =>{
+                return (
+                    <SubTotal
+                        key = {item.ORDER_ID}
+                        order = {item.ORDER_ID}
+                        total = {item.TOTAL}
+                    />
+                );
+            });
+        }  
+        return output;
+    }
 
 }
 

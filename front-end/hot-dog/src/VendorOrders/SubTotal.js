@@ -8,10 +8,10 @@ class SubTotal extends React.Component{
 
     render(){
         return(
-            <div>
-                <h2>Subtotal</h2>
-                <p>{this.props.dollarValue}</p>
-            </div>
+            <tr>
+                <td>{this.props.order}</td>
+                <td>{this.props.total}</td>
+            </tr>
         );
     }
 }
