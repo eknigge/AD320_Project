@@ -61,7 +61,7 @@ export default function Map(props) {
         <Box>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={11}
+            zoom={12}
             center={props.center}
             options={options}
             onClick={(event) => {
