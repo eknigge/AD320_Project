@@ -3,7 +3,7 @@ import React from 'react';
 function Basket() {
   return(
 
-      <div>Yo Basket</div>
+      <div>Your Order</div>
   
   )
 };
