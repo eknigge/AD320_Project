@@ -1,4 +1,3 @@
-import './App.css';
 import './CustomerComponents/Table';
 import CustomerMenu from './CustomerComponents/CustomerMenu';
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import Order from './Order'
-import SubTotal from './SubTotal';
 
 class AllOrders extends React.Component{
     constructor(props){
@@ -27,32 +26,19 @@ class AllOrders extends React.Component{
         });
     }
 
-    getSubTotalData = () => {
-        fetch("http://localhost:5000/vendor/orders/2/subtotal")
-        .then(response => {
-            if (response.ok) {
-                    return response;
-            } 
-        })
-        .then(response => response.json())
-        .then(json =>{
-           this.setState({ apiDataSubTotal: json.data, orderTotalisFetched:true })
-        });
-    }
-
     renderOrders(){
         let output = 'Loading...'
         if(this.state.tableDataisFetched){
             output = this.state.apiData.map((item) =>{
                 return (
-                    <Order
-                        key = {item.ORDER_ID}
-                        orderID = {item.ORDER_ID}
-                        name = {item.FIRST_NAME + " " + item.LAST_NAME[0]}
-                        item = {item.ITEM_NAME}
-                        price = {item.PRICE}
-                        quantity = {item.QUANTITY}
-                    />
+                <Order
+                    key = {item.ORDER_ID + item.ITEM_NAME}
+                    orderID = {item.ORDER_ID}
+                    name = {item.FIRST_NAME + " " + item.LAST_NAME[0]}
+                    item = {item.ITEM_NAME}
+                    price = {item.PRICE}
+                    quantity = {item.QUANTITY}
+                />
                 );
             });
         }  
@@ -61,43 +47,21 @@ class AllOrders extends React.Component{
 
     render(){
         return (
-            <div>
-                {this.renderOrders()}
-                {this.renderSubtotal()}
-            </div>
-        )
-    }
-
-    renderSubtotal(){
-        return (
-            <table>
+            <table className="ui celled table">
                 <thead>
-                    <th>ORDER ID</th>
-                    <th>TOTAL ($)</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
                 </thead>
                 <tbody>
-                    {this.getSubtotals}
+                    {this.renderOrders()}
                 </tbody>
             </table>
         )
     }
 
-    getSubtotals(){
-        let output = 'Loading...'
-        if(this.state.orderTotalisFetched){
-            console.log(this.state.apiDataSubTotal)
-            output = this.state.apiDataSubTotal.map((item) =>{
-                return (
-                    <SubTotal
-                        key = {item.ORDER_ID}
-                        order = {item.ORDER_ID}
-                        total = {item.TOTAL}
-                    />
-                );
-            });
-        }  
-        return output;
-    }
 
 }
 

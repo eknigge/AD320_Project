@@ -19,7 +19,7 @@ router.get('/:cartID', (req, res, next) => {
     JOIN CART USING (MENU_ID) 
     WHERE CART_ID = ${cartID};`
 
-    // querry database
+// querry database
   connection.query(custCartQuery, (err, results, fields)=>{
     if (err) throw err;
     let output = {"data": results}

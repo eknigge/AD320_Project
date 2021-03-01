@@ -8,6 +8,23 @@ let credentials = require('../credentials.json')
 //create database connection
 const connection = mysql.createConnection(credentials);
 
+// vendor/orders/complete/orderID
+router.post('/complete/:orderID', (req, res, next) =>{
+  let orderID = req.params.orderID;
+  let completeOrderQuery = `
+    UPDATE CART_ORDERS
+    SET COMPLETE = "Y"
+    WHERE ORDER_ID = ${orderID}; 
+  `;
+
+  // query database for cart orders
+  connection.query(completeOrderQuery, (err, results, fields)=>{
+    if (err) throw err;
+    res.send("success");
+})
+})
+
+
 // vendor/orders/cartID
 router.get('/:cartID', (req, res, next) => {
   let cartID = req.params.cartID;

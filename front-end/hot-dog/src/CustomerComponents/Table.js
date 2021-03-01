@@ -47,16 +47,18 @@ class Table extends React.Component{
 
     render(){
         return (
-            <table className="custTable">
-                <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                {this.renderItems()}
-            </table>
+            <div className="ui container">
+                <table className="ui celled table">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    {this.renderItems()}
+                </table>
+            </div>
         );
     }
 
