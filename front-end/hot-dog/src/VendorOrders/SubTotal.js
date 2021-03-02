@@ -11,7 +11,7 @@ class SubTotal extends React.Component{
         this.getSubTotalData();
     }
 
-    getSubTotalData = () => {
+    getSubTotalData (){
         fetch("http://localhost:5000/vendor/orders/2/subtotal")
         .then(response => {
             if (response.ok) {
