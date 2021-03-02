@@ -19,18 +19,25 @@ class VendorMain extends React.Component {
     fetch(`http://localhost:8000/vendor/${id}`)
       .then((res) => res.json())
       .then((res) => {
-        this.setState(
-          {
-            apiResponse: res,
-            available: res.cart[0].available,
-            center: { lat: res.cart[0].lat, lng: res.cart[0].lng }
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
+        this.setState({
+          apiResponse: res,
+          available: res.cart[0].available,
+          center: { lat: res.cart[0].lat, lng: res.cart[0].lng },
+          error: false
+        });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        this.setState({
+          apiResponse: {
+            vendorFirstName: 'something went wrong',
+            vendorLastName: ''
+          },
+          error: true,
+          message:
+            'Please make sure you have valid permission and the correct vendor ID'
+        });
+      });
   }
 
   componentDidMount() {
@@ -91,6 +98,7 @@ class VendorMain extends React.Component {
                   this.state.available ? 'teal' : 'green'
                 }`}
                 onClick={this.updateStatus}
+                disabled={this.state.error}
               >
                 Currently {this.state.available ? 'Working' : 'Offline'}, Go
                 {` ${this.state.available ? 'home' : 'to work'}`}
@@ -99,27 +107,37 @@ class VendorMain extends React.Component {
             <div className="column">
               <button
                 className="large ui blue button"
-                data-tooltip="Click anywhere on the map to place a pin, click this button then REFRESH THE PAGE"
+                data-tooltip="Click anywhere on the map to place a pin, then click this button"
                 onClick={this.updateLocation}
+                disabled={this.state.error}
               >
                 Change Location
               </button>
             </div>
             <div className="column">
               <Link to={`/vendor/menu/${this.props.match.params.id}`}>
-                <button className="large ui blue button">
+                <button
+                  className="large ui blue button"
+                  disabled={this.state.error}
+                >
                   Edit Menu Items
                 </button>
               </Link>
             </div>
           </div>
         </Box>
-        <Map
-          apiResponse={this.state.apiResponse}
-          status={this.state.available}
-          center={this.state.center}
-          onClick={this.getNewLocation.bind(this)}
-        />
+        {this.state.error ? (
+          <div className="ui message center">
+            <h3>{this.state.message}</h3>
+          </div>
+        ) : (
+          <Map
+            apiResponse={this.state.apiResponse}
+            status={this.state.available}
+            center={this.state.center}
+            onClick={this.getNewLocation.bind(this)}
+          />
+        )}
       </Container>
     );
   }
