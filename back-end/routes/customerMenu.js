@@ -12,19 +12,22 @@ const connection = mysql.createConnection(credentials);
 router.get('/:cartID', (req, res, next) => {
   let cartID = req.params.cartID;
   let custCartQuery = 
-    `SELECT ITEM_NAME, DESCRIPTION_ITEM, PRICE
+    `SELECT ITEM_ID, ITEM_NAME, DESCRIPTION_ITEM, PRICE
     FROM MENU 
     JOIN ITEMS_MENU USING (MENU_ID) 
     JOIN ITEMS USING (ITEM_ID) 
     JOIN CART USING (MENU_ID) 
     WHERE CART_ID = ${cartID};`
 
-    // querry database
+// querry database
   connection.query(custCartQuery, (err, results, fields)=>{
     if (err) throw err;
-    res.json(results);
+    let output = {"data": results}
+    res.setHeader('Access-Control-Allow-Origin','*');
+    res.json(output);
   })
 });
+
 
 // customers/ route
 router.get('/', (req, res, next) => {
