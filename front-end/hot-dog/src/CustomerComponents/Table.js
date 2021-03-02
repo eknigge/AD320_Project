@@ -14,6 +14,12 @@ class Table extends React.Component{
         this.getData();
     }
 
+    initializeMenuQuantity(){
+        this.state.apiData.map( (item) => {
+            this.setState({[item.ITEM_ID]:0})
+        })
+    }
+
     getData = () => {
         fetch("http://localhost:5000/customer/1")
         .then(response => {
@@ -23,7 +29,7 @@ class Table extends React.Component{
         })
         .then(response => response.json())
         .then(json =>{
-           this.setState({ apiData: json.data, tableDataisFetched:true })
+           this.setState({ apiData: json.data, tableDataisFetched:true }, this.initializeMenuQuantity)
         });
     }
 
@@ -34,7 +40,7 @@ class Table extends React.Component{
             output = this.state.apiData.map( (item) =>{
                 return (
                     <TableRow
-                        key = {item.ITEM_NAME}
+                        key = {item.ITEM_ID}
                         item = {item.ITEM_NAME}
                         description = {item.DESCRIPTION_ITEM}
                         price = {item.PRICE}
@@ -54,6 +60,9 @@ class Table extends React.Component{
                         <th>Item</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Add</th>
+                        <th>Remove</th>
+                        <th>Quantity</th>
                     </tr>
                     </thead>
                     {this.renderItems()}
