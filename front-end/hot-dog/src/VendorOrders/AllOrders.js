@@ -49,11 +49,13 @@ class AllOrders extends React.Component{
         return (
             <table className="ui celled table">
                 <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Item</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Item</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                    </tr>
                 </thead>
                 <tbody>
                     {this.renderOrders()}

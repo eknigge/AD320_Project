@@ -6,6 +6,18 @@ class TableRow extends React.Component{
         this.state = {quantity:0}
     }
 
+    componentDidMount(){
+        if(this.props){
+            this.setState({ITEM_ID:this.props.item_id})
+        }
+    }
+
+    componentDidUpdate(){
+        if(this.props.onChange){
+            this.props.onChange(this.state);
+        }
+    }
+
     // one method to execute function on click
     addToQuantity = () => {
         let update = this.state.quantity + 1; 

@@ -1,7 +1,6 @@
 import React, {useEffect, useState}  from 'react';
 import TableRow from './TableRow';
 
-let testData = require('./testdata.json')
 const fetch = require('node-fetch');
 
 class Table extends React.Component{
@@ -33,6 +32,10 @@ class Table extends React.Component{
         });
     }
 
+    updateQuantities = data => (
+        //this.setState({[data.ITEM_ID]:data.quantity})
+        console.log(data.ITEM_ID, data.quantity)
+    );
 
     renderItems(){
         let output = 'Loading...'
@@ -41,9 +44,11 @@ class Table extends React.Component{
                 return (
                     <TableRow
                         key = {item.ITEM_ID}
+                        item_id = {item.ITEM_ID}
                         item = {item.ITEM_NAME}
                         description = {item.DESCRIPTION_ITEM}
                         price = {item.PRICE}
+                        onChange={this.updateQuantities}
                     />
                 );
             });
@@ -56,14 +61,14 @@ class Table extends React.Component{
             <div className="ui container">
                 <table className="ui celled table">
                     <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Add</th>
-                        <th>Remove</th>
-                        <th>Quantity</th>
-                    </tr>
+                        <tr>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Add</th>
+                            <th>Remove</th>
+                            <th>Quantity</th>
+                        </tr>
                     </thead>
                     {this.renderItems()}
                 </table>
