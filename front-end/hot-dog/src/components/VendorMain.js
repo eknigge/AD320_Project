@@ -8,7 +8,10 @@ import { Link } from 'react-router-dom';
 class VendorMain extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { apiResponse: {} };
+    this.state = {
+      apiResponse: {},
+      newLocation: {}
+    };
   }
 
   callAPI() {
@@ -35,7 +38,44 @@ class VendorMain extends React.Component {
   }
 
   updateStatus = () => {
-    this.setState({ available: !this.state.available });
+    let id = this.props.match.params.id;
+    this.setState({ available: !this.state.available }, () => {
+      fetch(`http://localhost:8000/vendor/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          reqType: 'status',
+          cartID: this.state.apiResponse.cart[0].id,
+          status: this.state.available
+        })
+      })
+        .then((res) => res.text())
+        .then((res) => console.log(res))
+        .catch((err) => console.err(err));
+    });
+  };
+
+  getNewLocation(newLoc) {
+    this.setState({ newLocation: newLoc });
+  }
+
+  updateLocation = () => {
+    let id = this.props.match.params.id;
+    fetch(`http://localhost:8000/vendor/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        reqType: 'location',
+        cartID: this.state.apiResponse.cart[0].id,
+        newLocation: `${this.state.newLocation.lat},${this.state.newLocation.lng}`
+      })
+    })
+      .then((res) => res.text())
+      .then((res) => console.log(res))
+      .catch((err) => console.err(err));
+
+    // there must be a better way to re-render the map besides hard refreshing
+    window.location.reload();
   };
 
   render() {
@@ -59,7 +99,8 @@ class VendorMain extends React.Component {
             <div className="column">
               <button
                 className="large ui blue button"
-                data-tooltip="Click anywhere on the map to place a pin, then click this button (no functionality yet)"
+                data-tooltip="Click anywhere on the map to place a pin, click this button then REFRESH THE PAGE"
+                onClick={this.updateLocation}
               >
                 Change Location
               </button>
@@ -77,6 +118,7 @@ class VendorMain extends React.Component {
           apiResponse={this.state.apiResponse}
           status={this.state.available}
           center={this.state.center}
+          onClick={this.getNewLocation.bind(this)}
         />
       </Container>
     );

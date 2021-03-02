@@ -70,6 +70,10 @@ export default function Map(props) {
                 lng: event.latLng.lng(),
                 time: new Date()
               });
+              props.onClick({
+                lat: event.latLng.lat(),
+                lng: event.latLng.lng()
+              });
             }}
           >
             {cart?.map((marker) => {
