@@ -47,7 +47,7 @@ class TableRow extends React.Component {
 
   handleChange = (event) => {
     this.setState({ status: event.target.checked }, () => {
-      fetch('http://localhost:8000/vendor/menu', {
+      fetch('http://localhost:5000/vendor/menu', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(this.state)

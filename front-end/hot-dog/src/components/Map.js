@@ -5,8 +5,6 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
-import Box from './Box';
-import Container from './Container';
 
 // Configs
 const mapContainerStyle = {
@@ -57,8 +55,6 @@ export default function Map(props) {
 
   return (
     <div>
-      {/* <Container>
-        <Box> */}
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
@@ -150,8 +146,6 @@ export default function Map(props) {
           </InfoWindow>
         ) : null}
       </GoogleMap>
-      {/* </Box>
-      </Container> */}
     </div>
   );
 }

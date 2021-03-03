@@ -1,15 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
-import AppCustomerMenu from './AppCustomerMenu';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AppVendorOrders from './AppVendorOrders';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AppVendorOrders />
-    <AppCustomerMenu />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -16,7 +16,7 @@ class VendorMain extends React.Component {
 
   callAPI() {
     let id = this.props.match.params.id;
-    fetch(`http://localhost:8000/vendor/${id}`)
+    fetch(`http://localhost:5000/vendor/${id}`)
       .then((res) => res.json())
       .then((res) => {
         this.setState({
@@ -47,7 +47,7 @@ class VendorMain extends React.Component {
   updateStatus = () => {
     let id = this.props.match.params.id;
     this.setState({ available: !this.state.available }, () => {
-      fetch(`http://localhost:8000/vendor/${id}`, {
+      fetch(`http://localhost:5000/vendor/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -68,7 +68,7 @@ class VendorMain extends React.Component {
 
   updateLocation = () => {
     let id = this.props.match.params.id;
-    fetch(`http://localhost:8000/vendor/${id}`, {
+    fetch(`http://localhost:5000/vendor/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

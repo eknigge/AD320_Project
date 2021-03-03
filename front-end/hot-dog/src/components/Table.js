@@ -19,7 +19,7 @@ class Table extends React.Component {
         status: true
       },
       () => {
-        fetch('http://localhost:8000/vendor/menu', {
+        fetch('http://localhost:5000/vendor/menu', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(this.state)
