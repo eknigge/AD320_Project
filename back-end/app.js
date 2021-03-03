@@ -1,20 +1,54 @@
-'use strict';
-
 const express = require('express');
-const LOCAL_PORT = 8000;
+const cors = require('cors');
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+// const LOCAL_PORT = 8000;
+
+// routes
+const indexRouter = require('./routes/index');
 const vendorMenu = require('./routes/vendorMenu');
 const vendorMain = require('./routes/vendorMain');
-const cors = require('cors');
+const vendorRouter = require('./routes/vendorOrders');
+const customerRouter = require('./routes/customerMenu');
 
-const app = express();
+var app = express();
+
+//CORS
 app.use(cors());
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-console.log('Server is running...');
-
+app.use('/', indexRouter);
+app.use('/customer', customerRouter);
+app.use('/vendor/orders', vendorRouter);
+app.use('/vendor/orders/complete/5', vendorRouter);
 app.use('/vendor/menu', vendorMenu);
 app.use('/vendor', vendorMain);
 
-const PORT = process.env.PORT || LOCAL_PORT;
-app.listen(PORT);
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
