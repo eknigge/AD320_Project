@@ -4,7 +4,7 @@ let router = express.Router();
 const db = require('../database/connection');
 
 // get credentials
-let credentials = require('../credentials.json');
+// let credentials = require('../credentials.json');
 
 //create database connection
 // const connection = mysql.createConnection(credentials);
