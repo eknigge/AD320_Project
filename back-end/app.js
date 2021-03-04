@@ -1,13 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-let cors = require('cors');
+const express = require('express');
+const cors = require('cors');
+const createError = require('http-errors');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+// const LOCAL_PORT = 8000;
 
-var indexRouter = require('./routes/index');
-var customerRouter = require('./routes/customerMenu');
-var vendorRouter = require('./routes/vendorOrders')
+// routes
+const indexRouter = require('./routes/index');
+const vendorMenu = require('./routes/vendorMenu');
+const vendorMain = require('./routes/vendorMain');
+const vendorRouter = require('./routes/vendorOrders');
+const customerRouter = require('./routes/customerMenu');
 
 var app = express();
 
@@ -28,15 +32,16 @@ app.use('/', indexRouter);
 app.use('/customer', customerRouter);
 app.use('/vendor/orders', vendorRouter);
 app.use('/vendor/orders/complete/5', vendorRouter);
-
+app.use('/vendor/menu', vendorMenu);
+app.use('/vendor', vendorMain);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

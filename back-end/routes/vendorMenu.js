@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
+const checkPermission = require('./checkPermission');
 
 // SQL queries
 const queries = {
@@ -19,10 +20,7 @@ router.get('/:id', async (req, res) => {
   let id = parseInt(req.params.id);
   let validPermission;
   try {
-    validPermission =
-      (await db.promise().execute(queries.userPermission, [id]))[0][0][
-        'Permission'
-      ] === 'VENDOR';
+    validPermission = checkPermission(id, 'VENDOR');
 
     if (validPermission) {
       try {
