@@ -1,46 +1,106 @@
 import React from 'react';
-import Container from './Container';
-import Map from './Map';
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow
+} from '@react-google-maps/api';
 
-class CustomerMap extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      apiResponse: {}
-    };
-  }
+// Configs
+const mapContainerStyle = {
+  width: '100%',
+  height: '85vh'
+};
 
-  componentDidMount() {
-    this.callAPI();
-  }
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true
+};
 
-  callAPI() {
-    fetch('http://localhost:5000/customer/map')
-      .then((res) => res.json())
-      .then((res) =>
-        this.setState({ apiResponse: res }, () => console.log(this.state))
-      );
-  }
+export default function CustomerMap(props) {
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY
+  });
 
-  render() {
-    return (
-      <div>
-        <Container>
-          <div
-            className="ui huge header centered"
-            style={{ marginTop: '2vh', marginBottom: '2vh' }}
+  const [selected, setSelected] = React.useState(null);
+
+  if (loadError) return 'Error loading maps';
+  if (!isLoaded) return 'Loading maps';
+
+  const icon = {
+    open: {
+      url: '/images/hot-dog-stand.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    },
+    closed: {
+      url: '/images/closed.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    },
+    new: {
+      url: '/images/new.svg',
+      scaledSize: new window.google.maps.Size(40, 40),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(20, 20)
+    }
+  };
+
+  const { cart } = props.apiResponse;
+
+  return (
+    <div>
+      <GoogleMap
+        mapContainerStyle={mapContainerStyle}
+        zoom={12}
+        center={props.center}
+        options={options}
+      >
+        {cart?.map((marker) => {
+          return (
+            <Marker
+              key={`${marker.lat}-${marker.lng}`}
+              position={{
+                lat: marker.lat,
+                lng: marker.lng
+              }}
+              onClick={() => {
+                setSelected(marker);
+              }}
+              icon={marker.Available ? icon.open : icon.closed}
+            ></Marker>
+          );
+        })}
+
+        {/* TODO: change the info window to display menu info */}
+        {selected ? (
+          <InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
           >
-            Welcome to the Hot Doggist!
-          </div>
-        </Container>
-        {/* TODO: Need to build a custom map for customer view */}
-        <Map
-          apiResponse={this.state.apiResponse}
-          center={{ lat: 47.6062, lng: -122.3321 }}
-        />
-      </div>
-    );
-  }
+            <div>
+              <h3>
+                <span role="img" aria-label="cart">
+                  🌭
+                </span>{' '}
+                {`${selected.First_Name} ${selected.Last_Name}`}'s Hot Dog Cart
+              </h3>
+              <p>Cart ID: {selected.Cart_ID}</p>
+              <p>Menu ID: {selected.Menu_ID}</p>
+              <p>
+                Status:{' '}
+                <span style={{ color: selected.Available ? 'green' : 'red' }}>
+                  {selected.Available ? 'Available' : 'Unavailable'}
+                </span>
+              </p>
+            </div>
+          </InfoWindow>
+        ) : null}
+      </GoogleMap>
+    </div>
+  );
 }
-
-export default CustomerMap;

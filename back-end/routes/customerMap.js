@@ -11,7 +11,7 @@ const queries = {
 router.get('/', async (req, res) => {
   let dbResult = (await db.promise().execute(queries.getAllCart))[0];
   let formattedJSON = makeJSON(dbResult);
-  res.json(formattedJSON);
+  res.json({ cart: formattedJSON });
 });
 
 function makeJSON(dbResult) {

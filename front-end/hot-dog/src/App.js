@@ -6,7 +6,7 @@ import Main from './customer/components/TheData';
 import Home from './customer/components/Home';
 import AppCustomerMenu from './AppCustomerMenu';
 import AppVendorOrders from './AppVendorOrders';
-import CustomerMap from './components/CustomerMap';
+import CustomerMain from './components/CustomerMain';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         <Route path="/vendor/menu/:id" component={VendorMenu} />
         <Route path="/vendor/orders/:id" component={AppVendorOrders} />
         <Route path="/customer/menu" component={AppCustomerMenu} />
-        <Route path="/customer/map" component={CustomerMap} />
+        <Route path="/customer/map" component={CustomerMain} />
       </Switch>
     </BrowserRouter>
   );
