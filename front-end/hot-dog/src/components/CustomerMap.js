@@ -5,6 +5,7 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
+import Search from './Search';
 
 // Configs
 const mapContainerStyle = {
@@ -17,10 +18,18 @@ const options = {
   zoomControl: true
 };
 
+const libraries = ['places'];
+
 export default function CustomerMap(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_MAP_KEY
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+    libraries: libraries
   });
+
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
 
   const [selected, setSelected] = React.useState(null);
 
@@ -51,12 +60,15 @@ export default function CustomerMap(props) {
   const { cart } = props.apiResponse;
 
   return (
-    <div>
+    <div style={{ marginTop: '-4vh' }}>
+      <Search />
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={props.center}
         options={options}
+        onLoad={onMapLoad}
       >
         {cart?.map((marker) => {
           return (
