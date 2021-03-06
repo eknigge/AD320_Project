@@ -10,16 +10,24 @@ const queries = {
 
 router.get('/', async (req, res) => {
   let dbResult = (await db.promise().execute(queries.getAllCart))[0];
-  console.log(dbResult);
-  res.status(200);
+  let formattedJSON = makeJSON(dbResult);
+  res.json(formattedJSON);
 });
 
-// TODO: format the location to lat/lng, available to boolean
 function makeJSON(dbResult) {
-  let obj = {
-    lat: 49.3434,
-    lng: -122.4343
-  };
+  return dbResult.map((cart) => {
+    let locArr = cart.Location.split(',');
+    let item = {
+      Cart_ID: cart.Cart_ID,
+      First_Name: cart.First_Name,
+      Last_Name: cart.Last_Name,
+      Menu_ID: cart.Menu_ID,
+      Available: cart.Available === 'Y' ? true : false,
+      lat: parseFloat(locArr[0]),
+      lng: parseFloat(locArr[1])
+    };
+    return item;
+  });
 }
 
 module.exports = router;
