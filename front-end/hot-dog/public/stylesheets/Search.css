@@ -1,6 +1,6 @@
 .search {
     position: relative;
-    top: 5vh;
+    top: 10vh;
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -12,4 +12,18 @@
     padding: 0.5rem;
     font-size: 1.2rem;
     width: 100%;
+}
+
+.locate {
+    position: relative;
+    top: 80vh;
+    left: 2%;
+    background: none;
+    border: none;
+    z-index: 10;
+}
+
+.locate img {
+    width: 30px;
+    cursor: pointer;
 }

@@ -6,6 +6,7 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 import Search from './Search';
+import Locate from './Locate';
 
 // Configs
 const mapContainerStyle = {
@@ -23,7 +24,7 @@ const libraries = ['places'];
 export default function CustomerMap(props) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
-    libraries: libraries
+    libraries
   });
 
   const mapRef = React.useRef();
@@ -65,8 +66,9 @@ export default function CustomerMap(props) {
   const { cart } = props.apiResponse;
 
   return (
-    <div style={{ marginTop: '-4vh' }}>
+    <div style={{ marginTop: '-8vh' }}>
       <Search panTo={panTo} />
+      <Locate panTo={panTo} />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
