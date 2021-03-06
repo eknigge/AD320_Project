@@ -36,11 +36,14 @@ class CustomerMain extends React.Component {
     return (
       <div>
         <Container>
-          <div
-            className="ui huge header centered"
-            style={{ marginTop: '2vh', marginBottom: '2vh' }}
-          >
-            Welcome to the Hot Doggist!
+          <div style={{ marginTop: '2vh', marginBottom: '2vh' }}>
+            <h3 className="ui huge header centered">
+              Welcome, there are{' '}
+              <span style={{ color: 'brown' }}>
+                {this.state.apiResponse.cart?.length} carts
+              </span>{' '}
+              near you
+            </h3>
           </div>
         </Container>
         <CustomerMap
