@@ -1,5 +1,5 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 // const mysql = require('mysql2');
 const db = require('../database/connection');
 
@@ -29,9 +29,9 @@ router.get('/:cartID', (req, res, next) => {
 });
 
 // customers/ route
-router.get('/', (req, res, next) => {
-  let text = 'select * from MENU;';
-  res.send('this will be a map of all carts');
-});
+// router.get('/', (req, res, next) => {
+//   let text = 'select * from MENU;';
+//   res.send('this will be a map of all carts');
+// });
 
 module.exports = router;
