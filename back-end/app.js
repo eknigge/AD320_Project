@@ -10,10 +10,11 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const vendorMenu = require('./routes/vendorMenu');
 const vendorMain = require('./routes/vendorMain');
-const vendorRouter = require('./routes/vendorOrders');
+const vendorOrders = require('./routes/vendorOrders');
 const customerRouter = require('./routes/customerMenu');
+const customerMap = require('./routes/customerMap');
 
-var app = express();
+const app = express();
 
 //CORS
 app.use(cors());
@@ -29,9 +30,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/customer/map', customerMap);
 app.use('/customer', customerRouter);
-app.use('/vendor/orders', vendorRouter);
-app.use('/vendor/orders/complete/5', vendorRouter);
+app.use('/vendor/orders', vendorOrders);
+app.use('/vendor/orders/complete/5', vendorOrders);
 app.use('/vendor/menu', vendorMenu);
 app.use('/vendor', vendorMain);
 
