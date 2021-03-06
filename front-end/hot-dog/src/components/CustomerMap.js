@@ -31,6 +31,11 @@ export default function CustomerMap(props) {
     mapRef.current = map;
   }, []);
 
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   const [selected, setSelected] = React.useState(null);
 
   if (loadError) return 'Error loading maps';
@@ -61,7 +66,7 @@ export default function CustomerMap(props) {
 
   return (
     <div style={{ marginTop: '-4vh' }}>
-      <Search />
+      <Search panTo={panTo} />
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
