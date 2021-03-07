@@ -93,6 +93,13 @@ class VendorMain extends React.Component {
         <Box>
           <div className="ui equal width center stackable grid">
             <div className="column">
+              <Link to="/vendor">
+                <button className="ui large button">
+                  <p>Back to Punch Cards</p>
+                </button>
+              </Link>
+            </div>
+            <div className="column">
               <button
                 className={`large ui button ${
                   this.state.available ? 'teal' : 'green'

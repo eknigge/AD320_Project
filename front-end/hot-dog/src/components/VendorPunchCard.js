@@ -18,11 +18,7 @@ class VendorPunchCard extends React.Component {
   callAPI() {
     fetch(`http://localhost:5000/vendor/`)
       .then((res) => res.json())
-      .then((res) =>
-        this.setState({ apiResponse: res, dataReceived: true }, () =>
-          console.log(this.state.apiResponse)
-        )
-      )
+      .then((res) => this.setState({ apiResponse: res, dataReceived: true }))
       .catch((err) => console.log(err));
   }
 

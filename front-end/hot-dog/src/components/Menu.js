@@ -2,13 +2,21 @@ import React from 'react';
 import Box from './Box';
 import Table from './Table';
 import Container from './Container';
+import { Link } from 'react-router-dom';
 
 class Menu extends React.Component {
   errorHandling() {
     if (this.props.apiResponse.error) {
       return (
-        <div className="ui error message">
-          <h2 className="ui centered header">{this.props.apiResponse.error}</h2>
+        <div>
+          <div className="ui error message">
+            <h2 className="ui centered header">
+              {this.props.apiResponse.error}
+            </h2>
+          </div>
+          <Link to="/vendor">
+            <button className="ui large green button">Back to main</button>
+          </Link>
         </div>
       );
     } else {
