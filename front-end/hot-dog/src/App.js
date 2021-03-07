@@ -8,6 +8,8 @@ import AppCustomerMenu from './AppCustomerMenu';
 import AppVendorOrders from './AppVendorOrders';
 import CustomerMain from './components/CustomerMain';
 import VendorPunchCard from './components/VendorPunchCard';
+import AdminMain from './components/AdminMain';
+import AdminCarts from './components/AdminCarts';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/vendor/orders/:id" component={AppVendorOrders} />
         <Route path="/customer/menu" component={AppCustomerMenu} />
         <Route path="/customer/map" component={CustomerMain} />
+        <Route path="/admin" exact component={AdminMain} />
+        <Route path="/admin/carts" component={AdminCarts} />
       </Switch>
     </BrowserRouter>
   );
