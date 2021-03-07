@@ -95,7 +95,7 @@ class VendorMain extends React.Component {
             <div className="column">
               <Link to="/vendor">
                 <button className="ui large button">
-                  <p>Back to Punch Cards</p>
+                  <p>Punch out</p>
                 </button>
               </Link>
             </div>
