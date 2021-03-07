@@ -4,13 +4,19 @@ const router = express.Router();
 const db = require('../database/connection');
 const checkPermission = require('./checkPermission');
 
+// SQL queries
 const queries = {
   getVendorInfo:
     'Select USER_ID, First_Name, Last_Name, Cart_ID, Location, Menu_ID, Available FROM users JOIN users_cart USING (User_ID) JOIN cart USING (cart_ID)WHERE user_ID = ?;',
   updateCartStatus: 'UPDATE Cart SET AVAILABLE = ? WHERE Cart_ID = ?;',
-  updateCartLocation: 'UPDATE Cart SET location = ? WHERE cart_ID = ?;'
+  updateCartLocation: 'UPDATE Cart SET location = ? WHERE cart_ID = ?;',
+  getAllVendorInfo:
+    'SELECT USER_ID, First_Name, Last_Name FROM users WHERE permission = "VENDOR";'
 };
 
+/**
+ * Used by vendor main to get it's cart location, menu_ID, and cart_ID
+ */
 router.get('/:id', async (req, res) => {
   let id = req.params.id;
   let validPermission;
@@ -28,6 +34,9 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * Used by vendor main to update cart's location and status
+ */
 router.put('/:id', async (req, res) => {
   let id = req.params.id;
   const { reqType, cartID } = req.body;
@@ -52,6 +61,14 @@ router.put('/:id', async (req, res) => {
     res.status(400).send({ error: `No user found with id ${id}` });
   }
 });
+
+/**
+ * Used by vendor punch card to get a list of all vendor's ID and names
+ */
+router.get('/', async (req, res) => {
+  res.json((await db.promise().execute(queries.getAllVendorInfo))[0]);
+});
+
 /**
  * Transforms database result array into JSON in desired format
  * @param {Array} dbResult results from database query

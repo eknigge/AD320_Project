@@ -109,7 +109,7 @@ class VendorMain extends React.Component {
                 className="large ui blue button"
                 data-tooltip="Click anywhere on the map to place a pin, then click this button"
                 onClick={this.updateLocation}
-                disabled={!this.state.error && !this.state.newLocation.lat}
+                disabled={this.state.error || !this.state.newLocation.lat}
               >
                 Change Location
               </button>

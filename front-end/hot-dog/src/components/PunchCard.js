@@ -11,10 +11,7 @@ class PunchCard extends React.Component {
 
         <div className="middle aligned content">
           <div className="header">{this.props.name}</div>
-          {/* <div className="description">
-            <p>{this.props.description}</p>
-          </div> */}
-          <Link to={this.props.vendorID}>
+          <Link to={this.props.url}>
             <button className="ui right floated primary button">
               Punch In
             </button>
