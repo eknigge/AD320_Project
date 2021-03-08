@@ -9,22 +9,6 @@ class AdminMain extends React.Component {
     return (
       <Container>
         <Banner vendorName="our Beloved and Respected Administrator"></Banner>
-        {/* <Box>
-          <div className="ui equal width center stackable grid">
-            <div className="column">
-              <button className="ui large green button">Carts</button>
-            </div>
-            <div className="column">
-              <button className="ui large orange button">Users</button>
-            </div>
-            <div className="column">
-              <button className="ui large blue button">Menus</button>
-            </div>
-            <div className="column">
-              <button className="ui large brown button">Logs</button>
-            </div>
-          </div>
-        </Box> */}
         <div className="ui grid">
           <div className="three wide column" style={{ marginTop: '1em' }}>
             <div className="ui vertical menu">

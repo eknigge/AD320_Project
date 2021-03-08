@@ -4,7 +4,7 @@ class CartsTableRow extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.props.cartId}</td>
+        <td className="collapsing">{this.props.cartId}</td>
         <td>{this.props.location}</td>
         <td
           className={

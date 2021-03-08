@@ -42,16 +42,16 @@ class CartsTable extends React.Component {
 
   render() {
     return (
-      <table className="ui striped table">
+      <table className="ui striped stackable table">
         <thead>
           <tr>
-            <th>Cart ID</th>
+            <th className="collapsing">Cart ID</th>
             <th>Location</th>
             <th>Status</th>
             <th>Vendor (id-name)</th>
             <th>Menu (id-title)</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th className="collapsing">Edit</th>
+            <th className="collapsing">Delete</th>
           </tr>
         </thead>
         {this.renderCarts()}
