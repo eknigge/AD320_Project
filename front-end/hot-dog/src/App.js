@@ -10,6 +10,7 @@ import CustomerMain from './components/CustomerMain';
 import VendorPunchCard from './components/VendorPunchCard';
 import AdminMain from './components/AdminMain';
 import AdminCarts from './components/AdminCarts';
+import EditCart from './components/EditCart';
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
         <Route path="/customer/menu" component={AppCustomerMenu} />
         <Route path="/customer/map" component={CustomerMain} />
         <Route path="/admin" exact component={AdminMain} />
-        <Route path="/admin/carts" component={AdminCarts} />
+        <Route path="/admin/carts" exact component={AdminCarts} />
+        <Route path="/admin/carts/edit/:id" component={EditCart} />
       </Switch>
     </BrowserRouter>
   );

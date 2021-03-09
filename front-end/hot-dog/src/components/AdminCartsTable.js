@@ -61,10 +61,7 @@ class CartsTable extends React.Component {
               <button className="ui medium button">Refresh</button>
             </th>
             <th colSpan="6">
-              <button
-                className="ui right floated medium green button"
-                // onClick={this.updateItems}
-              >
+              <button className="ui right floated medium green button">
                 Add New Cart
               </button>
             </th>

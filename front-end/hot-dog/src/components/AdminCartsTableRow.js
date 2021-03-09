@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class CartsTableRow extends React.Component {
   render() {
@@ -16,7 +17,9 @@ class CartsTableRow extends React.Component {
         <td>{`${this.props.userID}-${this.props.vendorName}`}</td>
         <td>{`${this.props.menuID}-${this.props.menuTitle}`}</td>
         <td>
-          <button className="ui blue button">Edit</button>
+          <Link to="/admin/carts/edit/1">
+            <button className="ui blue button">Edit</button>
+          </Link>
         </td>
         <td>
           <button className="ui red button">Delete</button>
