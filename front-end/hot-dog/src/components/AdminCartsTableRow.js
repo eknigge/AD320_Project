@@ -17,7 +17,7 @@ class CartsTableRow extends React.Component {
         <td>{`${this.props.userID}-${this.props.vendorName}`}</td>
         <td>{`${this.props.menuID}-${this.props.menuTitle}`}</td>
         <td>
-          <Link to="/admin/carts/edit/1">
+          <Link to={`/admin/carts/edit/${this.props.cartId}`}>
             <button className="ui blue button">Edit</button>
           </Link>
         </td>

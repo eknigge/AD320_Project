@@ -20,7 +20,38 @@ const validationSchema = Yup.object().shape({
 });
 
 class EditCart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { apiResponse: {} };
+  }
+
+  componentDidMount() {
+    this.callAPI();
+  }
+
+  callAPI() {
+    let id = this.props.match.params.id;
+    fetch(`http://localhost:5000/admin/carts/edit/${id}`)
+      .then((res) => res.json())
+      .then((res) =>
+        this.setState({ apiResponse: res }, () =>
+          console.log(this.state.apiResponse)
+        )
+      )
+      .catch((error) => console.log(error));
+  }
+
+  renderAllMenus() {
+    if (this.state.apiResponse.allMenus) {
+      return this.state.apiResponse.allMenus.map((menuID) => (
+        <option value={`${menuID}`}>{menuID}</option>
+      ));
+    }
+  }
+
   render() {
+    const { lat, lng, status, menuID } = this.state.apiResponse;
+
     return (
       <AdminMain>
         <Box>
@@ -42,12 +73,13 @@ class EditCart extends React.Component {
             </p>
           </Box>
           <Formik
+            enableReinitialize={true}
             initialValues={{
-              lat: '',
-              lng: '',
-              menuID: '',
+              lat: lat,
+              lng: lng,
+              menuID: menuID,
               vendorID: '',
-              status: false,
+              status: status,
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -113,8 +145,7 @@ class EditCart extends React.Component {
                     <label>Menu ID</label>
                     <Field as="select" name="menuID">
                       <option value="">assign a menu</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
+                      {this.renderAllMenus()}
                     </Field>
                     <Error touched={touched.menuID} message={errors.menuID} />
                   </div>
