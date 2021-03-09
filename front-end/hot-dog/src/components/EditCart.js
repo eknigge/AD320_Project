@@ -10,12 +10,12 @@ const validationSchema = Yup.object().shape({
     .transform((value) => (isNaN(value) ? undefined : value))
     .min(-90, 'Latitude cannot be less than -90')
     .max(90, 'Latitude cannot be more than 90')
-    .required('cannot be empty, must be a valid number'),
+    .required('Latitude cannot be empty, must be a valid number'),
   lng: Yup.number()
     .transform((value) => (isNaN(value) ? undefined : value))
     .min(-180, 'Longitude cannot be less than -180')
     .max(180, 'Longitude cannot be more than 180')
-    .required('cannot be empty, must be a valid number'),
+    .required('Longitude cannot be empty, must be a valid number'),
   menuID: Yup.number().required('Please select a menu'),
 });
 

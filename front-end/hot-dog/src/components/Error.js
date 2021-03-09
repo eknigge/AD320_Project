@@ -14,6 +14,7 @@ const Error = ({ touched, message }) => {
           marginTop: '0.2em',
         }}
       >
+        <i class="exclamation triangle icon"></i>
         {message}
       </div>
     );
@@ -27,7 +28,7 @@ const Error = ({ touched, message }) => {
         marginTop: '0.2em',
       }}
     >
-      all good
+      <i class="check circle icon"></i>
     </div>
   );
 };
