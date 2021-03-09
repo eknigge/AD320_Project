@@ -16,8 +16,12 @@ function OrderCheckout() {
 </header>
 
 <div className="welcome">
-<h4>WELCOME to HOT DOGGIST</h4>
+<h4>CART</h4>
 </div>
+<div className="home">
+    <h4>YOUR ITEM</h4>
+</div>
+
 
 <div class="chiliSup">
 <img className="chili" src={chili} alt="chili-dog" />
