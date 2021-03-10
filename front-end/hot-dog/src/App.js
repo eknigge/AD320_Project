@@ -11,6 +11,7 @@ import VendorPunchCard from './components/VendorPunchCard';
 import AdminMain from './components/AdminMain';
 import AdminCarts from './components/AdminCarts';
 import EditCart from './components/EditCart';
+import AdminUsers from './components/AdminUsers';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/admin/carts" exact component={AdminCarts} />
         <Route path="/admin/carts/edit/:id" component={EditCart} />
         <Route path="/admin/carts/new" component={EditCart} />
+        <Route path="/admin/users" component={AdminUsers} />
       </Switch>
     </BrowserRouter>
   );

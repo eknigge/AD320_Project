@@ -12,10 +12,32 @@ class AdminMain extends React.Component {
         <div className="ui grid">
           <div className="three wide column" style={{ marginTop: '1em' }}>
             <div className="ui vertical menu">
-              <Link to="/admin/carts">
-                <div className="item">Carts</div>
-              </Link>
-              <div className="item">Users</div>
+              <div className="item">
+                <Link
+                  to="/admin/carts"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                    fontSize: '1.5em',
+                  }}
+                >
+                  Carts
+                </Link>
+              </div>
+
+              <div className="item">
+                <Link
+                  to="/admin/users"
+                  style={{
+                    textDecoration: 'none',
+                    color: 'black',
+                    fontSize: '1.5em',
+                  }}
+                >
+                  Users
+                </Link>
+              </div>
+
               <div className="item">Menu</div>
               <div className="item">Logs</div>
             </div>
