@@ -48,4 +48,14 @@ router.get('/new', async (req, res) => {
   res.json({ allMenus });
 });
 
+router.put('/edit/:cartID', async (req, res) => {
+  console.log(req.body);
+  res.send('update successful');
+});
+
+router.post('/new', async (req, res) => {
+  console.log(req.body);
+  res.send('cart created');
+});
+
 module.exports = router;

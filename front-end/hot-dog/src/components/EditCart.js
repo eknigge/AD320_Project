@@ -63,6 +63,32 @@ class EditCart extends React.Component {
     }
   }
 
+  sendRequest(values) {
+    if (this.props.match.url === '/admin/carts/new') {
+      // send POST request
+      fetch(`http://localhost:5000/admin/carts/new`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.text())
+        .then((res) => alert(res))
+        .catch((err) => console.err(err));
+    } else {
+      fetch(
+        `http://localhost:5000/admin/carts/edit/${this.props.match.params.id}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values),
+        }
+      )
+        .then((res) => res.text())
+        .then((res) => alert(res))
+        .catch((err) => console.err(err));
+    }
+  }
+
   render() {
     const { lat, lng, status, menuID, vendorID } = this.state.apiResponse;
 
@@ -99,11 +125,9 @@ class EditCart extends React.Component {
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                resetForm();
-                setSubmitting(false);
-              }, 500);
+              this.sendRequest(values);
+              resetForm();
+              setSubmitting(false);
             }}
           >
             {({
