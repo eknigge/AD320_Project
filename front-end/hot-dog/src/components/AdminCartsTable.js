@@ -58,12 +58,19 @@ class CartsTable extends React.Component {
         <tfoot className="full-width">
           <tr>
             <th>
-              <button className="ui medium button">Refresh</button>
+              <button
+                className="ui medium button"
+                onClick={() => window.location.reload()}
+              >
+                Refresh
+              </button>
             </th>
             <th colSpan="6">
-              <button className="ui right floated medium green button">
-                Add New Cart
-              </button>
+              <Link to="/admin/carts/new">
+                <button className="ui right floated medium green button">
+                  Add New Cart
+                </button>
+              </Link>
             </th>
           </tr>
         </tfoot>

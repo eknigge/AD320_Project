@@ -4,6 +4,7 @@ import Box from './Box';
 import { Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import Error from './Error';
+import { Link } from 'react-router-dom';
 
 const validationSchema = Yup.object().shape({
   lat: Yup.number()
@@ -31,26 +32,39 @@ class EditCart extends React.Component {
 
   callAPI() {
     let id = this.props.match.params.id;
-    fetch(`http://localhost:5000/admin/carts/edit/${id}`)
-      .then((res) => res.json())
-      .then((res) =>
-        this.setState({ apiResponse: res }, () =>
-          console.log(this.state.apiResponse)
+    if (!isNaN(id)) {
+      fetch(`http://localhost:5000/admin/carts/edit/${id}`)
+        .then((res) => res.json())
+        .then((res) =>
+          this.setState({ apiResponse: res }, () =>
+            console.log(this.state.apiResponse)
+          )
         )
-      )
-      .catch((error) => console.log(error));
+        .catch((error) => console.log(error));
+    } else if (this.props.match.url === '/admin/carts/new') {
+      fetch(`http://localhost:5000/admin/carts/new`)
+        .then((res) => res.json())
+        .then((res) =>
+          this.setState({ apiResponse: res }, () =>
+            console.log(this.state.apiResponse)
+          )
+        )
+        .catch((error) => console.log(error));
+    }
   }
 
   renderAllMenus() {
     if (this.state.apiResponse.allMenus) {
       return this.state.apiResponse.allMenus.map((menuID) => (
-        <option value={`${menuID}`}>{menuID}</option>
+        <option key={menuID} value={`${menuID}`}>
+          {menuID}
+        </option>
       ));
     }
   }
 
   render() {
-    const { lat, lng, status, menuID } = this.state.apiResponse;
+    const { lat, lng, status, menuID, vendorID } = this.state.apiResponse;
 
     return (
       <AdminMain>
@@ -59,7 +73,9 @@ class EditCart extends React.Component {
             <img src="/images/hot-dog-cart.svg" alt="cart"></img>
             Carts
           </h1>
-
+          <Link to="/admin/carts">
+            <button className="ui button">Back to carts</button>
+          </Link>
           <Box>
             <p>
               Useful Link:{' '}
@@ -75,11 +91,11 @@ class EditCart extends React.Component {
           <Formik
             enableReinitialize={true}
             initialValues={{
-              lat: lat,
-              lng: lng,
-              menuID: menuID,
-              vendorID: '',
-              status: status,
+              lat: lat || '',
+              lng: lng || '',
+              menuID: menuID || '',
+              vendorID: vendorID || '',
+              status: status || '',
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -100,9 +116,9 @@ class EditCart extends React.Component {
               isSubmitting,
             }) => (
               <form className="ui form" onSubmit={handleSubmit}>
-                {JSON.stringify(values)}
+                {/* {`Debug message: ${JSON.stringify(values)}`} */}
                 <h3 className="ui centered dividing header">
-                  Cart ID - {this.props.match.params.id}
+                  Cart ID - {this.props.match.params.id || 'new cart'}
                 </h3>
                 <div className="two fields">
                   <div
@@ -111,13 +127,14 @@ class EditCart extends React.Component {
                     }`}
                   >
                     <label htmlFor="lat">Latitude</label>
-                    <input
+                    <Field
+                      as="input"
                       type="text"
                       name="lat"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.lat}
-                    ></input>
+                    ></Field>
                     <Error touched={touched.lat} message={errors.lat} />
                   </div>
                   <div
@@ -126,13 +143,14 @@ class EditCart extends React.Component {
                     }`}
                   >
                     <label htmlFor="lng">Longitude</label>
-                    <input
+                    <Field
+                      as="input"
                       type="text"
                       name="lng"
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.lng}
-                    ></input>
+                    ></Field>
                     <Error touched={touched.lng} message={errors.lng} />
                   </div>
                 </div>
@@ -150,6 +168,7 @@ class EditCart extends React.Component {
                     <Error touched={touched.menuID} message={errors.menuID} />
                   </div>
                   <div className="field">
+                    {/* TODO: dynamically generate vacant vendors, if the cart belongs to an existing vendor, render their id */}
                     <label>(Optional) Vendor ID</label>
                     <Field as="select" name="vendorID">
                       <option value="">(Optional) assign a vendor</option>
@@ -170,7 +189,7 @@ class EditCart extends React.Component {
                   </div>
                 </div>
                 <button
-                  className="ui green button"
+                  className="ui large green button"
                   type="submit"
                   disabled={
                     !touched.lat ||

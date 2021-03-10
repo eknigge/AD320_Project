@@ -42,4 +42,10 @@ router.get('/edit/:cartID', async (req, res) => {
   res.json(result);
 });
 
+router.get('/new', async (req, res) => {
+  let menuIDs = (await db.promise().execute(queries.getAllMenuID))[0];
+  let allMenus = menuIDs.map((menu) => menu.menu_ID);
+  res.json({ allMenus });
+});
+
 module.exports = router;

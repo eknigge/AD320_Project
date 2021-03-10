@@ -27,6 +27,7 @@ function App() {
         <Route path="/admin" exact component={AdminMain} />
         <Route path="/admin/carts" exact component={AdminCarts} />
         <Route path="/admin/carts/edit/:id" component={EditCart} />
+        <Route path="/admin/carts/new" component={EditCart} />
       </Switch>
     </BrowserRouter>
   );
