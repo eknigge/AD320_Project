@@ -1,12 +1,23 @@
-import './CustomerComponents/Table';
+import React from 'react';
 import CustomerMenu from './CustomerComponents/CustomerMenu';
 
-function AppCustomerMenu() {
-  return (
-    <div className="App">
-      <CustomerMenu />
-    </div>
-  );
+
+class AppCustomerMenu extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {};
+    }
+
+    render(){
+      return (
+        <div className="App">
+          <CustomerMenu 
+            cartID = {this.props.match.params.id}
+          />
+        </div>
+      );
+    }
 }
+
 
 export default AppCustomerMenu;

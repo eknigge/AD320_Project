@@ -12,7 +12,7 @@ class SubTotal extends React.Component{
     }
 
     getSubTotalData (){
-        fetch("http://localhost:5000/vendor/orders/2/subtotal")
+        fetch(`http://localhost:5000/vendor/orders/${this.props.cartID}/subtotal`)
         .then(response => {
             if (response.ok) {
                     return response;

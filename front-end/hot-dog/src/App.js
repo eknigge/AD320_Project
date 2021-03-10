@@ -16,7 +16,7 @@ function App() {
         <Route path="/vendor/:id" exact component={VendorMain} />
         <Route path="/vendor/menu/:id" component={VendorMenu} />
         <Route path="/vendor/orders/:id" component={AppVendorOrders} />
-        <Route path="/customer/menu" component={AppCustomerMenu} />
+        <Route path="/customer/menu/:id" component={AppCustomerMenu} />
       </Switch>
     </BrowserRouter>
   );

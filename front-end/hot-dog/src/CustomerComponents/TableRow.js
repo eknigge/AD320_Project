@@ -30,6 +30,7 @@ class TableRow extends React.Component{
         return(
             <tr>
                 <td>{this.props.item}</td>
+                <td>{this.props.name}</td>
                 <td>{this.props.description}</td>
                 <td>{this.props.price}</td>
                 <td><button onClick={this.increaseQuantity}>+</button></td>
