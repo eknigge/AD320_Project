@@ -1,7 +1,6 @@
 let express = require('express');
 let router = express.Router();
 const db = require('../database/connection');
-let tempdata = require('./testdata.json')
 
 router.put('/order', async(req, res, next) => {
   tempdata = req.body;
