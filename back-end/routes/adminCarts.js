@@ -6,9 +6,9 @@ const checkPermission = require('./checkPermission');
 
 const queries = {
   getAllCarts:
-    'Select Cart_ID, Location, Available, User_ID, First_Name, Last_Name, menu_ID, menu_Title from cart JOIN users_cart USING (cart_id) JOIN Users USING (user_ID) JOIN Menu USING (menu_ID);',
+    'Select Cart_ID, Location, Available, User_ID, First_Name, Last_Name, menu_ID, menu_Title from cart LEFT JOIN users_cart USING (cart_id) LEFT JOIN Users USING (user_ID) LEFT JOIN Menu USING (menu_ID);',
   getCartByID:
-    'SELECT * from Cart JOIN users_cart USING (cart_ID) WHERE cart_ID = ?;',
+    'SELECT * from Cart LEFT JOIN users_cart USING (cart_ID) WHERE cart_ID = ?;',
   getAllMenuID: 'SELECT menu_ID from menu;',
 };
 

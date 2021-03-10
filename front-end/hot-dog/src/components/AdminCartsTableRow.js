@@ -2,6 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class CartsTableRow extends React.Component {
+  checkNullVendor() {
+    if (this.props.userID === null) {
+      return 'N/A';
+    } else {
+      return `${this.props.userID}-${this.props.vendorName}`;
+    }
+  }
+
   render() {
     return (
       <tr>
@@ -14,7 +22,7 @@ class CartsTableRow extends React.Component {
         >
           {this.props.status}
         </td>
-        <td>{`${this.props.userID}-${this.props.vendorName}`}</td>
+        <td>{this.checkNullVendor()}</td>
         <td>{`${this.props.menuID}-${this.props.menuTitle}`}</td>
         <td>
           <Link to={`/admin/carts/edit/${this.props.cartId}`}>
