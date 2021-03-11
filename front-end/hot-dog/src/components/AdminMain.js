@@ -24,7 +24,7 @@ class AdminMain extends React.Component {
                 </Link>
               </div>
 
-              <div className="item ">Menu (Coming sooner...)</div>
+              <div className="item ">Menus & Items (Hanna's working on it)</div>
               <div className="item ">Logs (Coming soon...)</div>
             </div>
           </div>

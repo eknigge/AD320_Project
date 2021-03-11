@@ -23,7 +23,11 @@ const validationSchema = Yup.object().shape({
 class EditCart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { apiResponse: {} };
+    this.state = {
+      apiResponse: {},
+      formSuccess: false,
+      resMessage: '',
+    };
   }
 
   componentDidMount() {
@@ -63,29 +67,36 @@ class EditCart extends React.Component {
     }
   }
 
+  // TODO: add error message display
   sendRequest(values) {
     if (this.props.match.url === '/admin/carts/new') {
-      // send POST request
       fetch(`http://localhost:5000/admin/carts/new`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       })
         .then((res) => res.text())
-        .then((res) => alert(res))
-        .catch((err) => console.err(err));
+        .then((res) => {
+          this.setState({ formSuccess: true, resMessage: res });
+        })
+        .catch((err) => console.log(err));
     } else {
       fetch(
         `http://localhost:5000/admin/carts/edit/${this.props.match.params.id}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            cartID: parseInt(this.props.match.params.id),
+            ...values,
+          }),
         }
       )
         .then((res) => res.text())
-        .then((res) => alert(res))
-        .catch((err) => console.err(err));
+        .then((res) => {
+          this.setState({ formSuccess: true, resMessage: res });
+        })
+        .catch((err) => console.log(err));
     }
   }
 
@@ -114,6 +125,16 @@ class EditCart extends React.Component {
               </a>
             </p>
           </Box>
+
+          <div
+            className={`ui success message ${
+              this.state.formSuccess ? null : `hidden`
+            }`}
+          >
+            <div className="header">{this.state.resMessage}</div>
+            <p>Alright alright alright ~~~</p>
+          </div>
+
           <Formik
             enableReinitialize={true}
             initialValues={{
@@ -121,7 +142,7 @@ class EditCart extends React.Component {
               lng: lng || '',
               menuID: menuID || '',
               vendorID: vendorID || '',
-              status: status || '',
+              status: status || false,
             }}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting, resetForm }) => {
@@ -139,10 +160,12 @@ class EditCart extends React.Component {
               handleSubmit,
               isSubmitting,
             }) => (
-              <form className="ui form" onSubmit={handleSubmit}>
+              <form className={`ui form`} onSubmit={handleSubmit}>
                 {/* {`Debug message: ${JSON.stringify(values)}`} */}
                 <h3 className="ui centered dividing header">
-                  Cart ID - {this.props.match.params.id || 'new cart'}
+                  {this.props.match.params.id
+                    ? `Editing Cart ID - ${this.props.match.params.id}`
+                    : 'Creating New Cart'}
                 </h3>
                 <div className="two fields">
                   <div

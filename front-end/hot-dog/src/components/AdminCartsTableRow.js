@@ -30,7 +30,9 @@ class CartsTableRow extends React.Component {
           </Link>
         </td>
         <td>
-          <button className="ui red button">Delete</button>
+          <button className="ui red button" disabled={true}>
+            Delete
+          </button>
         </td>
       </tr>
     );

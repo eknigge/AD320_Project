@@ -10,6 +10,9 @@ const queries = {
   getCartByID:
     'SELECT * from Cart LEFT JOIN users_cart USING (cart_ID) WHERE cart_ID = ?;',
   getAllMenuID: 'SELECT menu_ID from menu;',
+  updateCart:
+    'UPDATE Cart SET Location = ?, Menu_ID = ?, Available =? WHERE Cart_ID = ?;',
+  createNewCart: 'INSERT INTO cart VALUES (null, ?, ?, ?);',
 };
 
 router.get('/', async (req, res) => {
@@ -49,13 +52,41 @@ router.get('/new', async (req, res) => {
 });
 
 router.put('/edit/:cartID', async (req, res) => {
-  console.log(req.body);
-  res.send('update successful');
+  try {
+    console.log(req.body);
+    const { cartID, lat, lng, menuID, vendorID, status } = req.body;
+    const location = `${lat},${lng}`;
+    const available = status ? 'Y' : 'N';
+    const result = (
+      await db
+        .promise()
+        .execute(queries.updateCart, [location, menuID, available, cartID])
+    )[0];
+    console.log(result);
+
+    if (!isNaN(vendorID)) {
+      // TODO: update associated vendor
+    }
+    res.send(`Update successful for Cart ID ${cartID}`);
+  } catch {
+    res.status(400).send('Update failed.');
+  }
 });
 
 router.post('/new', async (req, res) => {
-  console.log(req.body);
-  res.send('cart created');
+  try {
+    const { lat, lng, menuID, vendorID, status } = req.body;
+    const location = `${lat},${lng}`;
+    const available = status ? 'Y' : 'N';
+    const result = (
+      await db
+        .promise()
+        .execute(queries.createNewCart, [location, parseInt(menuID), available])
+    )[0];
+    res.send(`Successfully created new cart ID ${result.insertId}`);
+  } catch {
+    res.status(400).send('Something went wrong.');
+  }
 });
 
 module.exports = router;
