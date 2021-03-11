@@ -7,12 +7,36 @@ class CustomerMenu extends React.Component{
         this.state = {tableDataisFetched: false};
     }
 
+    submitOrder = () => {
+        // create JSON object for back-end API
+        let order = {}
+        for(let key in this.state){
+            order[key] = this.state[key]
+        }
+        let orderJSON = {
+            "order": order,
+            "cartID":this.props.cartID,
+            "userID":2
+        }
+
+        fetch(`http://localhost:5000/customer/order/`, {
+            method:'PUT',
+            body:orderJSON,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderJSON)
+        })
+
+        //for debugging purposes
+        console.log(orderJSON);
+
+    }
+
     componentDidMount(){
         this.getData();
     }
 
     getData = () => {
-        fetch('http://localhost:5000/customer/1')
+        fetch(`http://localhost:5000/customer/${this.props.cartID}`)
         .then((response) => {
             if (response.ok) {
             return response;
@@ -43,6 +67,7 @@ class CustomerMenu extends React.Component{
                     <TableRow 
                         key={item.ITEM_ID}
                         item={item.ITEM_ID}
+                        name={item.ITEM_NAME}
                         description={item.DESCRIPTION_ITEM}
                         price={item.PRICE}
                         quantity={this.state[item.ITEM_ID]}
@@ -62,6 +87,7 @@ class CustomerMenu extends React.Component{
                 <thead>
                     <tr>
                         <th>Item</th>
+                        <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
                         <th>Add</th>
@@ -71,6 +97,7 @@ class CustomerMenu extends React.Component{
                 </thead>
                 {this.renderItems()}
             </table>
+            <button onClick={this.submitOrder}> Submit Order</button>
         </div>
         )
     }
