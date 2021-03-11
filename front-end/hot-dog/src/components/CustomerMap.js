@@ -5,6 +5,8 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
+import Search from './Search';
+import Locate from './Locate';
 
 // Configs
 const mapContainerStyle = {
@@ -17,15 +19,25 @@ const options = {
   zoomControl: true
 };
 
-// Functional component
-export default function Map(props) {
+const libraries = ['places'];
+
+export default function CustomerMap(props) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_MAP_KEY
+    googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
+    libraries
   });
 
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
+
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
   const [selected, setSelected] = React.useState(null);
-  const [newLoc, setNewLoc] = React.useState(null);
-  const [selectNew, setSelectNew] = React.useState(null);
 
   if (loadError) return 'Error loading maps';
   if (!isLoaded) return 'Loading maps';
@@ -51,26 +63,19 @@ export default function Map(props) {
     }
   };
 
-  const { cart, vendorFirstName, vendorLastName } = props.apiResponse;
+  const { cart } = props.apiResponse;
 
   return (
-    <div>
+    <div style={{ marginTop: '-8vh' }}>
+      <Search panTo={panTo} />
+      <Locate panTo={panTo} />
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={12}
         center={props.center}
         options={options}
-        onClick={(event) => {
-          setNewLoc({
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-            time: new Date()
-          });
-          props.onClick({
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
-          });
-        }}
+        onLoad={onMapLoad}
       >
         {cart?.map((marker) => {
           return (
@@ -83,21 +88,12 @@ export default function Map(props) {
               onClick={() => {
                 setSelected(marker);
               }}
-              icon={props.status ? icon.open : icon.closed}
+              icon={marker.Available ? icon.open : icon.closed}
             ></Marker>
           );
         })}
 
-        {newLoc ? (
-          <Marker
-            key={`${newLoc.lat}-${newLoc.lng}`}
-            position={{ lat: newLoc.lat, lng: newLoc.lng }}
-            onClick={() => {
-              setSelectNew(newLoc);
-            }}
-            icon={icon.new}
-          />
-        ) : null}
+        {/* TODO: change the info window to display menu info */}
         {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
@@ -110,37 +106,15 @@ export default function Map(props) {
                 <span role="img" aria-label="cart">
                   🌭
                 </span>{' '}
-                {`${vendorFirstName} ${vendorLastName}`}'s Hot Dog Cart
+                {`${selected.First_Name} ${selected.Last_Name}`}'s Hot Dog Cart
               </h3>
-              <p>Cart ID: {selected.id}</p>
-              <p>Menu ID: {selected.menuID}</p>
+              <p>Cart ID: {selected.Cart_ID}</p>
+              <p>Menu ID: {selected.Menu_ID}</p>
               <p>
                 Status:{' '}
-                <span style={{ color: props.status ? 'green' : 'red' }}>
-                  {props.status ? 'Available' : 'Unavailable'}
+                <span style={{ color: selected.Available ? 'green' : 'red' }}>
+                  {selected.Available ? 'Available' : 'Unavailable'}
                 </span>
-              </p>
-            </div>
-          </InfoWindow>
-        ) : null}
-        {selectNew ? (
-          <InfoWindow
-            position={{ lat: newLoc.lat, lng: newLoc.lng }}
-            onCloseClick={() => {
-              setSelectNew(null);
-            }}
-          >
-            <div>
-              <h3>New Cart Location</h3>
-
-              <p>
-                <strong>Latitude:</strong> {newLoc.lat.toFixed(5)}
-              </p>
-              <p>
-                <strong>Longitude:</strong> {newLoc.lng.toFixed(5)}
-              </p>
-              <p>
-                <strong>Time Selected:</strong> {newLoc.time.toLocaleString()}
               </p>
             </div>
           </InfoWindow>
