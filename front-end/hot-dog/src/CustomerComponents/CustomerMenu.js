@@ -21,7 +21,9 @@ class CustomerMenu extends React.Component{
 
         fetch(`http://localhost:5000/customer/order/`, {
             method:'PUT',
-            body:orderJSON
+            body:orderJSON,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderJSON)
         })
 
         //for debugging purposes

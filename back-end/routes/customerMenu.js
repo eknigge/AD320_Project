@@ -90,7 +90,7 @@ router.get('/:cartID', (req, res, next) => {
     JOIN ITEMS_MENU USING (MENU_ID) 
     JOIN ITEMS USING (ITEM_ID) 
     JOIN CART USING (MENU_ID) 
-    WHERE CART_ID = ${cartID};`;
+    WHERE CART_ID = ${cartID} AND ITEMS_MENU.AVAILABLE ="Y";`;
 
   // querry database
   db.query(custCartQuery, (err, results, fields) => {

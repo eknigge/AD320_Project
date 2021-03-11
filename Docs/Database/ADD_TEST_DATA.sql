@@ -41,7 +41,7 @@ VALUES 	("admin@website.com", "adminpass", "adminFirst", "adminLast", "ADMIN"),
         ("ilikedonuts@simpson.com", "yumyum", "Rick", "Sanchez", "VENDOR")
 ;
 
-INSERT INTO ITEMS_MENU(MENU_ID, ITEM_ID, AVAILABLE_MENU)
+INSERT INTO ITEMS_MENU(MENU_ID, ITEM_ID, AVAILABLE)
 VALUES 	
 	(1,1,"Y"),
 	(1,2,"Y"),
