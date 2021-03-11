@@ -7,6 +7,7 @@ import Home from './customer/components/Home';
 import AppCustomerMenu from './AppCustomerMenu';
 import AppVendorOrders from './AppVendorOrders';
 import CustomerMain from './components/CustomerMain';
+import VendorPunchCard from './components/VendorPunchCard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/menu" component={Main} />
+        <Route path="/vendor" exact component={VendorPunchCard} />
         <Route path="/vendor/:id" exact component={VendorMain} />
         <Route path="/vendor/menu/:id" component={VendorMenu} />
         <Route path="/vendor/orders/:id" component={AppVendorOrders} />

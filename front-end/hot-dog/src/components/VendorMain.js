@@ -93,6 +93,13 @@ class VendorMain extends React.Component {
         <Box>
           <div className="ui equal width center stackable grid">
             <div className="column">
+              <Link to="/vendor">
+                <button className="ui large button">
+                  <p>Punch out</p>
+                </button>
+              </Link>
+            </div>
+            <div className="column">
               <button
                 className={`large ui button ${
                   this.state.available ? 'teal' : 'green'
@@ -109,7 +116,7 @@ class VendorMain extends React.Component {
                 className="large ui blue button"
                 data-tooltip="Click anywhere on the map to place a pin, then click this button"
                 onClick={this.updateLocation}
-                disabled={!this.state.error && !this.state.newLocation.lat}
+                disabled={this.state.error || !this.state.newLocation.lat}
               >
                 Change Location
               </button>

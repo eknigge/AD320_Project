@@ -1,5 +1,6 @@
 import React from 'react';
 import TableRow from './TableRow';
+import { Link } from 'react-router-dom';
 
 class Table extends React.Component {
   constructor(props) {
@@ -70,7 +71,11 @@ class Table extends React.Component {
           {this.renderItems()}
           <tfoot className="full-width">
             <tr>
-              <th></th>
+              <th>
+                <Link to={`/vendor/${this.props.apiResponse.vendorID}`}>
+                  <button className="ui large gray button">Back to main</button>
+                </Link>
+              </th>
               <th colSpan="5">
                 <button
                   className="ui right floated medium green button"
