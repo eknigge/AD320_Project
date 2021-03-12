@@ -17,13 +17,13 @@ class Table extends React.Component {
       {
         menuID: this.props.apiResponse.menu.menuID,
         id: idList,
-        status: true
+        status: true,
       },
       () => {
         fetch('http://localhost:5000/vendor/menu', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(this.state)
+          body: JSON.stringify(this.state),
         })
           .then((res) => res.text())
           // Extra feature: add a pop up stating whether update was successful

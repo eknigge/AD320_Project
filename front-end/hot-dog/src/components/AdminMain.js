@@ -1,0 +1,40 @@
+import React from 'react';
+import Banner from './Banner';
+import Container from './Container';
+import Box from './Box';
+import { Link } from 'react-router-dom';
+
+class AdminMain extends React.Component {
+  render() {
+    return (
+      <Container>
+        <Banner vendorName="our Beloved and Respected Administrator"></Banner>
+        <div className="ui grid">
+          <div className="three wide column" style={{ marginTop: '1em' }}>
+            <div className="ui vertical menu">
+              <div className="item">
+                <Link to="/admin/carts" className="admin">
+                  Carts
+                </Link>
+              </div>
+
+              <div className="item">
+                <Link to="/admin/users" className="admin">
+                  Users
+                </Link>
+              </div>
+
+              <div className="item ">Menus & Items (Hanna's working on it)</div>
+              <div className="item ">Logs (Coming soon...)</div>
+            </div>
+          </div>
+          <div className="thirteen wide column" style={{ marginTop: '1em' }}>
+            {this.props.children}
+          </div>
+        </div>
+      </Container>
+    );
+  }
+}
+
+export default AdminMain;
