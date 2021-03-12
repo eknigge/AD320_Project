@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
 const checkPermission = require('./checkPermission');
+const logger = require('../src/logging');
 
 const queries = {
   getAllCarts:
@@ -63,6 +64,7 @@ router.put('/edit/:cartID', async (req, res) => {
         .execute(queries.updateCart, [location, menuID, available, cartID])
     )[0];
     console.log(result);
+    logger(1, `Admin updated cart ID ${cartID}`);
 
     if (!isNaN(vendorID)) {
       // TODO: update associated vendor

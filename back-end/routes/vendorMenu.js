@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
 const checkPermission = require('./checkPermission');
+const logger = require('../src/logging');
 
 // SQL queries
 const queries = {
@@ -10,7 +11,7 @@ const queries = {
     'SELECT User_ID, First_Name, Last_Name, Cart_ID, Menu_ID, Item_ID, Item_Name, Item_Category, Price, Items_Menu.Available FROM Users JOIN Users_Cart USING (user_ID) JOIN Cart USING (cart_ID) JOIN Menu USING (menu_ID) JOIN Items_Menu USING (menu_ID) JOIN Items USING (item_ID) WHERE User_ID = ?',
   userPermission: 'SELECT Permission FROM Users WHERE User_ID = ?',
   updateMenuItem:
-    'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?'
+    'UPDATE Items_Menu SET Available = ? WHERE Menu_ID = ? AND Item_ID = ?',
 };
 
 /**
@@ -30,7 +31,7 @@ router.get('/:id', async (req, res) => {
         res.json(finalJSON);
       } catch {
         res.status(400).send({
-          error: 'You currently do not have an active menu'
+          error: 'You currently do not have an active menu',
         });
       }
     } else {
@@ -47,6 +48,7 @@ router.get('/:id', async (req, res) => {
  * Updates an item's availability in the database
  */
 router.put('/', async (req, res) => {
+  // TODO: include vendor ID in put request for logger
   try {
     const { menuID, id, status } = req.body;
     let available = status ? 'Y' : 'N';
@@ -58,6 +60,16 @@ router.put('/', async (req, res) => {
       await db
         .promise()
         .execute(queries.updateMenuItem, [available, menuID, id]);
+      // added logger
+      // TODO: Substitute placeholder ID for vendor ID
+      let lastID = logger(
+        2,
+        `Vendor updated item ${id} in menu ${menuID} to ${
+          status ? `available` : `unavailable`
+        }`
+      );
+      // TODO: use lastID to insert into USER_LOGS TABLE
+      // code here...
     }
     res.status(204).send('Update successful');
   } catch {
@@ -78,8 +90,8 @@ function makeJSON(dbResult) {
       cartID: dbResult[0].Cart_ID,
       menu: {
         menuID: dbResult[0].Menu_ID,
-        items: getItems(dbResult)
-      }
+        items: getItems(dbResult),
+      },
     };
     return obj;
   }
@@ -103,7 +115,7 @@ function getItem(row) {
     name: row.Item_Name,
     category: row.Item_Category,
     price: row.Price / 100,
-    available: row.Available === 'Y'
+    available: row.Available === 'Y',
   };
   return item;
 }

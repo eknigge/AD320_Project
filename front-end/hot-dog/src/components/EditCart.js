@@ -131,8 +131,8 @@ class EditCart extends React.Component {
               this.state.formSuccess ? null : `hidden`
             }`}
           >
-            <div className="header">{this.state.resMessage}</div>
-            <p>Alright alright alright ~~~</p>
+            <h4 className="header">{this.state.resMessage}</h4>
+            <p>Go back to the carts page to see the latest changes</p>
           </div>
 
           <Formik

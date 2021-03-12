@@ -3,20 +3,21 @@ import {
   GoogleMap,
   useLoadScript,
   Marker,
-  InfoWindow
+  InfoWindow,
 } from '@react-google-maps/api';
 import Search from './Search';
 import Locate from './Locate';
+import { Link } from 'react-router-dom';
 
 // Configs
 const mapContainerStyle = {
   width: '100%',
-  height: '85vh'
+  height: '85vh',
 };
 
 const options = {
   disableDefaultUI: true,
-  zoomControl: true
+  zoomControl: true,
 };
 
 const libraries = ['places'];
@@ -24,7 +25,7 @@ const libraries = ['places'];
 export default function CustomerMap(props) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
-    libraries
+    libraries,
   });
 
   const mapRef = React.useRef();
@@ -47,20 +48,20 @@ export default function CustomerMap(props) {
       url: '/images/hot-dog-stand.svg',
       scaledSize: new window.google.maps.Size(40, 40),
       origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(20, 20)
+      anchor: new window.google.maps.Point(20, 20),
     },
     closed: {
       url: '/images/closed.svg',
       scaledSize: new window.google.maps.Size(40, 40),
       origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(20, 20)
+      anchor: new window.google.maps.Point(20, 20),
     },
     new: {
       url: '/images/new.svg',
       scaledSize: new window.google.maps.Size(40, 40),
       origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(20, 20)
-    }
+      anchor: new window.google.maps.Point(20, 20),
+    },
   };
 
   const { cart } = props.apiResponse;
@@ -83,7 +84,7 @@ export default function CustomerMap(props) {
               key={`${marker.lat}-${marker.lng}`}
               position={{
                 lat: marker.lat,
-                lng: marker.lng
+                lng: marker.lng,
               }}
               onClick={() => {
                 setSelected(marker);
@@ -102,20 +103,32 @@ export default function CustomerMap(props) {
             }}
           >
             <div>
-              <h3>
+              <h3 className="ui header brown">
                 <span role="img" aria-label="cart">
                   🌭
                 </span>{' '}
                 {`${selected.First_Name} ${selected.Last_Name}`}'s Hot Dog Cart
               </h3>
-              <p>Cart ID: {selected.Cart_ID}</p>
-              <p>Menu ID: {selected.Menu_ID}</p>
+              {/* <p>Cart ID: {selected.Cart_ID}</p>
+              <p>Menu ID: {selected.Menu_ID}</p> */}
               <p>
-                Status:{' '}
-                <span style={{ color: selected.Available ? 'green' : 'red' }}>
-                  {selected.Available ? 'Available' : 'Unavailable'}
-                </span>
+                We are{' '}
+                {/* <span style={{ color: selected.Available ? 'green' : 'red' }}> */}
+                {selected.Available
+                  ? 'Open! Come get your hot dogs and snacks!'
+                  : 'currently closed, check back soon!'}
+                {/* </span> */}
               </p>
+              <Link to={`/customer/menu/${selected.Cart_ID}`}>
+                <button
+                  disabled={selected.Available ? false : true}
+                  className={`ui button ${
+                    selected.Available ? `green` : `orange`
+                  }`}
+                >
+                  {`${selected.Available ? `See Menu` : `Sorry We're Closed`}`}
+                </button>
+              </Link>
             </div>
           </InfoWindow>
         ) : null}
