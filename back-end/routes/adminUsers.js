@@ -47,6 +47,7 @@ router.put('/edit/:cartID', async (req, res) => {
       email,
       userId,
     ]);
+  logger(1, `Admin edited info on user ID ${userId}: ${firstName} ${lastName}`);
   res.send(`Update successful for User ID ${userId}`);
 });
 
@@ -58,6 +59,10 @@ router.post('/new', async (req, res) => {
         .promise()
         .execute(queries.createNewUser, [email, firstName, lastName, role])
     )[0];
+    logger(
+      1,
+      `Admin created a new user ID ${result.insertId}: ${firstName} ${lastName}`
+    );
     res.send(`Successfully created new user ID ${result.insertId}`);
   } catch {
     res.status(400).send('Something went wrong.');
