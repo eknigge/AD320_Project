@@ -122,6 +122,15 @@ class VendorMain extends React.Component {
               </button>
             </div>
             <div className="column">
+              <Link to={`/vendor/orders/${this.props.match.params.id}`}>
+                <button
+                  className="large ui blue button"
+                >
+                  Manage Orders
+                </button>
+              </Link>
+            </div>
+            <div className="column">
               <Link to={`/vendor/menu/${this.props.match.params.id}`}>
                 <button
                   className="large ui blue button"
