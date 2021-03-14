@@ -3,6 +3,7 @@ USE mydb;
 INSERT INTO ITEMS (ITEM_NAME, ITEM_CATEGORY, PRICE, DESCRIPTION_ITEM)
 VALUES 	("Seattle Dog", "Food", 499, "Our most popular item the Seattle Dog. Cream cheese, relish, beef dog, on brioche bun."),
 		("Plain Hot Dog", "Food", 349, "Keeping it simple"),
+        ("Bailey Dog", "Food", 777, "Named after Eric's lovely dog. An all beef dog with extra awesome bacon bits and cheedar cheese."),
         ("Double Dog", "Food", 599, "Take a plain and make it double"),
         ("Chicago", "Food", 499, "Mustard, onion, relish, dill pickle, sport peppers, and tomato"),
         ("New York", "Food", 499, "Mustard, sauerkraut, onion sauce"),

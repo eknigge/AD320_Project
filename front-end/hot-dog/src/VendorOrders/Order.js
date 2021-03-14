@@ -19,6 +19,7 @@ class Order extends React.Component{
             <tr>
                 <th>{this.props.orderID}</th>
                 <th>{this.props.name}</th>
+                <th>{this.props.contact}</th>
                 <th>{this.props.item}</th>
                 <th>{this.props.price}</th>
                 <th>{this.props.quantity}</th>

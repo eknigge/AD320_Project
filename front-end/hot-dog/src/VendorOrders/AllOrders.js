@@ -35,6 +35,7 @@ class AllOrders extends React.Component{
                     key = {item.ORDER_ID + item.ITEM_NAME}
                     orderID = {item.ORDER_ID}
                     name = {item.FIRST_NAME + " " + item.LAST_NAME[0]}
+                    contact = {item.CONTACT}
                     item = {item.ITEM_NAME}
                     price = {item.PRICE}
                     quantity = {item.QUANTITY}
@@ -51,6 +52,7 @@ class AllOrders extends React.Component{
                 <thead>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Contact</th>
                     <th>Item</th>
                     <th>Price</th>
                     <th>Quantity</th>
