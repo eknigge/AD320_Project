@@ -39,20 +39,12 @@ class EditCart extends React.Component {
     if (!isNaN(id)) {
       fetch(`http://localhost:5000/admin/carts/edit/${id}`)
         .then((res) => res.json())
-        .then((res) =>
-          this.setState({ apiResponse: res }, () =>
-            console.log(this.state.apiResponse)
-          )
-        )
+        .then((res) => this.setState({ apiResponse: res }))
         .catch((error) => console.log(error));
     } else if (this.props.match.url === '/admin/carts/new') {
       fetch(`http://localhost:5000/admin/carts/new`)
         .then((res) => res.json())
-        .then((res) =>
-          this.setState({ apiResponse: res }, () =>
-            console.log(this.state.apiResponse)
-          )
-        )
+        .then((res) => this.setState({ apiResponse: res }))
         .catch((error) => console.log(error));
     }
   }
@@ -62,6 +54,16 @@ class EditCart extends React.Component {
       return this.state.apiResponse.allMenus.map((menuID) => (
         <option key={menuID} value={`${menuID}`}>
           {menuID}
+        </option>
+      ));
+    }
+  }
+
+  renderVacantVendors() {
+    if (this.state.apiResponse.vendors) {
+      return this.state.apiResponse.vendors.map((vendor) => (
+        <option key={vendor.User_ID} value={`${vendor.User_ID}`}>
+          {`${vendor.User_ID}-${vendor.First_Name} ${vendor.Last_Name}`}
         </option>
       ));
     }
@@ -215,12 +217,16 @@ class EditCart extends React.Component {
                     <Error touched={touched.menuID} message={errors.menuID} />
                   </div>
                   <div className="field">
-                    {/* TODO: dynamically generate vacant vendors, if the cart belongs to an existing vendor, render their id */}
                     <label>(Optional) Vendor ID</label>
                     <Field as="select" name="vendorID">
                       <option value="">(Optional) assign a vendor</option>
-                      <option value="0">0</option>
-                      <option value="1">1</option>
+                      {this.renderVacantVendors()}
+                      <option
+                        value="remove"
+                        style={{ color: 'crimson', fontStyle: 'italic' }}
+                      >
+                        Release vendor from this cart
+                      </option>
                     </Field>
                   </div>
                 </div>

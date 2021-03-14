@@ -12,6 +12,7 @@ import AdminMain from './components/AdminMain';
 import AdminCarts from './components/AdminCarts';
 import EditCart from './components/EditCart';
 import AdminUsers from './components/AdminUsers';
+import EditUser from './components/EditUser';
 
 function App() {
   return (
@@ -30,7 +31,9 @@ function App() {
         <Route path="/admin/carts" exact component={AdminCarts} />
         <Route path="/admin/carts/edit/:id" component={EditCart} />
         <Route path="/admin/carts/new" component={EditCart} />
-        <Route path="/admin/users" component={AdminUsers} />
+        <Route path="/admin/users" exact component={AdminUsers} />
+        <Route path="/admin/users/edit/:id" component={EditUser} />
+        <Route path="/admin/users/new" component={EditUser} />
       </Switch>
     </BrowserRouter>
   );

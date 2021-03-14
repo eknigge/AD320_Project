@@ -39,7 +39,8 @@ VALUES 	("admin@website.com", "adminpass", "adminFirst", "adminLast", "ADMIN"),
         ("admin@website.com", "apass1", "Best", "Boss", "ADMIN"),
         ("angrychef@gmail.com", "itsraw", "Gordan", "Ramsey", "VENDOR"),
         ("ilikedonuts@simpson.com", "yumyum", "Homer", "Simpson", "VENDOR"),
-        ("ilikedonuts@simpson.com", "yumyum", "Rick", "Sanchez", "VENDOR")
+        ("ilikedonuts@simpson.com", "yumyum", "Rick", "Sanchez", "VENDOR"),
+        ("unemployed@me.com", "yikes", "Donald", "Duck", "VENDOR")
 ;
 
 INSERT INTO ITEMS_MENU(MENU_ID, ITEM_ID, AVAILABLE)

@@ -2,6 +2,7 @@ const db = require('../database/connection');
 
 const queries = {
   createLog: 'INSERT INTO Log VALUE (NULL, ?, ?);',
+  createUserLog: 'INSERT INTO User_Logs VALUES (?, ?);',
 };
 
 /**
@@ -17,8 +18,11 @@ const logger = async function createLogEvent(userID, logText) {
   let result = (
     await db.promise().execute(queries.createLog, [date, logText])
   )[0];
-  let lastId = await result.insertId;
-  return lastId;
+  let logId = await result.insertId;
+  let userLog = (
+    await db.promise().execute(queries.createUserLog, [userID, logId])
+  )[0];
+  return logId;
 };
 
 module.exports = logger;
