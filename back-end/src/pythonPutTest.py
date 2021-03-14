@@ -11,7 +11,10 @@ data = {
         "other":'true'},
 
     "cartID":3,
-    "userID":2
+    "userID":2,
+    "firstName":"First Name",
+    "lastName":"Last Name",
+    "contact":"phone number"
 }
 
 url = 'http://localhost:5000/customer/order/'

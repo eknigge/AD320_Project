@@ -4,14 +4,55 @@ const router = express.Router();
 const db = require('../database/connection');
 
 router.put('/order', async(req, res, next) => {
-  tempdata = req.body;
-  //need to import cart data
-  let cartID = tempdata.cartID;
-  let userID;
+  requestData = req.body;
+  let cartID = requestData.cartID;
 
-  //if not user ID use anonmyous order
-  if(tempdata.userID) userID = tempdata.userID
-  else  userID = 2;
+  //create new user ID
+  let contactInfo = requestData.contact;
+  let firstName = requestData.firstName;
+  let lastName = requestData.lastName;
+  let createNewUserQuery = 
+    `
+    INSERT INTO USERS(EMAIL, USERS.PASSWORD, FIRST_NAME, LAST_NAME, PERMISSION)
+    VALUES	("${contactInfo}", "", "${firstName}", "${lastName}", "CUSTOMER")
+    ;
+    `
+  let createNewUser = await db.promise().query(createNewUserQuery);
+
+  // get new user ID 
+  let getNewUserIDQuery = 
+    `SELECT USER_ID FROM USERS
+    ORDER BY USER_ID DESC
+    LIMIT 1
+    ;`
+  let newUserID = (await db.promise().query(getNewUserIDQuery))[0][0].USER_ID;
+
+  // create log entry 
+  let createLogEntryQuery = 
+    `
+    INSERT INTO LOG(DATETIME, EVENT)
+    VALUES (NOW(), "SUBMIT ORDER FROM WEB INTERFACE")
+    ;
+    `
+
+    console.log(req.body);
+  let addLogEntry = await db.promise().query(createLogEntryQuery)
+
+  // get latest log event ID
+  let getLatestLogEventQuery = 
+    `SELECT LOG_ITEM_ID FROM LOG
+    ORDER BY LOG_ITEM_ID DESC
+    LIMIT 1
+    ;`
+  let latestLogID = (await db.promise().query(getLatestLogEventQuery))[0][0].LOG_ITEM_ID;
+
+  // insert log event into user logs table
+  let userLogsQuery = 
+    `INSERT INTO USER_LOGS(USER_ID, LOG_ITEM_ID)
+    VALUES (${newUserID}, ${latestLogID})
+    ;
+    `
+  let userLogsEntry = await db.promise().query(userLogsQuery);
 
   //create new order in database
   let createOrderQuery = 
@@ -45,11 +86,11 @@ router.put('/order', async(req, res, next) => {
   }
 
   // add items to order
-  for(const key in tempdata){
+  for(const key in requestData){
     if(key === "order"){
-      for(const value in tempdata[key]){
+      for(const value in requestData[key]){
         let itemid = parseInt(value);
-        let quantity = tempdata[key][value];
+        let quantity = requestData[key][value];
         if(itemsArray.includes(itemid) && quantity > 0){
           let addItemQuery = await 
           `INSERT INTO ORDERS_ITEMS
@@ -74,7 +115,7 @@ router.put('/order', async(req, res, next) => {
   // add order to ORDER_USERS
   let orderUsersQuery = 
     `INSERT INTO ORDER_USERS(USER_ID, ORDER_ID)
-    VALUES  (${userID}, ${latestID})
+    VALUES  (${newUserID}, ${latestID})
     ;`
   let userOrders = await db.promise().query(orderUsersQuery);
 
@@ -101,11 +142,5 @@ router.get('/:cartID', (req, res, next) => {
     res.json(output);
   });
 });
-
-// customers/ route
-// router.get('/', (req, res, next) => {
-//   let text = 'select * from MENU;';
-//   res.send('this will be a map of all carts');
-// });
 
 module.exports = router;

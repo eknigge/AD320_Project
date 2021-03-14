@@ -3,12 +3,6 @@ const router = express.Router();
 // const mysql = require('mysql2');
 const db = require('../database/connection');
 
-// get credentials
-// let credentials = require('../credentials.json')
-
-//create database connection
-// const connection = mysql.createConnection(credentials);
-
 // vendor/orders/complete/orderID
 router.post('/complete/:orderID', (req, res, next) => {
   let orderID = req.params.orderID;
@@ -29,7 +23,7 @@ router.post('/complete/:orderID', (req, res, next) => {
 router.get('/:cartID', (req, res, next) => {
   let cartID = req.params.cartID;
   let custCartQuery = `
-    SELECT DATE, ORDER_ID, FIRST_NAME, LAST_NAME, ITEM_NAME, PRICE, QUANTITY
+    SELECT DATE, ORDER_ID, FIRST_NAME, LAST_NAME, ITEM_NAME, PRICE, QUANTITY, EMAIL AS CONTACT
     FROM ORDERS
     JOIN CART_ORDERS USING (ORDER_ID)
     JOIN CART USING (CART_ID)

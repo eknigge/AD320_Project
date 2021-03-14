@@ -29,7 +29,6 @@ class TableRow extends React.Component{
     render(){
         return(
             <tr>
-                <td>{this.props.item}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.description}</td>
                 <td>{this.props.price}</td>
