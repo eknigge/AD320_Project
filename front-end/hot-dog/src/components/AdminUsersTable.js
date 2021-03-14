@@ -1,5 +1,6 @@
 import React from 'react';
 import UsersTableRow from './AdminUsersTableRow';
+import { Link } from 'react-router-dom';
 
 class UsersTable extends React.Component {
   renderUsers() {
@@ -7,12 +8,12 @@ class UsersTable extends React.Component {
       const allUsers = this.props.apiResponse.map((user) => {
         return (
           <UsersTableRow
-            key={user.USER_ID}
-            id={user.USER_ID}
-            firstName={user.FIRST_NAME}
-            lastName={user.LAST_NAME}
-            role={user.PERMISSION}
-            email={user.EMAIL}
+            key={user.User_ID}
+            id={user.User_ID}
+            firstName={user.First_Name}
+            lastName={user.Last_Name}
+            role={user.Permission}
+            email={user.Email}
           />
         );
       });
@@ -46,9 +47,11 @@ class UsersTable extends React.Component {
               </button>
             </th>
             <th colSpan="6">
-              <button className="ui right floated medium green button">
-                Add New User
-              </button>
+              <Link to="/admin/users/new">
+                <button className="ui right floated medium green button">
+                  Add New User
+                </button>
+              </Link>
             </th>
           </tr>
         </tfoot>

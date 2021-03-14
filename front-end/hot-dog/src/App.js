@@ -33,6 +33,7 @@ function App() {
         <Route path="/admin/carts/new" component={EditCart} />
         <Route path="/admin/users" exact component={AdminUsers} />
         <Route path="/admin/users/edit/:id" component={EditUser} />
+        <Route path="/admin/users/new" component={EditUser} />
       </Switch>
     </BrowserRouter>
   );

@@ -53,7 +53,6 @@ router.get('/new', async (req, res) => {
 
 router.put('/edit/:cartID', async (req, res) => {
   try {
-    console.log(req.body);
     const { cartID, lat, lng, menuID, vendorID, status } = req.body;
     const location = `${lat},${lng}`;
     const available = status ? 'Y' : 'N';

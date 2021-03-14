@@ -14,7 +14,66 @@ const validationSchema = Yup.object().shape({
 });
 
 class EditUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      apiResponse: {},
+      formSuccess: false,
+      resMessage: '',
+    };
+  }
+
+  componentDidMount() {
+    this.callAPI();
+  }
+
+  callAPI() {
+    let id = this.props.match.params.id;
+    if (!isNaN(id)) {
+      fetch(`http://localhost:5000/admin/users/edit/${id}`)
+        .then((res) => res.json())
+        .then((res) => this.setState({ apiResponse: res }))
+        .catch((error) => console.log(error));
+    }
+  }
+
+  sendRequest(values) {
+    if (this.props.match.url === '/admin/users/new') {
+      fetch(`http://localhost:5000/admin/users/new`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+        .then((res) => res.text())
+        .then((res) => {
+          this.setState({ formSuccess: true, resMessage: res });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      fetch(
+        `http://localhost:5000/admin/users/edit/${this.props.match.params.id}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userId: parseInt(this.props.match.params.id),
+            ...values,
+          }),
+        }
+      )
+        .then((res) => res.text())
+        .then((res) => {
+          this.setState({ formSuccess: true, resMessage: res }, () =>
+            console.log(res)
+          );
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
   render() {
+    const { First_Name, Last_Name, Email, Permission } = this.state.apiResponse;
+
     return (
       <AdminMain>
         <Box>
@@ -26,15 +85,29 @@ class EditUser extends React.Component {
             <button className="ui button">Back to users</button>
           </Link>
 
+          <div
+            className={`ui success message ${
+              this.state.formSuccess ? null : `hidden`
+            }`}
+          >
+            <h4 className="header">{this.state.resMessage}</h4>
+            <p>Go back to the users page to see the latest changes</p>
+          </div>
+
           <Formik
             enableReinitialize={true}
             initialValues={{
-              firstName: '',
-              lastName: '',
-              email: '',
-              role: '',
+              firstName: First_Name || '',
+              lastName: Last_Name || '',
+              email: Email || '',
+              role: Permission || '',
             }}
             validationSchema={validationSchema}
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              this.sendRequest(values);
+              resetForm();
+              setSubmitting(false);
+            }}
           >
             {({
               values,
@@ -45,8 +118,8 @@ class EditUser extends React.Component {
               handleSubmit,
               isSubmitting,
             }) => (
-              <form className="ui form">
-                {`Debug message: ${JSON.stringify(values)}`}
+              <form className="ui form" onSubmit={handleSubmit}>
+                {/* {`Debug message: ${JSON.stringify(values)}`} */}
                 <h3 className="ui centered dividing header">
                   {this.props.match.params.id
                     ? `Editing User ID - ${this.props.match.params.id}`
