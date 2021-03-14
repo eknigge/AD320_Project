@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/connection');
-const checkPermission = require('./checkPermission');
 const logger = require('../src/logging');
 
 const queries = {

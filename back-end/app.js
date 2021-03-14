@@ -14,6 +14,7 @@ const vendorOrders = require('./routes/vendorOrders');
 const customerRouter = require('./routes/customerMenu');
 const customerMap = require('./routes/customerMap');
 const adminCarts = require('./routes/adminCarts');
+const adminUsers = require('./routes/adminUsers');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/vendor/orders/complete/5', vendorOrders);
 app.use('/vendor/menu', vendorMenu);
 app.use('/vendor', vendorMain);
 app.use('/admin/carts', adminCarts);
+app.use('/admin/users', adminUsers);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
