@@ -12,6 +12,7 @@ import AdminMain from './components/AdminMain';
 import AdminCarts from './components/AdminCarts';
 import EditCart from './components/EditCart';
 import AdminUsers from './components/AdminUsers';
+import AppCompletedOrders from './AppCompletedOrders';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/vendor/:id" exact component={VendorMain} />
         <Route path="/vendor/menu/:id" component={VendorMenu} />
         <Route path="/vendor/orders/:id" component={AppVendorOrders} />
+        <Route path="/vendor/orders/complete" exact component={AppCompletedOrders} />
         <Route path="/customer/menu/:id" component={AppCustomerMenu} />
         <Route path="/customer/menu" component={AppCustomerMenu} />
         <Route path="/customer/map" component={CustomerMain} />
