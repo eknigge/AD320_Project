@@ -3,11 +3,6 @@ import CartsTableRow from './AdminCartsTableRow';
 import { Link } from 'react-router-dom';
 
 class CartsTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: {} };
-  }
-
   renderCarts() {
     if (this.props.apiResponse.length > 0) {
       const allCarts = this.props.apiResponse.map((cart) => {
