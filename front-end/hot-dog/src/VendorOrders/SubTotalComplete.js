@@ -1,5 +1,5 @@
 import React from 'react';
-import SubTotalRow from './SubTotalRow';
+import SubTotalComplete from './SubTotalRowComplete';
 
 class SubTotal extends React.Component{
     constructor(props){
@@ -29,7 +29,7 @@ class SubTotal extends React.Component{
         if(this.state.apiDataSubTotal){
             output = this.state.apiDataSubTotal.map( (item) => {
                 return (
-                    <SubTotalRow
+                    <SubTotalComplete
                         key = {item.ORDER_ID}
                         order = {item.ORDER_ID}
                         total = {item.TOTAL}
@@ -46,7 +46,6 @@ class SubTotal extends React.Component{
                 <thead>
                     <th>ORDER ID</th>
                     <th>TOTAL ($)</th>
-                    <th>Status</th>
                 </thead>
                 <tbody>
                     {this.renderRows()}

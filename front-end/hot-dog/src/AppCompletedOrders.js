@@ -7,7 +7,6 @@ class AppCustomerMenu extends React.Component{
     return (
     <div className="App">
       <h1>Completed Order Items</h1>
-      {/*
       <CompleteOrders
         cartID = {this.props.match.params.id}
       />
@@ -15,7 +14,6 @@ class AppCustomerMenu extends React.Component{
       <SubTotalComplete
         cartID = {this.props.match.params.id}
        />
-      */}
     </div>
     )}
 
