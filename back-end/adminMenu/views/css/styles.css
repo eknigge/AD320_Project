@@ -1,0 +1,33 @@
+table{
+    text-align: center;
+    background: teal;
+    color: #fff;
+    margin:20px auto 50px auto; /*top, right, bottom, left*/ 
+}
+
+h1{
+    margin-left: 5%; 
+    font-size: 1.8em;
+}
+
+body{
+    border: solid blue;
+    box-sizing: border-box;
+    width: 50%;
+    margin:20px auto 40px auto; /*top, right, bottom, left*/
+}
+
+td, input, select{
+    padding: 4.5px; 
+}
+
+#btn{
+    width: 100%;
+    font-size: 1.1em;
+}
+
+select{
+    width: 55%;
+}
+
+
