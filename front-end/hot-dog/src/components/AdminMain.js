@@ -1,7 +1,6 @@
 import React from 'react';
 import Banner from './Banner';
 import Container from './Container';
-import Box from './Box';
 import { Link } from 'react-router-dom';
 
 class AdminMain extends React.Component {
@@ -24,7 +23,7 @@ class AdminMain extends React.Component {
                 </Link>
               </div>
 
-              <div className="item ">Menus & Items (Hanna's working on it)</div>
+              <div className="item ">Menus & Items</div>
 
               <div className="item ">
                 <Link to="/admin/logs" className="admin">

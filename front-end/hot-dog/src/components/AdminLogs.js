@@ -29,12 +29,16 @@ class AdminLogs extends React.Component {
             Logs
           </h1>
           <Box>
-            <label>Pick a user to see their logs</label>
-            <select>
-              <option>All users</option>
-              <option>1</option>
-              <option>2</option>
-            </select>
+            <div className="ui form">
+              <div className="field">
+                <label>Pick a user to see their logs (not implemented)</label>
+                <select>
+                  <option>All users</option>
+                  <option>1</option>
+                  <option>2</option>
+                </select>
+              </div>
+            </div>
           </Box>
           <LogsTable apiResponse={this.state.apiResponse}></LogsTable>
         </Box>
