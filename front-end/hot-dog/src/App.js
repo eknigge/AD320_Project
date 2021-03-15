@@ -13,6 +13,7 @@ import AdminCarts from './components/AdminCarts';
 import EditCart from './components/EditCart';
 import AdminUsers from './components/AdminUsers';
 import EditUser from './components/EditUser';
+import AdminLogs from './components/AdminLogs';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/admin/users" exact component={AdminUsers} />
         <Route path="/admin/users/edit/:id" component={EditUser} />
         <Route path="/admin/users/new" component={EditUser} />
+        <Route path="/admin/logs" component={AdminLogs} />
       </Switch>
     </BrowserRouter>
   );

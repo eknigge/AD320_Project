@@ -25,7 +25,12 @@ class AdminMain extends React.Component {
               </div>
 
               <div className="item ">Menus & Items (Hanna's working on it)</div>
-              <div className="item ">Logs (Coming soon...)</div>
+
+              <div className="item ">
+                <Link to="/admin/logs" className="admin">
+                  Logs
+                </Link>
+              </div>
             </div>
           </div>
           <div className="thirteen wide column" style={{ marginTop: '1em' }}>

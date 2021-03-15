@@ -30,10 +30,10 @@ VALUES 	("This is the cart located in Ballard", "Ballard"),
 ;
 
 INSERT INTO USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, PERMISSION)
-VALUES 	("admin@website.com", "adminpass", "adminFirst", "adminLast", "ADMIN"),
+VALUES 	("admin@website.com", "adminpass", "Default", "Admin", "ADMIN"),
         ("user1@website.com", "pass1", "Homer", "Simpson", "CUSTOMER"),
 		("user2@website.com", "pass1", "Baby", "Huey", "CUSTOMER"),
-        ("user3@url.com", "pass1", "custfirst1", "custlast1", "CUSTOMER"),
+        ("user3@url.com", "pass1", "Juicy", "J", "CUSTOMER"),
         ("vendor1@website.com", "vpass1", "Bobby", "Flay", "VENDOR"),
         ("vendor2@website.com", "vpass2", "Wolfgang", "Puck", "VENDOR"),
         ("admin@website.com", "apass1", "Best", "Boss", "ADMIN"),

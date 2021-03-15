@@ -25,7 +25,7 @@ class AdminUsers extends React.Component {
       <AdminMain>
         <Box>
           <h1 className="ui header">
-            <img src="/images/users.svg" alt="cart"></img>
+            <img src="/images/users.svg" alt="user icon"></img>
             Users
           </h1>
           <UsersTable apiResponse={this.state.apiResponse}></UsersTable>
