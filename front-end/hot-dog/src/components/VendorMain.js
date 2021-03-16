@@ -87,6 +87,12 @@ class VendorMain extends React.Component {
 
   render() {
     const { vendorFirstName, vendorLastName } = this.state.apiResponse;
+    let cartID;
+    if(this.state.apiResponse.cart !== undefined ){
+      cartID = this.state.apiResponse.cart[0].id;
+    } else {
+      cartID = 0;
+    }
     return (
       <Container>
         <Banner vendorName={`${vendorFirstName} ${vendorLastName}`}></Banner>
@@ -122,7 +128,7 @@ class VendorMain extends React.Component {
               </button>
             </div>
             <div className="column">
-              <Link to={`/vendor/orders/${this.props.match.params.id}`}>
+              <Link to={`/vendor/orders/${cartID}`}>
                 <button
                   className="large ui blue button"
                 >
