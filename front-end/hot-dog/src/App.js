@@ -12,6 +12,7 @@ import AdminMain from './components/AdminMain';
 import AdminCarts from './components/AdminCarts';
 import EditCart from './components/EditCart';
 import AdminUsers from './components/AdminUsers';
+import AppCompletedOrders from './AppCompletedOrders';
 import EditUser from './components/EditUser';
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
         <Route path="/vendor" exact component={VendorPunchCard} />
         <Route path="/vendor/:id" exact component={VendorMain} />
         <Route path="/vendor/menu/:id" component={VendorMenu} />
-        <Route path="/vendor/orders/:id" component={AppVendorOrders} />
+        <Route path="/vendor/orders/:id" exact component={AppVendorOrders} />
+        <Route path="/vendor/orders/:id/complete" exact component={AppCompletedOrders} />
         <Route path="/customer/menu/:id" component={AppCustomerMenu} />
         <Route path="/customer/menu" component={AppCustomerMenu} />
         <Route path="/customer/map" component={CustomerMain} />
