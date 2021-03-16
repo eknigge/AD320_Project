@@ -1,17 +1,19 @@
 import React from 'react';
 import AllOrders from './VendorOrders/AllOrders';
 import SubTotal from './VendorOrders/SubTotal';
-import { Link } from 'react-router-dom';
+import BackButton from './VendorOrders/BackButton';
+import CompleteOrdersButton from './VendorOrders/CompletedOrdersButton';
 
 class AppCustomerMenu extends React.Component{
   render (){
     return (
     <div className="App">
-      <Link to={`/vendor/${this.props.match.params.id}`}>
-        <button className="large ui blue button">
-          Return to Main
-        </button>
-      </Link>
+      <BackButton
+        cartID = {this.props.match.params.id}
+      />
+      <CompleteOrdersButton
+        cartID = {this.props.match.params.id}
+      />
       <h1>Order Items</h1>
       <AllOrders 
         cartID = {this.props.match.params.id}
