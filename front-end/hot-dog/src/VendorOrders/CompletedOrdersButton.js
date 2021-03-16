@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class BackButton extends React.Component{
+class CompleteOrdersButton extends React.Component{
     constructor(props){
         super(props);
         this.state = {tableDataisFetched:false}
@@ -15,16 +15,16 @@ class BackButton extends React.Component{
         fetch(`http://localhost:5000/vendor/cartid/${this.props.cartID}`)
         .then(response => response.json())
         .then(data =>{
-           this.setState({ vendorID: data.USER_ID, tableDataisFetched:true })
+           this.setState({ cartID: data.CART_ID, tableDataisFetched:true })
         })
     }
 
     render(){
         return (
             <>
-                <Link to={`/vendor/${this.state.vendorID}`}>
+                <Link to={`/vendor/orders/${this.state.cartID}/complete`}>
                     <button className="large ui blue button">
-                    Return to Main
+                    Completed Orders
                     </button>
                 </Link>
             </>
@@ -34,4 +34,4 @@ class BackButton extends React.Component{
 
 }
 
-export default BackButton
+export default CompleteOrdersButton
