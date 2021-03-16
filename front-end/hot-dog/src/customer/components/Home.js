@@ -1,32 +1,22 @@
 import React from 'react';
-import logo from './images/logo.jpg';
-import chili from './images/doodle.png'
+import { Link } from 'react-router-dom';
 
 function Home() {
   
   return(
 
 <div className="wrapper">
+  <h1>Hot Dog Landing Page</h1>
+  <Link to="/customer/map">
+    <h1>Customer Site</h1>
+  </Link>
+  <Link to="/vendor/">
+    <h1>Vendor Site</h1>
+  </Link>
+  <Link to="/admin">
+    <h1>Admin Site</h1>
+  </Link>
 
-
-<header className="home">
-   
-        <img className="home-logo" src={logo} />
-    
-</header>
-
-<div className="welcome">
-<h4>WELCOME to HOT DOGGIST</h4>
-</div>
-
-<div class="chiliSup">
-<img className="chili" src={chili} alt="chili-dog" />
-
-<h3><a href="menu">Click here to see the options of hot dog</a></h3>
-
-</div>
-
-   
 </div>
        
 
