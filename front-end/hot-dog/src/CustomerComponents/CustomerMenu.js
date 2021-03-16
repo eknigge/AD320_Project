@@ -1,6 +1,7 @@
 import React from 'react';
 import TableRow from './TableRow';
 import { Formik, Field, Form} from 'formik';
+import { Link } from 'react-router-dom';
 
 class CustomerMenu extends React.Component{
     constructor(props){
@@ -146,6 +147,16 @@ class CustomerMenu extends React.Component{
     render(){
         return(
         <div>
+            <Link to={`/customer/map`}>
+                <button className="large ui blue button">
+                Return to Map
+                </button>
+            </Link>
+            <Link to={`/`}>
+                <button className="large ui blue button">
+                Return to Home
+                </button>
+            </Link>
             <h1>Menu</h1>
             <table className="ui celled table">
                 <thead>

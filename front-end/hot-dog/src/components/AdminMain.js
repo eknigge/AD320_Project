@@ -13,6 +13,11 @@ class AdminMain extends React.Component {
           <div className="three wide column" style={{ marginTop: '1em' }}>
             <div className="ui vertical menu">
               <div className="item">
+                <Link to="/" className="admin">
+                  Home
+                </Link>
+              </div>
+              <div className="item">
                 <Link to="/admin/carts" className="admin">
                   Carts
                 </Link>
