@@ -28,7 +28,11 @@ class AdminMain extends React.Component {
                 </Link>
               </div>
 
-              <div className="item ">Menus & Items</div>
+              <div className="item ">
+                <Link to="/admin/menu" className="admin">
+                  Menus & Items
+                </Link>
+              </div>
 
               <div className="item ">
                 <Link to="/admin/logs" className="admin">
