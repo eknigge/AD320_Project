@@ -7,7 +7,16 @@ import Error from './Error';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
-const validationSchema = Yup.object().shape();
+const validationSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(1, 'Title cannot be less than 1 character')
+    .max(45, 'Title cannot have more than 45 characters')
+    .required('Title cannot be empty'),
+  description: Yup.string()
+    .min(1, 'Title cannot be less than 1 character')
+    .max(45, 'Title cannot have more than 45 characters')
+    .required('Title cannot be empty'),
+});
 
 class EditMenu extends React.Component {
   constructor(props) {
@@ -120,24 +129,32 @@ class EditMenu extends React.Component {
                     : 'Creating New Item'}
                 </h3>
 
-                <div className="field">
+                <div
+                  className={`field ${
+                    touched.title && errors.title ? `error` : null
+                  }`}
+                >
                   <label htmlFor="title">Title</label>
                   <Field as="input" type="text" name="title"></Field>
+                  <Error touched={touched.title} message={errors.title} />
                 </div>
-                <div className="field">
+                <div
+                  className={`field ${
+                    touched.description && errors.description ? `error` : null
+                  }`}
+                >
                   <label htmlFor="description">Description</label>
-                  <Field
-                    as="input"
-                    type="text"
-                    name="description"
-                    value={values.description}
-                  ></Field>
+                  <Field as="input" type="text" name="description"></Field>
+                  <Error
+                    touched={touched.description}
+                    message={errors.description}
+                  />
                 </div>
 
                 <div className="two fields">
                   <div
                     className={`field ${
-                      touched.menuID && errors.menuID ? `error` : null
+                      touched.removeItems && errors.removeItems ? `error` : null
                     }`}
                   >
                     <label>Remove Item</label>
@@ -154,7 +171,10 @@ class EditMenu extends React.Component {
                         );
                       }}
                     />
-                    <Error touched={touched.menuID} message={errors.menuID} />
+                    <Error
+                      touched={touched.removeItems}
+                      message={errors.removeItems}
+                    />
                   </div>
                   <div className="field">
                     <label>Add Item</label>
