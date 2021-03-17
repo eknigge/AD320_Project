@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name cannot be empty'),
   lastName: Yup.string().required('Last Name cannot be empty'),
-  email: Yup.string().email(),
+  email: Yup.string(),
   role: Yup.string().required('Please select a role'),
 });
 

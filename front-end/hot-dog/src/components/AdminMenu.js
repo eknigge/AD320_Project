@@ -1,9 +1,9 @@
 import React from 'react';
 import AdminMain from './AdminMain';
 import Box from './Box';
-import UsersTable from './AdminUsersTable';
+import MenuTable from './AdminMenuTable';
 
-class AdminUsers extends React.Component {
+class AdminMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = { apiResponse: {} };
@@ -14,7 +14,7 @@ class AdminUsers extends React.Component {
   }
 
   callAPI() {
-    fetch('http://localhost:5000/admin/users')
+    fetch('http://localhost:5000/admin/menu')
       .then((res) => res.json())
       .then((res) => this.setState({ apiResponse: res }))
       .catch((err) => console.log(err));
@@ -25,14 +25,14 @@ class AdminUsers extends React.Component {
       <AdminMain>
         <Box>
           <h1 className="ui header">
-            <img src="/images/users.svg" alt="user icon"></img>
-            Users
+            <img src="/images/menu.svg" alt="menu icon"></img>
+            Menu & Items
           </h1>
-          <UsersTable apiResponse={this.state.apiResponse}></UsersTable>
+          <MenuTable apiResponse={this.state.apiResponse}></MenuTable>
         </Box>
       </AdminMain>
     );
   }
 }
 
-export default AdminUsers;
+export default AdminMenu;
