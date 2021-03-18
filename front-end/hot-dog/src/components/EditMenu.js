@@ -76,6 +76,29 @@ class EditMenu extends React.Component {
     }
   }
 
+  sendRequest(values) {
+    fetch(
+      `http://localhost:5000/admin/menu/edit/${this.props.match.params.id}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          menuID: parseInt(this.props.match.params.id),
+          ...values,
+        }),
+      }
+    )
+      .then((res) => res.text())
+      .then((res) => {
+        this.setState({ formSuccess: true, resMessage: res });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
   render() {
     return (
       <AdminMain>
@@ -87,6 +110,12 @@ class EditMenu extends React.Component {
           <Link to="/admin/menu">
             <button className="ui button">Back to menus</button>
           </Link>
+          <button
+            onClick={this.refreshPage}
+            className="ui inverted primary button"
+          >
+            Refresh
+          </button>
 
           <div
             className={`ui success message ${
@@ -122,7 +151,7 @@ class EditMenu extends React.Component {
               isSubmitting,
             }) => (
               <form className={`ui form`} onSubmit={handleSubmit}>
-                {`Debug message: ${JSON.stringify(values)}`}
+                {/* {`Debug message: ${JSON.stringify(values)}`} */}
                 <h3 className="ui centered dividing header">
                   {this.props.match.params.id
                     ? `Editing Menu ID - ${this.props.match.params.id}`
@@ -162,6 +191,7 @@ class EditMenu extends React.Component {
                       isMulti
                       name="removeItems"
                       options={this.state.onMenu}
+                      closeMenuOnSelect={false}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       onChange={(evt) => {
@@ -182,6 +212,7 @@ class EditMenu extends React.Component {
                       isMulti
                       name="addItems"
                       options={this.state.offMenu}
+                      closeMenuOnSelect={false}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       onChange={(evt) => {
@@ -191,12 +222,16 @@ class EditMenu extends React.Component {
                         );
                       }}
                     />
+                    <Error
+                      touched={touched.addItems}
+                      message={errors.addItems}
+                    />
                   </div>
                 </div>
                 <button
                   className="ui large green button"
                   type="submit"
-                  disabled={false}
+                  disabled={errors.title || errors.description}
                 >
                   Submit
                 </button>
