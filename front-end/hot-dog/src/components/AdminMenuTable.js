@@ -41,9 +41,22 @@ class MenuTable extends React.Component {
                 Refresh
               </button>
             </th>
-            <th colSpan="2">
-              <button className="ui right floated medium button">
+            <th colSpan="1">
+              <button
+                className="ui right floated medium button"
+                style={{ textDecoration: 'line-through' }}
+                disabled={true}
+              >
                 Add new item
+              </button>
+            </th>
+            <th colSpan="1">
+              <button
+                className="ui right floated medium button"
+                style={{ textDecoration: 'line-through' }}
+                disabled={true}
+              >
+                Add new menu
               </button>
             </th>
           </tr>

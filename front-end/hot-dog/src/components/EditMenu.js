@@ -41,8 +41,8 @@ class EditMenu extends React.Component {
           this.setState({ apiResponse: res }, this.genCurrentItemOptions)
         )
         .catch((error) => console.log(error));
-      // } else if (this.props.match.url === '/admin/carts/new') {
-      //   fetch(`http://localhost:5000/admin/carts/new`)
+      // } else if (this.props.match.url === '/admin/menu/new') {
+      //   fetch(`http://localhost:5000/admin/menu/new`)
       //     .then((res) => res.json())
       //     .then((res) => this.setState({ apiResponse: res }))
       //     .catch((error) => console.log(error));
