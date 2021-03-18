@@ -7,7 +7,16 @@ import Error from './Error';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 
-const validationSchema = Yup.object().shape();
+const validationSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(1, 'Title cannot be less than 1 character')
+    .max(45, 'Title cannot have more than 45 characters')
+    .required('Title cannot be empty'),
+  description: Yup.string()
+    .min(1, 'Title cannot be less than 1 character')
+    .max(45, 'Title cannot have more than 45 characters')
+    .required('Title cannot be empty'),
+});
 
 class EditMenu extends React.Component {
   constructor(props) {
@@ -32,8 +41,8 @@ class EditMenu extends React.Component {
           this.setState({ apiResponse: res }, this.genCurrentItemOptions)
         )
         .catch((error) => console.log(error));
-      // } else if (this.props.match.url === '/admin/carts/new') {
-      //   fetch(`http://localhost:5000/admin/carts/new`)
+      // } else if (this.props.match.url === '/admin/menu/new') {
+      //   fetch(`http://localhost:5000/admin/menu/new`)
       //     .then((res) => res.json())
       //     .then((res) => this.setState({ apiResponse: res }))
       //     .catch((error) => console.log(error));
@@ -67,6 +76,29 @@ class EditMenu extends React.Component {
     }
   }
 
+  sendRequest(values) {
+    fetch(
+      `http://localhost:5000/admin/menu/edit/${this.props.match.params.id}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          menuID: parseInt(this.props.match.params.id),
+          ...values,
+        }),
+      }
+    )
+      .then((res) => res.text())
+      .then((res) => {
+        this.setState({ formSuccess: true, resMessage: res });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
   render() {
     return (
       <AdminMain>
@@ -78,6 +110,12 @@ class EditMenu extends React.Component {
           <Link to="/admin/menu">
             <button className="ui button">Back to menus</button>
           </Link>
+          <button
+            onClick={this.refreshPage}
+            className="ui inverted primary button"
+          >
+            Refresh
+          </button>
 
           <div
             className={`ui success message ${
@@ -113,31 +151,39 @@ class EditMenu extends React.Component {
               isSubmitting,
             }) => (
               <form className={`ui form`} onSubmit={handleSubmit}>
-                {`Debug message: ${JSON.stringify(values)}`}
+                {/* {`Debug message: ${JSON.stringify(values)}`} */}
                 <h3 className="ui centered dividing header">
                   {this.props.match.params.id
                     ? `Editing Menu ID - ${this.props.match.params.id}`
                     : 'Creating New Item'}
                 </h3>
 
-                <div className="field">
+                <div
+                  className={`field ${
+                    touched.title && errors.title ? `error` : null
+                  }`}
+                >
                   <label htmlFor="title">Title</label>
                   <Field as="input" type="text" name="title"></Field>
+                  <Error touched={touched.title} message={errors.title} />
                 </div>
-                <div className="field">
+                <div
+                  className={`field ${
+                    touched.description && errors.description ? `error` : null
+                  }`}
+                >
                   <label htmlFor="description">Description</label>
-                  <Field
-                    as="input"
-                    type="text"
-                    name="description"
-                    value={values.description}
-                  ></Field>
+                  <Field as="input" type="text" name="description"></Field>
+                  <Error
+                    touched={touched.description}
+                    message={errors.description}
+                  />
                 </div>
 
                 <div className="two fields">
                   <div
                     className={`field ${
-                      touched.menuID && errors.menuID ? `error` : null
+                      touched.removeItems && errors.removeItems ? `error` : null
                     }`}
                   >
                     <label>Remove Item</label>
@@ -145,6 +191,7 @@ class EditMenu extends React.Component {
                       isMulti
                       name="removeItems"
                       options={this.state.onMenu}
+                      closeMenuOnSelect={false}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       onChange={(evt) => {
@@ -154,7 +201,10 @@ class EditMenu extends React.Component {
                         );
                       }}
                     />
-                    <Error touched={touched.menuID} message={errors.menuID} />
+                    <Error
+                      touched={touched.removeItems}
+                      message={errors.removeItems}
+                    />
                   </div>
                   <div className="field">
                     <label>Add Item</label>
@@ -162,6 +212,7 @@ class EditMenu extends React.Component {
                       isMulti
                       name="addItems"
                       options={this.state.offMenu}
+                      closeMenuOnSelect={false}
                       className="basic-multi-select"
                       classNamePrefix="select"
                       onChange={(evt) => {
@@ -171,12 +222,16 @@ class EditMenu extends React.Component {
                         );
                       }}
                     />
+                    <Error
+                      touched={touched.addItems}
+                      message={errors.addItems}
+                    />
                   </div>
                 </div>
                 <button
                   className="ui large green button"
                   type="submit"
-                  disabled={false}
+                  disabled={errors.title || errors.description}
                 >
                   Submit
                 </button>

@@ -101,6 +101,9 @@ class EditCart extends React.Component {
         .catch((err) => console.log(err));
     }
   }
+  refreshPage() {
+    window.location.reload();
+  }
 
   render() {
     const { lat, lng, status, menuID, vendorID } = this.state.apiResponse;
@@ -115,6 +118,12 @@ class EditCart extends React.Component {
           <Link to="/admin/carts">
             <button className="ui button">Back to carts</button>
           </Link>
+          <button
+            onClick={this.refreshPage}
+            className="ui inverted primary button"
+          >
+            Refresh
+          </button>
           <Box>
             <p>
               Useful Link:{' '}
@@ -134,7 +143,10 @@ class EditCart extends React.Component {
             }`}
           >
             <h4 className="header">{this.state.resMessage}</h4>
-            <p>Go back to the carts page to see the latest changes</p>
+            <p>
+              Refresh the page or go back to the carts page to see the latest
+              changes
+            </p>
           </div>
 
           <Formik

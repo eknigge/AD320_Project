@@ -71,6 +71,10 @@ class EditUser extends React.Component {
     }
   }
 
+  refreshPage() {
+    window.location.reload();
+  }
+
   render() {
     const { First_Name, Last_Name, Email, Permission } = this.state.apiResponse;
 
@@ -84,14 +88,22 @@ class EditUser extends React.Component {
           <Link to="/admin/users">
             <button className="ui button">Back to users</button>
           </Link>
-
+          <button
+            onClick={this.refreshPage}
+            className="ui inverted primary button"
+          >
+            Refresh
+          </button>
           <div
             className={`ui success message ${
               this.state.formSuccess ? null : `hidden`
             }`}
           >
             <h4 className="header">{this.state.resMessage}</h4>
-            <p>Go back to the users page to see the latest changes</p>
+            <p>
+              Refresh the page or go back to the users page to see the latest
+              changes
+            </p>
           </div>
 
           <Formik
